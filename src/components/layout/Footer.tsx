@@ -7,9 +7,9 @@ const footerLinks = {
     { name: "AI SEO", href: "/seo" },
   ],
   company: [
-    { name: "About", href: "#" },
-    { name: "Philosophy", href: "#" },
-    { name: "Contact", href: "#" },
+    { name: "About", href: "/about" },
+    { name: "Philosophy", href: "/philosophy" },
+    { name: "Contact", href: "/contact" },
   ],
 };
 
@@ -79,13 +79,13 @@ export function Footer() {
           </p>
           <div className="flex items-center gap-6">
             <Link
-              to="#"
+              to="/privacy"
               className="font-modern text-xs text-muted-foreground hover:text-foreground transition-colors duration-300"
             >
               Privacy
             </Link>
             <Link
-              to="#"
+              to="/terms"
               className="font-modern text-xs text-muted-foreground hover:text-foreground transition-colors duration-300"
             >
               Terms
