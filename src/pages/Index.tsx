@@ -3,8 +3,13 @@ import { LuxuryButton } from "@/components/ui/luxury-button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { GlassCard } from "@/components/ui/glass-card";
 import { PageLayout } from "@/components/layout/PageLayout";
+import { LeadershipSection } from "@/components/sections/LeadershipSection";
+import { ContactSection } from "@/components/sections/ContactSection";
 import { ArrowRight, Zap, User, Search, Shield, Lock, Infinity } from "lucide-react";
 
+const scrollToContact = () => {
+  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+};
 // Hero Section
 function HeroSection() {
   return (
@@ -43,11 +48,11 @@ function HeroSection() {
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <LuxuryButton variant="platinum" size="lg">
+            <LuxuryButton variant="platinum" size="lg" onClick={scrollToContact}>
               Book a Strategy Call
               <ArrowRight className="ml-2 h-5 w-5" />
             </LuxuryButton>
-            <LuxuryButton variant="ghost" size="lg">
+            <LuxuryButton variant="ghost" size="lg" onClick={() => document.getElementById("pillars")?.scrollIntoView({ behavior: "smooth" })}>
               Explore the Infrastructure
             </LuxuryButton>
           </div>
@@ -133,7 +138,7 @@ function PillarsSection() {
   ];
 
   return (
-    <section className="py-24 lg:py-32">
+    <section id="pillars" className="py-24 lg:py-32">
       <div className="container mx-auto px-6 lg:px-8">
         <SectionHeading
           eyebrow="Core Systems"
@@ -234,7 +239,7 @@ function CTASection() {
             <p className="font-modern text-lg text-muted-foreground max-w-xl mx-auto mb-10">
               Transform your operations with infrastructure-grade AI systems designed for long-term dominance.
             </p>
-            <LuxuryButton variant="platinum" size="lg">
+            <LuxuryButton variant="platinum" size="lg" onClick={scrollToContact}>
               Book a Strategy Call
               <ArrowRight className="ml-2 h-5 w-5" />
             </LuxuryButton>
@@ -315,7 +320,7 @@ function FinalCTASection() {
           <h2 className="font-luxury text-3xl md:text-4xl font-semibold text-foreground mb-8">
             The Future of <span className="power-keyword text-platinum-gradient">Revenue</span> is Autonomous
           </h2>
-          <LuxuryButton variant="platinum" size="lg">
+          <LuxuryButton variant="platinum" size="lg" onClick={scrollToContact}>
             Book a Strategy Call
             <ArrowRight className="ml-2 h-5 w-5" />
           </LuxuryButton>
@@ -333,9 +338,10 @@ export default function Index() {
       <ManifestoSection />
       <PillarsSection />
       <CapabilitiesSection />
+      <LeadershipSection />
       <CTASection />
       <TrustSection />
-      <FinalCTASection />
+      <ContactSection />
     </PageLayout>
   );
 }
