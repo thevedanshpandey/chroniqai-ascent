@@ -1,15 +1,11 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { LuxuryButton } from "@/components/ui/luxury-button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { GlassCard } from "@/components/ui/glass-card";
 import { PageLayout } from "@/components/layout/PageLayout";
-import { LeadershipSection } from "@/components/sections/LeadershipSection";
-import { ContactSection } from "@/components/sections/ContactSection";
 import { ArrowRight, Zap, User, Search, Shield, Lock, Infinity } from "lucide-react";
 
-const scrollToContact = () => {
-  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-};
 // Hero Section
 function HeroSection() {
   return (
@@ -48,10 +44,12 @@ function HeroSection() {
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <LuxuryButton variant="platinum" size="lg" onClick={scrollToContact}>
-              Book a Strategy Call
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </LuxuryButton>
+            <Link to="/contact">
+              <LuxuryButton variant="platinum" size="lg">
+                Book a Strategy Call
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </LuxuryButton>
+            </Link>
             <LuxuryButton variant="ghost" size="lg" onClick={() => document.getElementById("pillars")?.scrollIntoView({ behavior: "smooth" })}>
               Explore the Infrastructure
             </LuxuryButton>
@@ -156,12 +154,12 @@ function PillarsSection() {
               <p className="font-modern text-muted-foreground text-sm leading-relaxed mb-6">
                 {pillar.description}
               </p>
-              <a
-                href={pillar.href}
+              <Link
+                to={pillar.href}
                 className="font-modern text-sm text-platinum hover:text-platinum-glow transition-colors duration-300 inline-flex items-center gap-2"
               >
                 Explore <ArrowRight className="w-4 h-4" />
-              </a>
+              </Link>
             </GlassCard>
           ))}
         </div>
@@ -239,10 +237,12 @@ function CTASection() {
             <p className="font-modern text-lg text-muted-foreground max-w-xl mx-auto mb-10">
               Transform your operations with infrastructure-grade AI systems designed for long-term dominance.
             </p>
-            <LuxuryButton variant="platinum" size="lg" onClick={scrollToContact}>
-              Book a Strategy Call
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </LuxuryButton>
+            <Link to="/contact">
+              <LuxuryButton variant="platinum" size="lg">
+                Book a Strategy Call
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </LuxuryButton>
+            </Link>
           </motion.div>
         </GlassCard>
       </div>
@@ -320,10 +320,12 @@ function FinalCTASection() {
           <h2 className="font-luxury text-3xl md:text-4xl font-semibold text-foreground mb-8">
             The Future of <span className="power-keyword text-platinum-gradient">Revenue</span> is Autonomous
           </h2>
-          <LuxuryButton variant="platinum" size="lg" onClick={scrollToContact}>
-            Book a Strategy Call
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </LuxuryButton>
+          <Link to="/contact">
+            <LuxuryButton variant="platinum" size="lg">
+              Book a Strategy Call
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </LuxuryButton>
+          </Link>
         </motion.div>
       </div>
     </section>
@@ -338,10 +340,9 @@ export default function Index() {
       <ManifestoSection />
       <PillarsSection />
       <CapabilitiesSection />
-      <LeadershipSection />
       <CTASection />
       <TrustSection />
-      <ContactSection />
+      <FinalCTASection />
     </PageLayout>
   );
 }
