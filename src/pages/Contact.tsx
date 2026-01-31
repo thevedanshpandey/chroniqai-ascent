@@ -70,6 +70,7 @@ function ContactForm() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    mobile: "",
     company: "",
     revenue: "",
     message: "",
@@ -90,7 +91,7 @@ function ContactForm() {
     });
 
     setTimeout(() => {
-      setFormData({ name: "", email: "", company: "", revenue: "", message: "" });
+      setFormData({ name: "", email: "", mobile: "", company: "", revenue: "", message: "" });
       setIsSubmitted(false);
     }, 5000);
   };
@@ -152,6 +153,21 @@ function ContactForm() {
                 placeholder="you@company.com"
               />
             </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="mobile" className="font-modern text-sm text-muted-foreground">
+              Mobile Number
+            </Label>
+            <Input
+              id="mobile"
+              name="mobile"
+              type="tel"
+              value={formData.mobile}
+              onChange={handleChange}
+              className="bg-background/50 border-border/50 focus:border-platinum/50 h-12"
+              placeholder="+91 98765 43210"
+            />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
