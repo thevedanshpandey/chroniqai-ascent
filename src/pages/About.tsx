@@ -4,6 +4,8 @@ import { PageLayout } from "@/components/layout/PageLayout";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { GlassCard } from "@/components/ui/glass-card";
 import { LuxuryButton } from "@/components/ui/luxury-button";
+import { SEOHead } from "@/components/seo/SEOHead";
+import { PersonSchema, BreadcrumbSchema } from "@/components/seo/StructuredData";
 import { ArrowRight, Linkedin, Target, Cpu, TrendingUp } from "lucide-react";
 
 const leaders = [
@@ -21,8 +23,8 @@ const leaders = [
   },
   {
     name: "Abhay Rawat",
-    role: "Architect, IRONMAN System",
-    tagline: "Revenue Systems Architect",
+    role: "Co-Founder & Revenue Systems Architect",
+    tagline: "Creator of IRONMAN System",
     bio: [
       "Abhay Rawat is the mastermind behind ChroniqAI's proprietary IRONMAN System—an AI-powered acquisition framework that transforms how high-ticket businesses acquire clients.",
       "Based in Delhi, India, he specializes in helping agency owners and coaches build predictable sales pipelines through Speed-to-Lead automation and intelligent AI agents.",
@@ -305,6 +307,33 @@ function CTASection() {
 export default function About() {
   return (
     <PageLayout>
+      <SEOHead
+        title="About ChroniqAI - Vedansh Pandey & Abhay Rawat | Leadership"
+        description="Meet the founders of ChroniqAI: Vedansh Pandey (CEO) and Abhay Rawat (Co-Founder & Creator of IRONMAN System). Building autonomous AI infrastructure for revenue, authority, and visibility."
+        canonical="https://chroniqai.com/about"
+        keywords="Vedansh Pandey, Abhay Rawat, ChroniqAI founders, IRONMAN System, AI automation founders, revenue systems architect, ChroniqAI leadership"
+      />
+      <PersonSchema
+        id="vedansh-pandey"
+        name="Vedansh Pandey"
+        jobTitle="Founder & CEO"
+        description="Vedansh Pandey is the visionary founder and CEO of ChroniqAI, leading the company's mission to transform how businesses leverage artificial intelligence for revenue growth."
+        expertise={["AI Strategy", "Revenue Automation", "Business Scaling", "Systems Architecture"]}
+        linkedIn="https://www.linkedin.com/in/vedansh-pandey"
+      />
+      <PersonSchema
+        id="abhay-rawat"
+        name="Abhay Rawat"
+        jobTitle="Co-Founder & Revenue Systems Architect"
+        description="Abhay Rawat is Co-Founder of ChroniqAI and creator of the IRONMAN System—an AI-powered acquisition framework that transforms how high-ticket businesses acquire clients through Speed-to-Lead automation."
+        expertise={["Speed-to-Lead Automation", "AI Agents for SMBs", "Sales Pipeline Optimization", "Backend Systems", "IRONMAN System"]}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://chroniqai.com" },
+          { name: "About", url: "https://chroniqai.com/about" }
+        ]}
+      />
       <HeroSection />
       <MissionSection />
       <LeadershipSection />

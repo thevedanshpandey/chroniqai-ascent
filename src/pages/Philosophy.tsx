@@ -4,6 +4,8 @@ import { PageLayout } from "@/components/layout/PageLayout";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { GlassCard } from "@/components/ui/glass-card";
 import { LuxuryButton } from "@/components/ui/luxury-button";
+import { SEOHead } from "@/components/seo/SEOHead";
+import { BreadcrumbSchema } from "@/components/seo/StructuredData";
 import { ArrowRight, Layers, Zap, Shield, Target, Clock, Infinity } from "lucide-react";
 
 const principles = [
@@ -224,6 +226,18 @@ function CTASection() {
 export default function Philosophy() {
   return (
     <PageLayout>
+      <SEOHead
+        title="Our Philosophy - ChroniqAI Principles & Manifesto"
+        description="Infrastructure over services. Automation as liberation. Privacy by architecture. Discover the principles that guide ChroniqAI's approach to building AI systems."
+        canonical="https://chroniqai.com/philosophy"
+        keywords="ChroniqAI philosophy, AI principles, automation philosophy, infrastructure thinking, ChroniqAI manifesto"
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://chroniqai.com" },
+          { name: "Philosophy", url: "https://chroniqai.com/philosophy" }
+        ]}
+      />
       <HeroSection />
       <PrinciplesSection />
       <BeliefsSection />

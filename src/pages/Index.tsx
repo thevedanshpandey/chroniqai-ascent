@@ -4,8 +4,9 @@ import { LuxuryButton } from "@/components/ui/luxury-button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { GlassCard } from "@/components/ui/glass-card";
 import { PageLayout } from "@/components/layout/PageLayout";
+import { SEOHead } from "@/components/seo/SEOHead";
+import { OrganizationSchema, WebsiteSchema } from "@/components/seo/StructuredData";
 import { ArrowRight, Zap, User, Search, Shield, Lock, Infinity } from "lucide-react";
-
 // Hero Section
 function HeroSection() {
   return (
@@ -336,6 +337,14 @@ function FinalCTASection() {
 export default function Index() {
   return (
     <PageLayout>
+      <SEOHead
+        title="ChroniqAI — AI That Scales Revenue | Automate. Scale. Dominate."
+        description="Infrastructure-grade AI systems powering automation, authority, and AI-native visibility. ChroniqAI delivers autonomous revenue systems, AI personal branding, and GEO/AI SEO for enterprises."
+        canonical="https://chroniqai.com"
+        keywords="ChroniqAI, AI automation, AI infrastructure, revenue automation, AI SEO, GEO, AI personal branding, Vedansh Pandey, Abhay Rawat, IRONMAN System"
+      />
+      <OrganizationSchema />
+      <WebsiteSchema />
       <HeroSection />
       <ManifestoSection />
       <PillarsSection />
