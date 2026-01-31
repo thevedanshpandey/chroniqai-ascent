@@ -7,6 +7,8 @@ import { LuxuryButton } from "@/components/ui/luxury-button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { SEOHead } from "@/components/seo/SEOHead";
+import { BreadcrumbSchema } from "@/components/seo/StructuredData";
 import { Send, CheckCircle, MapPin, Mail, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -334,6 +336,18 @@ function ContactSection() {
 export default function Contact() {
   return (
     <PageLayout>
+      <SEOHead
+        title="Contact ChroniqAI - Book a Strategy Call"
+        description="Ready to transform your operations with AI infrastructure? Contact ChroniqAI for a no-obligation consultation. We respond within 24 hours."
+        canonical="https://chroniqai.com/contact"
+        keywords="contact ChroniqAI, AI consultation, strategy call, AI automation inquiry, ChroniqAI contact"
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://chroniqai.com" },
+          { name: "Contact", url: "https://chroniqai.com/contact" }
+        ]}
+      />
       <HeroSection />
       <ContactSection />
     </PageLayout>

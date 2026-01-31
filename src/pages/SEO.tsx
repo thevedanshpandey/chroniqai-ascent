@@ -3,6 +3,8 @@ import { LuxuryButton } from "@/components/ui/luxury-button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { GlassCard } from "@/components/ui/glass-card";
 import { PageLayout } from "@/components/layout/PageLayout";
+import { SEOHead } from "@/components/seo/SEOHead";
+import { ServiceSchema, BreadcrumbSchema } from "@/components/seo/StructuredData";
 import { ArrowRight, Brain, Network, Database, Target, Layers, Rocket } from "lucide-react";
 
 function SEOHero() {
@@ -220,6 +222,24 @@ function SEOCTA() {
 export default function SEO() {
   return (
     <PageLayout>
+      <SEOHead
+        title="AI SEO & GEO - AI-Native Visibility Infrastructure | ChroniqAI"
+        description="Ranking on AI platforms, not just Google. ChroniqAI specializes in GPT, Gemini, Grok optimization through entity architecture and knowledge graph positioning."
+        canonical="https://chroniqai.com/seo"
+        keywords="AI SEO, GEO, generative engine optimization, ChatGPT ranking, Gemini optimization, Grok SEO, knowledge graph, entity SEO, AI visibility, ChroniqAI"
+      />
+      <ServiceSchema
+        name="AI SEO & GEO - AI-Native Visibility Infrastructure"
+        description="Ranking on AI platforms like GPT, Gemini, Grok via entity architecture and knowledge graph positioning"
+        url="https://chroniqai.com/seo"
+        features={["Entity Architecture", "Knowledge Graph Positioning", "Training Data Optimization", "Query Intent Mapping", "Multi-Layer Presence", "Velocity Architecture"]}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://chroniqai.com" },
+          { name: "AI SEO & GEO", url: "https://chroniqai.com/seo" }
+        ]}
+      />
       <SEOHero />
       <PlatformSection />
       <MethodologySection />

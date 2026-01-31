@@ -3,6 +3,8 @@ import { LuxuryButton } from "@/components/ui/luxury-button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { GlassCard } from "@/components/ui/glass-card";
 import { PageLayout } from "@/components/layout/PageLayout";
+import { SEOHead } from "@/components/seo/SEOHead";
+import { ServiceSchema, BreadcrumbSchema } from "@/components/seo/StructuredData";
 import { ArrowRight, Mic, Video, PenTool, Sparkles, Clock, Globe } from "lucide-react";
 
 function BrandingHero() {
@@ -213,6 +215,24 @@ function BrandingCTA() {
 export default function Branding() {
   return (
     <PageLayout>
+      <SEOHead
+        title="AI Personal Branding Infrastructure | ChroniqAI"
+        description="Autonomous AI presence for founders. Fully AI-generated realistic content—video, voice, and written—that builds authority 24/7 without you recording anything."
+        canonical="https://chroniqai.com/branding"
+        keywords="AI personal branding, AI content generation, founder branding, AI video generation, AI voice synthesis, thought leadership automation, ChroniqAI"
+      />
+      <ServiceSchema
+        name="AI Personal Branding Infrastructure"
+        description="Fully AI-generated autonomous presence infrastructure for founders—always-on authority engine"
+        url="https://chroniqai.com/branding"
+        features={["AI Video Generation", "AI Voice Synthesis", "AI Written Content", "AI Creative Direction", "Always-On Publishing", "Multi-Platform Presence"]}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://chroniqai.com" },
+          { name: "AI Personal Branding", url: "https://chroniqai.com/branding" }
+        ]}
+      />
       <BrandingHero />
       <PresenceSection />
       <CapabilitiesSection />

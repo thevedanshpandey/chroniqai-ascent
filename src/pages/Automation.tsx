@@ -3,6 +3,8 @@ import { LuxuryButton } from "@/components/ui/luxury-button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { GlassCard } from "@/components/ui/glass-card";
 import { PageLayout } from "@/components/layout/PageLayout";
+import { SEOHead } from "@/components/seo/SEOHead";
+import { ServiceSchema, BreadcrumbSchema } from "@/components/seo/StructuredData";
 import { ArrowRight, Cpu, Calendar, Headphones, Bot, Workflow, BarChart3 } from "lucide-react";
 
 function AutomationHero() {
@@ -179,6 +181,24 @@ function AutomationCTA() {
 export default function Automation() {
   return (
     <PageLayout>
+      <SEOHead
+        title="AI Automation Infrastructure | ChroniqAI"
+        description="Autonomous AI systems that qualify leads, book appointments, and handle customer operations at scale. ChroniqAI AI Automation removes human bottlenecks from your revenue engine."
+        canonical="https://chroniqai.com/automation"
+        keywords="AI automation, lead qualification AI, AI appointment booking, customer operations automation, revenue automation, ChroniqAI"
+      />
+      <ServiceSchema
+        name="AI Automation Infrastructure"
+        description="Autonomous systems that qualify, convert, and operate at enterprise scale without human bottlenecks"
+        url="https://chroniqai.com/automation"
+        features={["AI Lead Qualification", "AI Appointment Booking", "AI Customer Operations", "Orchestration Layer", "Processing Engine", "Analytics Core"]}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://chroniqai.com" },
+          { name: "AI Automation", url: "https://chroniqai.com/automation" }
+        ]}
+      />
       <AutomationHero />
       <SystemsSection />
       <ArchitectureSection />
