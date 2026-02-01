@@ -68,32 +68,86 @@ function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
+    full_name: "",
     email: "",
-    mobile: "",
-    company: "",
-    revenue: "",
-    message: "",
+    mobile_number: "",
+    company_name: "",
+    annual_revenue: "",
+    project_description: "",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate required fields
+    if (!formData.full_name.trim() || !formData.email.trim() || !formData.project_description.trim()) {
+      toast({
+        title: "Missing Required Fields",
+        description: "Please fill in all required fields.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      // Build form data for submission
+      const submitData = new URLSearchParams();
+      submitData.append("full_name", formData.full_name.trim());
+      submitData.append("email", formData.email.trim());
+      
+      if (formData.mobile_number.trim()) {
+        submitData.append("mobile_number", formData.mobile_number.trim());
+      }
+      if (formData.company_name.trim()) {
+        submitData.append("company_name", formData.company_name.trim());
+      }
+      // Only send annual_revenue if a valid option is selected
+      if (formData.annual_revenue && formData.annual_revenue !== "") {
+        submitData.append("annual_revenue", formData.annual_revenue);
+      }
+      submitData.append("project_description", formData.project_description.trim());
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    toast({
-      title: "Message Received",
-      description: "We'll get back to you within 24 hours.",
-    });
+      const response = await fetch("https://chroniqai.com/api/submit-form.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: submitData.toString(),
+      });
 
-    setTimeout(() => {
-      setFormData({ name: "", email: "", mobile: "", company: "", revenue: "", message: "" });
-      setIsSubmitted(false);
-    }, 5000);
+      const result = await response.json();
+
+      if (result.status === "success") {
+        setIsSubmitted(true);
+        toast({
+          title: "Message Sent",
+          description: "Thank you! We'll get back to you shortly.",
+        });
+        setTimeout(() => {
+          setFormData({
+            full_name: "",
+            email: "",
+            mobile_number: "",
+            company_name: "",
+            annual_revenue: "",
+            project_description: "",
+          });
+          setIsSubmitted(false);
+        }, 5000);
+      } else {
+        throw new Error(result.message || "Submission failed");
+      }
+    } catch (error) {
+      toast({
+        title: "Submission Failed",
+        description: "Something went wrong. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -125,13 +179,13 @@ function ContactForm() {
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div className="space-y-2">
-              <Label htmlFor="name" className="font-modern text-sm text-muted-foreground">
+              <Label htmlFor="full_name" className="font-modern text-sm text-muted-foreground">
                 Full Name *
               </Label>
               <Input
-                id="name"
-                name="name"
-                value={formData.name}
+                id="full_name"
+                name="full_name"
+                value={formData.full_name}
                 onChange={handleChange}
                 required
                 className="bg-background/50 border-border/50 focus:border-platinum/50 h-12"
@@ -156,14 +210,14 @@ function ContactForm() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="mobile" className="font-modern text-sm text-muted-foreground">
+            <Label htmlFor="mobile_number" className="font-modern text-sm text-muted-foreground">
               Mobile Number
             </Label>
             <Input
-              id="mobile"
-              name="mobile"
+              id="mobile_number"
+              name="mobile_number"
               type="tel"
-              value={formData.mobile}
+              value={formData.mobile_number}
               onChange={handleChange}
               className="bg-background/50 border-border/50 focus:border-platinum/50 h-12"
               placeholder="+91 98765 43210"
@@ -172,47 +226,47 @@ function ContactForm() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div className="space-y-2">
-              <Label htmlFor="company" className="font-modern text-sm text-muted-foreground">
+              <Label htmlFor="company_name" className="font-modern text-sm text-muted-foreground">
                 Company Name
               </Label>
               <Input
-                id="company"
-                name="company"
-                value={formData.company}
+                id="company_name"
+                name="company_name"
+                value={formData.company_name}
                 onChange={handleChange}
                 className="bg-background/50 border-border/50 focus:border-platinum/50 h-12"
                 placeholder="Your company"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="revenue" className="font-modern text-sm text-muted-foreground">
+              <Label htmlFor="annual_revenue" className="font-modern text-sm text-muted-foreground">
                 Annual Revenue
               </Label>
               <select
-                id="revenue"
-                name="revenue"
-                value={formData.revenue}
+                id="annual_revenue"
+                name="annual_revenue"
+                value={formData.annual_revenue}
                 onChange={handleChange}
                 className="w-full h-12 px-3 rounded-md bg-background/50 border border-border/50 focus:border-platinum/50 text-foreground font-modern text-sm focus:outline-none focus:ring-1 focus:ring-platinum/30"
               >
                 <option value="">Select range</option>
-                <option value="<500k">Less than $500K</option>
-                <option value="500k-1m">$500K – $1M</option>
-                <option value="1m-5m">$1M – $5M</option>
-                <option value="5m-10m">$5M – $10M</option>
-                <option value="10m+">$10M+</option>
+                <option value="Less than $500K">Less than $500K</option>
+                <option value="$500K – $1M">$500K – $1M</option>
+                <option value="$1M – $5M">$1M – $5M</option>
+                <option value="$5M – $10M">$5M – $10M</option>
+                <option value="$10M+">$10M+</option>
               </select>
             </div>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="message" className="font-modern text-sm text-muted-foreground">
+            <Label htmlFor="project_description" className="font-modern text-sm text-muted-foreground">
               Tell Us About Your Project *
             </Label>
             <Textarea
-              id="message"
-              name="message"
-              value={formData.message}
+              id="project_description"
+              name="project_description"
+              value={formData.project_description}
               onChange={handleChange}
               required
               rows={5}
