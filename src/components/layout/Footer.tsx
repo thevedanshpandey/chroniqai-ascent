@@ -21,7 +21,7 @@ export function Footer() {
           {/* Brand */}
           <div className="md:col-span-2">
             <Link to="/" className="inline-block mb-4">
-              <span className="font-luxury text-2xl font-semibold text-foreground">
+              <span className="font-luxury text-2xl font-semibold text-white">
                 Chroniq<span className="text-platinum-gradient">AI</span>
               </span>
             </Link>
