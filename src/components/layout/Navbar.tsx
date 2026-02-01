@@ -40,7 +40,7 @@ export function Navbar() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
-            <span className="font-luxury text-2xl font-semibold text-foreground tracking-wide group-hover:text-platinum-gradient transition-colors duration-300">
+            <span className="font-luxury text-2xl font-semibold text-white tracking-wide group-hover:text-platinum-gradient transition-colors duration-300">
               Chroniq<span className="text-platinum-gradient">AI</span>
             </span>
           </Link>
