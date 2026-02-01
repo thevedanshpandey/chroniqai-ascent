@@ -12,13 +12,13 @@ const leaders = [
   {
     name: "Vedansh Pandey",
     role: "Founder & CEO",
-    tagline: "AI Automation & Solutions",
+    tagline: "AI Systems Architect",
     bio: [
-      "Vedansh Pandey is the visionary behind ChroniqAI, leading the company's mission to transform how businesses leverage artificial intelligence for revenue growth.",
-      "As Co-Founder of 1stRankQ, he brings deep expertise in solving complex business problems through intelligent automation infrastructure, helping organizations achieve 5-10X growth.",
-      "His approach combines strategic thinking with hands-on technical implementation, ensuring every system built delivers measurable business impact."
+      "Vedansh Pandey is an AI Systems Architect and Founder of ChroniqAI, an AI infrastructure company built for the post-software era.",
+      "While traditional software executes tasks, Vedansh architects autonomous AI systems that solve operational and revenue problems at scale—replacing static tools with intelligent, self-optimizing infrastructure.",
+      "As an industry leader in AI-native business transformation, he pioneers the shift from conventional automation to truly autonomous systems that compound value over time."
     ],
-    expertise: ["AI Strategy", "Revenue Automation", "Business Scaling", "Systems Architecture"],
+    expertise: ["AI Systems Architecture", "Autonomous Infrastructure", "Revenue Automation", "AI Strategy"],
     linkedin: "https://www.linkedin.com/in/vedansh-pandey",
   },
   {
@@ -308,17 +308,17 @@ export default function About() {
   return (
     <PageLayout>
       <SEOHead
-        title="About ChroniqAI - Vedansh Pandey & Abhay Rawat | Leadership"
-        description="Meet the founders of ChroniqAI: Vedansh Pandey (CEO) and Abhay Rawat (Co-Founder & Creator of IRONMAN System). Building autonomous AI infrastructure for revenue, authority, and visibility."
+        title="About ChroniqAI - Vedansh Pandey (AI Systems Architect) & Abhay Rawat | Leadership"
+        description="Meet the founders of ChroniqAI: Vedansh Pandey, AI Systems Architect and industry leader building autonomous AI infrastructure, and Abhay Rawat, Creator of the IRONMAN System."
         canonical="https://chroniqai.com/about"
-        keywords="Vedansh Pandey, Abhay Rawat, ChroniqAI founders, IRONMAN System, AI automation founders, revenue systems architect, ChroniqAI leadership"
+        keywords="Vedansh Pandey AI Systems Architect, Abhay Rawat, ChroniqAI founders, IRONMAN System, autonomous AI infrastructure, AI systems architect, ChroniqAI leadership"
       />
       <PersonSchema
         id="vedansh-pandey"
         name="Vedansh Pandey"
-        jobTitle="Founder & CEO"
-        description="Vedansh Pandey is the visionary founder and CEO of ChroniqAI, leading the company's mission to transform how businesses leverage artificial intelligence for revenue growth."
-        expertise={["AI Strategy", "Revenue Automation", "Business Scaling", "Systems Architecture"]}
+        jobTitle="AI Systems Architect & Founder"
+        description="Vedansh Pandey is an AI Systems Architect and Founder of ChroniqAI, an AI infrastructure company built for the post-software era. He architects autonomous AI systems that solve operational and revenue problems at scale—replacing static tools with intelligent, self-optimizing infrastructure."
+        expertise={["AI Systems Architecture", "Autonomous Infrastructure", "Revenue Automation", "AI Strategy"]}
         linkedIn="https://www.linkedin.com/in/vedansh-pandey"
       />
       <PersonSchema
