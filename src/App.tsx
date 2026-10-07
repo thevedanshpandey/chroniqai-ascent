@@ -2,15 +2,18 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import Index from "./pages/Index";
-import Automation from "./pages/Automation";
-import Branding from "./pages/Branding";
-import SEO from "./pages/SEO";
-import About from "./pages/About";
-import Philosophy from "./pages/Philosophy";
-import Contact from "./pages/Contact";
+import CaseStudies from "./pages/CaseStudies";
+import HowWeThink from "./pages/HowWeThink";
+import ScoreCalculatorPage from "./pages/ScoreCalculatorPage";
+import Resources from "./pages/Resources";
+import EngineeringJournal from "./pages/EngineeringJournal";
+import IronmanPlatform from "./pages/IronmanPlatform";
+import ScaleMetricsCaseStudy from "./pages/case-studies/ScaleMetricsCaseStudy";
+import CybersecurityCaseStudy from "./pages/case-studies/CybersecurityCaseStudy";
+import AiSaasCaseStudy from "./pages/case-studies/AiSaasCaseStudy";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
@@ -26,15 +29,36 @@ const App = () => (
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/automation" element={<Automation />} />
-          <Route path="/branding" element={<Branding />} />
-          <Route path="/seo" element={<SEO />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/philosophy" element={<Philosophy />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/ironman" element={<IronmanPlatform />} />
+          <Route path="/platform" element={<Navigate to="/ironman" replace />} />
+          <Route path="/solutions" element={<Navigate to="/ironman" replace />} />
+          <Route path="/modules" element={<Navigate to="/ironman" replace />} />
+          <Route path="/case-studies" element={<CaseStudies />} />
+          <Route path="/case-studies/scalemetrics-devops" element={<ScaleMetricsCaseStudy />} />
+          <Route path="/case-studies/cybersecurity-enterprise" element={<CybersecurityCaseStudy />} />
+          <Route path="/case-studies/ai-saas-platform" element={<AiSaasCaseStudy />} />
+          <Route path="/how-we-think" element={<HowWeThink />} />
+          <Route path="/score-calculator" element={<ScoreCalculatorPage />} />
+          <Route path="/resources" element={<Resources />} />
+          <Route path="/journal" element={<EngineeringJournal />} />
+          <Route path="/engineering-journal" element={<EngineeringJournal />} />
+
+          {/* Removed guides and changelog routes redirected cleanly */}
+          <Route path="/guides" element={<Navigate to="/" replace />} />
+          <Route path="/guides/*" element={<Navigate to="/" replace />} />
+          <Route path="/changelog" element={<Navigate to="/" replace />} />
+
+          {/* Compatibility and redirect routes */}
+          <Route path="/automation" element={<Navigate to="/ironman" replace />} />
+          <Route path="/branding" element={<Navigate to="/ironman" replace />} />
+          <Route path="/seo" element={<Navigate to="/ironman" replace />} />
+          <Route path="/philosophy" element={<Navigate to="/how-we-think" replace />} />
+          <Route path="/about" element={<Navigate to="/how-we-think" replace />} />
+          <Route path="/contact" element={<Navigate to="/score-calculator" replace />} />
+
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          {/* CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

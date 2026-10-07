@@ -1,0 +1,8 @@
+{
+  "name": "ChroniqAI",
+  "description": "AI Outbound System for High-Ticket B2B. Build predictable sales pipeline with the IRONMAN Outbound System through buyer intent discovery, deep account research, and personalized executive messaging.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

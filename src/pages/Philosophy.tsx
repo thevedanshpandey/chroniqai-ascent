@@ -6,7 +6,7 @@ import { GlassCard } from "@/components/ui/glass-card";
 import { LuxuryButton } from "@/components/ui/luxury-button";
 import { SEOHead } from "@/components/seo/SEOHead";
 import { BreadcrumbSchema } from "@/components/seo/StructuredData";
-import { ArrowRight, Layers, Zap, Shield, Target, Clock, Infinity } from "lucide-react";
+import { ArrowRight, Layers, Zap, Shield, Target, Clock, Infinity as InfinityIcon } from "lucide-react";
 
 const principles = [
   {
@@ -40,7 +40,7 @@ const principles = [
     insight: "We believe in rapid deployment with continuous refinement—not endless planning cycles.",
   },
   {
-    icon: Infinity,
+    icon: InfinityIcon,
     title: "Long-Term Thinking",
     description: "We optimize for decade-scale outcomes. Every decision weighs short-term convenience against long-term strategic advantage.",
     insight: "The systems we build today should still be delivering value in 2035.",
