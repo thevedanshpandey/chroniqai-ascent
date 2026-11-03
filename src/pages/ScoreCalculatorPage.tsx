@@ -16,8 +16,8 @@ export default function ScoreCalculatorPage() {
   return (
     <PageLayout>
       <SEOHead
-        title="Revenue System Score Calculator — ChroniqAI"
-        description="Calculate your B2B revenue infrastructure score out of 100 and identify hidden pipeline bottlenecks."
+        title="B2B Acquisition Score Calculator — ChroniqAI Gravity"
+        description="Calculate your B2B LinkedIn client acquisition score out of 100 and identify hidden pipeline bottlenecks."
       />
 
       <div className="pt-32 pb-24 relative overflow-hidden">

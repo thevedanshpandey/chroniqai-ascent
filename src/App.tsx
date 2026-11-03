@@ -10,7 +10,7 @@ import HowWeThink from "./pages/HowWeThink";
 import ScoreCalculatorPage from "./pages/ScoreCalculatorPage";
 import Resources from "./pages/Resources";
 import EngineeringJournal from "./pages/EngineeringJournal";
-import IronmanPlatform from "./pages/IronmanPlatform";
+import GravityPlatform from "./pages/GravityPlatform";
 import ScaleMetricsCaseStudy from "./pages/case-studies/ScaleMetricsCaseStudy";
 import CybersecurityCaseStudy from "./pages/case-studies/CybersecurityCaseStudy";
 import AiSaasCaseStudy from "./pages/case-studies/AiSaasCaseStudy";
@@ -29,10 +29,11 @@ const App = () => (
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/ironman" element={<IronmanPlatform />} />
-          <Route path="/platform" element={<Navigate to="/ironman" replace />} />
-          <Route path="/solutions" element={<Navigate to="/ironman" replace />} />
-          <Route path="/modules" element={<Navigate to="/ironman" replace />} />
+          <Route path="/gravity" element={<GravityPlatform />} />
+          <Route path="/ironman" element={<Navigate to="/gravity" replace />} />
+          <Route path="/platform" element={<Navigate to="/gravity" replace />} />
+          <Route path="/solutions" element={<Navigate to="/gravity" replace />} />
+          <Route path="/modules" element={<Navigate to="/gravity" replace />} />
           <Route path="/case-studies" element={<CaseStudies />} />
           <Route path="/case-studies/scalemetrics-devops" element={<ScaleMetricsCaseStudy />} />
           <Route path="/case-studies/cybersecurity-enterprise" element={<CybersecurityCaseStudy />} />
@@ -49,9 +50,9 @@ const App = () => (
           <Route path="/changelog" element={<Navigate to="/" replace />} />
 
           {/* Compatibility and redirect routes */}
-          <Route path="/automation" element={<Navigate to="/ironman" replace />} />
-          <Route path="/branding" element={<Navigate to="/ironman" replace />} />
-          <Route path="/seo" element={<Navigate to="/ironman" replace />} />
+          <Route path="/automation" element={<Navigate to="/gravity" replace />} />
+          <Route path="/branding" element={<Navigate to="/gravity" replace />} />
+          <Route path="/seo" element={<Navigate to="/gravity" replace />} />
           <Route path="/philosophy" element={<Navigate to="/how-we-think" replace />} />
           <Route path="/about" element={<Navigate to="/how-we-think" replace />} />
           <Route path="/contact" element={<Navigate to="/score-calculator" replace />} />

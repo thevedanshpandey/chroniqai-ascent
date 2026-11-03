@@ -9,30 +9,30 @@ import { ArrowRight, BookOpen, Download, FileText, Sparkles, CheckCircle2 } from
 const resources = [
   {
     id: "outbound-benchmarks",
-    title: "2026 B2B Outbound Deliverability & Response Benchmarks",
+    title: "2026 B2B LinkedIn Response & Meeting Benchmarks",
     category: "Benchmark Report",
-    description: "An analysis of 2.4M cold emails across 120 B2B tech companies. Details inbox protection practices, secondary domain setup, and high-converting message structures.",
+    description: "An analysis of executive outreach across 120 B2B tech companies. Details LinkedIn account warming practices, daily safety limits, and high-converting conversation structures.",
     pages: "28 Pages PDF",
   },
   {
     id: "personalization-playbook",
-    title: "The Executive Outbound Personalization Playbook",
+    title: "The Executive LinkedIn Personalization Playbook",
     category: "Executive Guide",
-    description: "How to research target accounts and write compelling 1-to-1 executive messages that decision-makers actually read and respond to.",
+    description: "How to research target accounts and write compelling 1-to-1 executive messages that decision-makers actually read and respond to on LinkedIn.",
     pages: "24 Pages PDF",
   },
   {
     id: "intent-signals-guide",
     title: "Buyer Intent Signals & Account Trigger Guide",
     category: "Strategy Guide",
-    description: "How to identify active buying triggers like hiring spikes, executive appointments, and tech stack changes before reaching out.",
+    description: "How to identify active buying triggers like hiring spikes, executive appointments, and tech stack changes before initiating conversations.",
     pages: "20 Pages PDF",
   },
   {
-    id: "domain-protection-manual",
-    title: "Domain Protection & Inbox Deliverability Manual",
+    id: "account-safety-manual",
+    title: "LinkedIn Account Safety & Daily Pacing Manual",
     category: "Operations Manual",
-    description: "Best practices for setting up secondary sending domains, gradual warming schedules, and ensuring your outreach stays out of spam folders.",
+    description: "Best practices for multi-account load distribution, gradual warming schedules, and ensuring complete account safety on LinkedIn.",
     pages: "18 Pages PDF",
   },
 ];
@@ -49,8 +49,8 @@ export default function Resources() {
   return (
     <PageLayout>
       <SEOHead
-        title="B2B Outbound Resources & Playbooks — ChroniqAI"
-        description="Download B2B outbound playbooks, deliverability benchmark reports, buyer intent guides, and messaging frameworks."
+        title="B2B LinkedIn Outbound Resources & Playbooks — ChroniqAI Gravity"
+        description="Download B2B LinkedIn outreach playbooks, response benchmark reports, buyer intent guides, and messaging frameworks."
       />
 
       <div className="pt-32 pb-24 relative overflow-hidden">
@@ -75,7 +75,7 @@ export default function Resources() {
             </h1>
 
             <p className="text-lg sm:text-xl text-muted-foreground font-modern max-w-2xl mx-auto leading-relaxed">
-              Empirical benchmark reports, platform experiments, technical frameworks, and systems documentation for high-ticket B2B pipeline.
+              Benchmark reports, playbooks, frameworks, and system documentation for high-ticket B2B client acquisition.
             </p>
           </motion.div>
 
@@ -116,7 +116,7 @@ export default function Resources() {
                   className="w-full flex items-center justify-center gap-2"
                 >
                   <Download size={16} />
-                  Get Playbook & Audit
+                  Get Playbook & Apply
                 </LuxuryButton>
               </motion.div>
             ))}
@@ -134,7 +134,7 @@ export default function Resources() {
               Want These Systems Implemented For You?
             </h2>
             <p className="text-muted-foreground text-base max-w-xl mx-auto leading-relaxed">
-              Book a 45-minute Free Revenue System Audit to analyze your outbound signals and get a customized deployment roadmap.
+              Apply for the 14-day trial to see how ChroniqAI Gravity books qualified meetings on your calendar.
             </p>
             <div className="pt-4">
               <LuxuryButton
@@ -142,7 +142,7 @@ export default function Resources() {
                 size="lg"
                 onClick={() => setIsAuditModalOpen(true)}
               >
-                Get My Free Revenue System Audit
+                Apply for 14-Day Gravity Trial
                 <ArrowRight size={18} className="ml-2" />
               </LuxuryButton>
             </div>

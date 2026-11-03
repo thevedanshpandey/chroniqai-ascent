@@ -14,13 +14,13 @@ export default function CybersecurityCaseStudy() {
     <PageLayout>
       <SEOHead
         title="Cybersecurity Case Study: 18 Qualified CISO Meetings / Month | ChroniqAI"
-        description="How an enterprise cybersecurity vendor booked 18 CISO meetings monthly with $120k ACV deals using the IRONMAN Outbound System."
+        description="How an enterprise cybersecurity vendor booked 18 CISO meetings monthly with $120k ACV deals using the ChroniqAI Gravity LinkedIn Acquisition System."
         canonical="https://chroniqai.com/case-studies/cybersecurity-enterprise"
-        keywords="cybersecurity case study, CISO cold outbound, B2B sales pipeline, IRONMAN outbound"
+        keywords="cybersecurity case study, CISO LinkedIn outreach, B2B sales pipeline, Gravity outbound"
       />
       <ArticleSchema
         title="Cybersecurity Case Study: Booking 18 CISO Meetings / Month via AI Outbound"
-        description="Case study demonstrating how a zero-trust cybersecurity vendor reached enterprise CISOs using signal-based outbound."
+        description="Case study demonstrating how a zero-trust cybersecurity vendor reached enterprise CISOs using signal-based LinkedIn outreach."
         url="https://chroniqai.com/case-studies/cybersecurity-enterprise"
         datePublished="2026-06-20"
       />
@@ -51,7 +51,7 @@ export default function CybersecurityCaseStudy() {
             </h1>
 
             <p className="text-base sm:text-lg text-muted-foreground font-modern leading-relaxed">
-              CISOs reject 99% of generic cold emails. The IRONMAN Outbound System combined verified hiring triggers with authentic peer-to-peer executive messaging to achieve an 18.4% response rate.
+              CISOs reject 99% of generic pitches. The ChroniqAI Gravity System combined verified hiring triggers with authentic peer-to-peer executive LinkedIn messaging to achieve an 18.4% response rate.
             </p>
           </div>
 
@@ -65,7 +65,7 @@ export default function CybersecurityCaseStudy() {
               <div className="text-2xl font-luxury text-white">$120,000</div>
             </div>
             <div className="space-y-1">
-              <div className="text-xs font-mono text-muted-foreground uppercase">Cold Response Rate</div>
+              <div className="text-xs font-mono text-muted-foreground uppercase">Response Rate</div>
               <div className="text-2xl font-luxury text-white">18.4%</div>
             </div>
             <div className="space-y-1">
@@ -78,26 +78,26 @@ export default function CybersecurityCaseStudy() {
             <div className="space-y-3">
               <h2 className="text-2xl font-luxury text-white">The Challenge</h2>
               <p>
-                Chief Information Security Officers (CISOs) receive over 100 cold sales emails every week. Generic pitch templates get deleted immediately. Aegis Security needed a way to reach enterprise security leaders with genuine relevance rather than aggressive sales tactics.
+                Chief Information Security Officers (CISOs) receive dozens of cold sales messages every week. Generic pitch templates get deleted immediately. Aegis Security needed a way to reach enterprise security leaders with genuine relevance rather than aggressive sales tactics.
               </p>
             </div>
 
             <div className="space-y-3">
               <h2 className="text-2xl font-luxury text-white">The Outbound Solution</h2>
               <p>
-                ChroniqAI deployed the **IRONMAN Outbound System**:
+                ChroniqAI deployed the **ChroniqAI Gravity System**:
               </p>
               <ul className="space-y-2 font-mono text-xs text-platinum pl-4 border-l-2 border-primary/40">
                 <li>• **Compliance & Hiring Triggers**: Reached target companies specifically when they posted job openings for security and compliance leaders.</li>
                 <li>• **Deep Account Context**: Reviewed public infrastructure initiatives to craft relevant, peer-level observations.</li>
-                <li>• **Executive Peer Outreach**: Formatted emails as brief, direct peer inquiries rather than generic sales pitches.</li>
+                <li>• **Executive Peer Outreach**: Formatted LinkedIn conversations as brief, direct peer inquiries rather than generic sales pitches.</li>
               </ul>
             </div>
 
             <div className="p-6 rounded-xl bg-secondary/80 border border-primary/30 space-y-3 my-8">
               <Quote size={28} className="text-platinum-glow opacity-60" />
               <p className="text-base font-luxury text-white italic">
-                &ldquo;Before ChroniqAI, getting enterprise CISOs on a call felt impossible. IRONMAN aligned our outreach with real hiring signals and authentic executive tone. We closed two $120k ARR accounts in our second month.&rdquo;
+                &ldquo;Before ChroniqAI, getting enterprise CISOs on a call felt impossible. Gravity aligned our outreach with real hiring signals and authentic executive tone. We closed two $120k ARR accounts in our second month.&rdquo;
               </p>
               <div className="text-xs font-mono text-platinum">
                 — Elena Rostova, CEO at Aegis Security

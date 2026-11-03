@@ -32,7 +32,7 @@ Our services are designed for businesses seeking to implement intelligent automa
     title: "4. Intellectual Property",
     content: `Upon full payment, clients receive ownership of custom-built systems and deliverables as specified in their service agreement. ChroniqAI retains ownership of:
 
-• Proprietary methodologies, frameworks, and processes (including the IRONMAN System)
+• Proprietary methodologies, frameworks, and processes (including the ChroniqAI Gravity System)
 • Pre-existing tools, libraries, and code modules
 • General knowledge and expertise developed during engagements
 

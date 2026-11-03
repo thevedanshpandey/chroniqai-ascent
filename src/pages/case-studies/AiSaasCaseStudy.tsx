@@ -14,9 +14,9 @@ export default function AiSaasCaseStudy() {
     <PageLayout>
       <SEOHead
         title="AI SaaS Case Study: $1.2M Pipeline in 60 Days | ChroniqAI"
-        description="How NeuralFlow generated 20+ enterprise demos monthly and $1.2M in qualified pipeline using the ChroniqAI IRONMAN Outbound System."
+        description="How NeuralFlow generated 20+ enterprise demos monthly and $1.2M in qualified pipeline using the ChroniqAI Gravity LinkedIn Acquisition System."
         canonical="https://chroniqai.com/case-studies/ai-saas-platform"
-        keywords="AI SaaS case study, B2B outbound pipeline, enterprise sales meetings, IRONMAN outbound"
+        keywords="AI SaaS case study, B2B outbound pipeline, enterprise sales meetings, Gravity outbound"
       />
       <ArticleSchema
         title="AI SaaS Case Study: Booking 20+ Enterprise Demos Monthly via AI Outbound"
@@ -51,7 +51,7 @@ export default function AiSaasCaseStudy() {
             </h1>
 
             <p className="text-base sm:text-lg text-muted-foreground font-modern leading-relaxed">
-              Replacing manual SDR outreach with the IRONMAN™ Outbound System delivered 20+ enterprise demos per month and reduced customer acquisition cost by 54%.
+              Replacing manual SDR outreach with the ChroniqAI Gravity System delivered 20+ enterprise demos per month and reduced customer acquisition cost by 54%.
             </p>
           </div>
 
@@ -85,19 +85,19 @@ export default function AiSaasCaseStudy() {
             <div className="space-y-3">
               <h2 className="text-2xl font-luxury text-white">The Outbound Solution</h2>
               <p>
-                ChroniqAI deployed the **IRONMAN Outbound System**:
+                ChroniqAI deployed the **ChroniqAI Gravity System**:
               </p>
               <ul className="space-y-2 font-mono text-xs text-platinum pl-4 border-l-2 border-primary/40">
                 <li>• **Technology & Growth Triggers**: Identified target accounts specifically when companies expanded their data engineering teams or raised new funding rounds.</li>
                 <li>• **Executive Role Research**: Mapped outreach directly to VP of Data and Head of E-commerce priorities.</li>
-                <li>• **Personalized 1-to-1 Emails**: Drafted authentic, concise executive emails that addressed specific business outcomes.</li>
+                <li>• **Personalized 1-to-1 Conversations**: Drafted authentic, concise executive LinkedIn messages that addressed specific business outcomes.</li>
               </ul>
             </div>
 
             <div className="p-6 rounded-xl bg-secondary/80 border border-primary/30 space-y-3 my-8">
               <Quote size={28} className="text-platinum-glow opacity-60" />
               <p className="text-base font-luxury text-white italic">
-                &ldquo;IRONMAN helped us reach decision-makers right when they were expanding their data teams. Our sales reps now spend their days talking to qualified prospects rather than manually looking up contact lists.&rdquo;
+                &ldquo;Gravity helped us reach decision-makers right when they were expanding their data teams. Our sales reps now spend their days talking to qualified prospects rather than manually looking up contact lists.&rdquo;
               </p>
               <div className="text-xs font-mono text-platinum">
                 — Devashish S., Co-Founder at NeuralFlow

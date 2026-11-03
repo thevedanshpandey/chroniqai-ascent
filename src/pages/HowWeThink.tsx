@@ -32,9 +32,9 @@ const principles = [
     title: "Why Authentic Voice Multiplies Responses",
     thesis: "Decision-makers respond to peers, not generic sales templates.",
     content: [
-      "B2B leaders rarely respond to cold pitches sent from anonymous sales accounts using identical templates. They respond when an email reads like a thoughtful peer-to-peer inquiry.",
+      "B2B leaders rarely respond to cold pitches sent from generic accounts using identical templates. They respond when outreach reads like a thoughtful peer-to-peer inquiry.",
       "When outreach reflects the founder's authentic voice and shows clear understanding of the recipient's business, response rates jump significantly.",
-      "The IRONMAN Outbound System calibrates every sequence to your natural executive tone, generating real conversations rather than spam complaints.",
+      "ChroniqAI Gravity calibrates every sequence to your natural executive tone, generating real conversations rather than spam complaints.",
     ],
   },
   {
@@ -53,7 +53,7 @@ const principles = [
     thesis: "Agency retainers are temporary. An outbound system is a compounding asset.",
     content: [
       "Agencies sell short-term campaigns: temporary bursts of activity that stop delivering the moment the retainer ends. When you stop paying, your pipeline vanishes.",
-      "We build a permanent outbound pipeline system for your company. You own the verified playbooks, dedicated domains, and outreach workflows permanently.",
+      "We build a permanent outbound pipeline system for your company. You own the verified playbooks, trained positioning, and outreach workflows permanently.",
       "The result is predictable, repeatable sales meetings month after month without being held hostage by agency retainers.",
     ],
   },

@@ -13,15 +13,15 @@ const caseStudies = [
     slug: "/case-studies/scalemetrics-devops",
     client: "ScaleMetrics (B2B Enterprise SaaS)",
     industry: "DevOps & Cloud Infrastructure",
-    problem: "Outbound sales team was spending 30 hours/week manually prospecting with sub-1% meeting conversion rates. Domain deliverability was deteriorating.",
-    systemBuilt: "Deployed the IRONMAN Outbound System. Integrated buyer intent triggers (funding & hiring) with in-depth company research and 1-to-1 executive personalization.",
+    problem: "Outbound sales team was spending 30 hours/week manually prospecting on LinkedIn with sub-1% meeting conversion rates and account restriction warnings.",
+    systemBuilt: "Deployed the ChroniqAI Gravity System. Integrated LinkedIn account warming, buyer intent triggers, and 1-to-1 personalized executive messaging.",
     results: [
       "$1.4M ARR Pipeline Created",
       "22 VP & C-Level Meetings Booked / Month",
-      "19.2% Cold Response Rate (Industry avg is 2-3%)",
+      "19.2% LinkedIn Response Rate (Industry avg is 2-3%)",
       "80% Sales Rep Time Saved",
     ],
-    testimonial: "ChroniqAI didn't just give us leads; they built an outbound system that generates qualified executive conversations every week without adding headcount.",
+    testimonial: "ChroniqAI didn't just give us leads; they built an outbound system that generates qualified executive conversations on LinkedIn every week without adding headcount.",
     author: "Marcus Vance",
     role: "VP Revenue, ScaleMetrics",
   },
@@ -30,15 +30,15 @@ const caseStudies = [
     slug: "/case-studies/cybersecurity-enterprise",
     client: "Aegis Security Systems",
     industry: "Cybersecurity & Enterprise Infrastructure",
-    problem: "Cybersecurity offer was buried under 100+ weekly cold emails sent to CISOs by competing vendors. Sub-1% response rates.",
-    systemBuilt: "Deployed the IRONMAN Outbound System. Focused on security compliance triggers, hiring alerts, and peer-to-peer technical executive messaging.",
+    problem: "Cybersecurity offer was getting buried under spam InMails sent to CISOs by competing vendors. Sub-1% response rates.",
+    systemBuilt: "Deployed the ChroniqAI Gravity System. Focused on security compliance triggers, hiring alerts, and peer-to-peer technical executive LinkedIn messaging.",
     results: [
       "18 Qualified CISO Meetings / Month",
       "$120,000 Average Deal ACV",
-      "18.4% Cold Response Rate",
+      "18.4% Response Rate",
       "3.8x Outbound Reply Lift",
     ],
-    testimonial: "Before ChroniqAI, getting enterprise CISOs on a call felt impossible. IRONMAN aligned our outreach with real hiring signals and authentic executive tone.",
+    testimonial: "Before ChroniqAI, getting enterprise CISOs on a call felt impossible. Gravity aligned our outreach with real hiring signals and authentic executive tone.",
     author: "Elena Rostova",
     role: "Founder & CEO, Aegis Security",
   },
@@ -47,15 +47,15 @@ const caseStudies = [
     slug: "/case-studies/ai-saas-platform",
     client: "NeuralFlow Platform",
     industry: "Enterprise AI Analytics",
-    problem: "Manual prospecting was too slow and untargeted, missing enterprise buyers who were actively evaluating data analytics solutions.",
-    systemBuilt: "Deployed the IRONMAN Outbound System. Automated buyer intent identification and tailored messaging to VP Data and E-commerce leaders.",
+    problem: "Manual LinkedIn prospecting was too slow and untargeted, missing enterprise buyers who were actively evaluating data analytics solutions.",
+    systemBuilt: "Deployed the ChroniqAI Gravity System. Automated buyer intent identification and tailored LinkedIn conversations to VP Data and E-commerce leaders.",
     results: [
       "20+ Enterprise Demos Booked / Month",
       "$1.2M Qualified Pipeline in 60 Days",
       "17.8% Average Response Rate",
       "54% Reduction in Customer Acquisition Cost",
     ],
-    testimonial: "IRONMAN helped us reach decision-makers right when they were expanding their data teams. Our sales reps now spend their days talking to qualified prospects.",
+    testimonial: "Gravity helped us reach decision-makers right when they were expanding their data teams. Our sales reps now spend their days talking to qualified prospects.",
     author: "Devashish S.",
     role: "Co-Founder, NeuralFlow",
   },
@@ -67,10 +67,10 @@ export default function CaseStudies() {
   return (
     <PageLayout>
       <SEOHead
-        title="B2B Outbound Case Studies & Pipeline Results | ChroniqAI"
-        description="Explore verified case studies, pipeline benchmarks, and client outcomes achieved through ChroniqAI IRONMAN Outbound System."
+        title="B2B LinkedIn Outbound Case Studies | ChroniqAI Gravity"
+        description="Explore verified case studies, pipeline benchmarks, and client outcomes achieved through ChroniqAI Gravity LinkedIn acquisition system."
         canonical="https://chroniqai.com/case-studies"
-        keywords="B2B AI outbound case studies, IRONMAN outbound results, cold outreach benchmarks, executive email personalization"
+        keywords="B2B LinkedIn client acquisition case studies, Gravity outbound results, high-ticket meeting booking benchmarks"
       />
 
       <div className="pt-32 pb-24 relative overflow-hidden">

@@ -1,47 +1,37 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { PageLayout } from "@/components/layout/PageLayout";
 import { SEOHead } from "@/components/seo/SEOHead";
 import { OrganizationSchema, WebsiteSchema } from "@/components/seo/StructuredData";
 import { LuxuryButton } from "@/components/ui/luxury-button";
-import { AuditModal } from "@/components/modals/AuditModal";
-import { IronmanDemoModal } from "@/components/modals/IronmanDemoModal";
-import { InteractiveIronmanDashboard } from "@/components/revenue/InteractiveIronmanDashboard";
-import { IronmanPipelineWorkflow } from "@/components/revenue/IronmanPipelineWorkflow";
-import { RevenueScoreCalculator } from "@/components/revenue/RevenueScoreCalculator";
+import { AuditModal, FORM_LINK } from "@/components/modals/AuditModal";
+import { InteractiveGravityDashboard } from "@/components/revenue/InteractiveGravityDashboard";
 import {
   ArrowRight,
-  BarChart3,
+  ArrowUpRight,
+  Calendar,
   CheckCircle2,
-  ChevronDown,
   Clock,
-  Eye,
   HelpCircle,
-  Infinity as InfinityIcon,
-  Layers,
-  Play,
   Quote,
-  RefreshCw,
   Search,
   Send,
-  Shield,
-  ShieldAlert,
+  ShieldCheck,
   Sparkles,
   Target,
   TrendingUp,
-  User,
-  Users,
   Zap,
 } from "lucide-react";
 
 // --- HERO SECTION ---
-function HeroSection({ onOpenAudit, onOpenDemo }: { onOpenAudit: () => void; onOpenDemo: () => void }) {
+function OfficialHeroSection({ onOpenAudit }: { onOpenAudit: () => void }) {
   return (
     <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden text-left">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] hero-gradient pointer-events-none -z-10" />
+      {/* Background radial gradient */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[650px] hero-gradient pointer-events-none -z-10" />
 
-      <div className="container mx-auto px-6 lg:px-8">
+      <div className="container mx-auto px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Left Text Column */}
           <motion.div
@@ -50,18 +40,21 @@ function HeroSection({ onOpenAudit, onOpenDemo }: { onOpenAudit: () => void; onO
             transition={{ duration: 0.6 }}
             className="lg:col-span-6 space-y-6"
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary/80 border border-primary/20 text-xs font-medium text-platinum">
+            {/* Eyebrow Badge */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary/90 border border-primary/25 text-xs font-medium text-platinum backdrop-blur-md">
               <Sparkles size={14} className="text-platinum-glow" />
-              <span>AI Outbound System for High-Ticket B2B</span>
+              <span>AI Revenue Infrastructure Platform</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-luxury text-white tracking-tight leading-[1.1]">
-              Build Predictable Outbound Pipeline. <br />
-              <span className="text-platinum-gradient">Not More Manual Work.</span>
+            {/* Headline */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-luxury text-white tracking-tight leading-[1.12]">
+              Build Predictable Sales Pipeline <br />
+              <span className="text-platinum-gradient">With ChroniqAI Gravity.</span>
             </h1>
 
-            <p className="text-base sm:text-lg text-muted-foreground font-modern leading-relaxed max-w-xl">
-              We build and manage the IRONMAN™ Outbound System: an automated AI engine that tracks verified buyer signals, conducts deep account research, and crafts personalized executive messages that book qualified meetings directly on your sales calendar.
+            {/* Subheading */}
+            <p className="text-base sm:text-lg text-slate-300 font-modern leading-relaxed max-w-xl">
+              ChroniqAI engineers autonomous client acquisition systems powered by the Gravity engine. We detect buyer intent signals, research target accounts, and book qualified, sales-ready meetings directly into your calendar.
             </p>
 
             {/* CTAs */}
@@ -70,46 +63,48 @@ function HeroSection({ onOpenAudit, onOpenDemo }: { onOpenAudit: () => void; onO
                 variant="platinum"
                 size="lg"
                 onClick={onOpenAudit}
-                className="flex items-center justify-center gap-2"
+                className="flex items-center justify-center gap-2 text-sm"
               >
-                <span>Get Free System Audit</span>
-                <ArrowRight size={18} />
+                <span>Apply for 14-Day Gravity Trial</span>
+                <ArrowRight size={17} />
               </LuxuryButton>
 
-              <LuxuryButton
-                variant="outline"
-                size="lg"
-                onClick={onOpenDemo}
-                className="flex items-center justify-center gap-2"
-              >
-                <Play size={16} className="text-platinum-glow fill-platinum-glow" />
-                <span>Watch How IRONMAN Works (2 min)</span>
-              </LuxuryButton>
+              <Link to="/gravity">
+                <LuxuryButton
+                  variant="outline"
+                  size="lg"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 text-sm"
+                >
+                  <span>Explore Gravity System</span>
+                  <ArrowUpRight size={16} />
+                </LuxuryButton>
+              </Link>
             </div>
 
-            {/* Self-qualification ICP indicator */}
-            <div className="pt-3 border-t border-border/40">
-              <div className="text-[11px] font-mono text-platinum/90 uppercase tracking-wider mb-2">
-                Built for High-Ticket B2B:
-              </div>
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-mono text-muted-foreground">
-                <span className="flex items-center gap-1"><CheckCircle2 size={13} className="text-emerald-400" /> SaaS</span>
-                <span className="flex items-center gap-1"><CheckCircle2 size={13} className="text-emerald-400" /> Cybersecurity</span>
-                <span className="flex items-center gap-1"><CheckCircle2 size={13} className="text-emerald-400" /> IT Services</span>
-                <span className="flex items-center gap-1"><CheckCircle2 size={13} className="text-emerald-400" /> AI & Dev Tools</span>
-                <span className="flex items-center gap-1"><CheckCircle2 size={13} className="text-emerald-400" /> Consulting</span>
+            {/* Trust Points */}
+            <div className="pt-4 border-t border-border/50">
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-mono text-slate-300">
+                <span className="flex items-center gap-1.5">
+                  <CheckCircle2 size={14} className="text-emerald-400" /> 1,000+ Meetings Booked
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <CheckCircle2 size={14} className="text-emerald-400" /> LinkedIn Account Safety
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <CheckCircle2 size={14} className="text-emerald-400" /> Outcome Guarantee
+                </span>
               </div>
             </div>
           </motion.div>
 
-          {/* Right Column: Interactive Live Dashboard Mockup */}
+          {/* Right Column: Live Interactive Dashboard */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="lg:col-span-6"
+            className="lg:col-span-6 relative"
           >
-            <InteractiveIronmanDashboard compact={false} />
+            <InteractiveGravityDashboard compact={false} />
           </motion.div>
         </div>
       </div>
@@ -117,575 +112,392 @@ function HeroSection({ onOpenAudit, onOpenDemo }: { onOpenAudit: () => void; onO
   );
 }
 
-// --- SECTION 2: SOCIAL PROOF / HARD METRICS ---
-function SocialProofSection() {
-  const metrics = [
-    { value: "1,000+", label: "Qualified Meetings Booked", note: "Verified B2B Decision-Makers" },
-    { value: "$14.2M", label: "Pipeline Generated", note: "Across Enterprise SaaS & Cyber" },
-    { value: "48", label: "B2B Companies Scaled", note: "Active System Deployments" },
-    { value: "18.4%", label: "Average Reply Rate", note: "6x Higher Than Industry Standard" },
+// --- STATS STRIP ---
+function OfficialStatsSection() {
+  const stats = [
+    { label: "Pipeline Created", value: "$1.4M+", detail: "Enterprise ARR Generated" },
+    { label: "Meetings Booked", value: "1,000+", detail: "Sales-Ready Decision Makers" },
+    { label: "Average Reply Rate", value: "18.4%", detail: "Industry Average is 2-3%" },
+    { label: "Speed to First Deal", value: "34 Days", detail: "Fast Time-to-Value Velocity" },
   ];
 
   return (
-    <section className="py-16 border-y border-border/50 bg-secondary/20 text-left">
-      <div className="container mx-auto px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center md:text-left mb-12">
-          {metrics.map((m, idx) => (
-            <div key={idx} className="p-4 rounded-xl bg-card/40 border border-border/40">
-              <div className="text-3xl sm:text-4xl font-luxury font-bold text-white tracking-tight mb-1">
-                {m.value}
-              </div>
-              <div className="text-xs sm:text-sm font-semibold text-platinum font-modern">
-                {m.label}
-              </div>
-              <div className="text-[11px] text-muted-foreground font-mono mt-0.5">
-                {m.note}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Client Logo Marquee Bar */}
-        <div className="pt-4 border-t border-border/40 flex flex-wrap items-center justify-between gap-8 text-xs font-mono text-muted-foreground/60 uppercase tracking-widest">
-          <span>Trusted by B2B Revenue Leaders</span>
-          <span className="text-muted-foreground font-semibold">SUPABASE</span>
-          <span className="text-muted-foreground font-semibold">LINEAR</span>
-          <span className="text-muted-foreground font-semibold">VERCEL</span>
-          <span className="text-muted-foreground font-semibold">RETOOL</span>
-          <span className="text-muted-foreground font-semibold">RAMP</span>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// --- SECTION 3: THE PROBLEM ---
-function ProblemSection() {
-  const problemSteps = [
-    { title: "Manual Outreach", text: "Reps spend 25+ hours each week copy-pasting generic emails to unvetted lists." },
-    { title: "Ignored Messages", text: "Senior decision-makers delete impersonal cold pitches within seconds." },
-    { title: "Missed Follow-Ups", text: "Warm prospects slip away because reps lack automated conversation workflows." },
-    { title: "High Team Turnover", text: "Sales rep turnover every 9-12 months constantly resets your pipeline." },
-    { title: "Disconnected Tools", text: "Scattered data across multiple tools makes pipeline unpredictable." },
-  ];
-
-  return (
-    <section className="py-24 text-left relative overflow-hidden">
-      <div className="container mx-auto px-6 lg:px-8 max-w-5xl">
-        <div className="text-center space-y-4 mb-16">
-          <span className="text-xs font-mono text-rose-400 uppercase tracking-wider block">
-            The B2B Pipeline Bottleneck
-          </span>
-          <h2 className="text-3xl sm:text-5xl font-luxury text-white">
-            Most Companies Don&apos;t Have a Sales Problem. <br />
-            <span className="text-platinum-gradient">They Have an Outbound System Problem.</span>
-          </h2>
-          <p className="text-muted-foreground text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-            When sales rely on brute-force manual effort, growth hits an immediate wall. Here is why traditional outbound sales break down:
-          </p>
-        </div>
-
-        {/* Horizontal Progression Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-3 relative">
-          {problemSteps.map((step, idx) => (
-            <div
-              key={idx}
-              className="p-5 rounded-xl bg-card/60 border border-rose-500/20 relative flex flex-col justify-between group hover:border-rose-500/40 transition-colors"
-            >
-              <div>
-                <span className="font-mono text-xs text-rose-400 block mb-2">0{idx + 1}.</span>
-                <h3 className="text-sm font-semibold text-white mb-2">{step.title}</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">{step.text}</p>
-              </div>
-              <div className="mt-4 pt-3 border-t border-border/30 text-[10px] font-mono text-rose-400/80">
-                Friction Point
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-12 p-6 rounded-2xl bg-secondary/40 border border-glass-border text-center">
-          <p className="text-sm sm:text-base text-white font-luxury italic">
-            &ldquo;The outcome of fragmented tools and manual sales rep work isn&apos;t just higher customer acquisition cost—it is completely unpredictable pipeline.&rdquo;
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// --- SECTION 4: MEET IRONMAN™ ---
-function MeetIronmanSection() {
-  return (
-    <section className="py-24 bg-secondary/10 border-y border-border/50 text-left">
+    <section className="py-14 border-y border-border/50 bg-secondary/30 text-left">
       <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
-        <div className="text-center space-y-4 mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary border border-primary/20 text-xs font-medium text-platinum">
-            <Layers size={13} className="text-platinum-glow" />
-            Automated Outbound Pipeline
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-luxury text-white">
-            Imagine Your Sales Team Waking Up to Booked Calls.
-          </h2>
-          <p className="text-base sm:text-lg text-platinum font-luxury italic">
-            Before your team opens their laptops, the IRONMAN Outbound System has already done the heavy lifting.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto pt-4 text-left">
-            <div className="p-4 rounded-xl bg-card/60 border border-border/50 text-xs space-y-2">
-              <span className="font-mono text-emerald-400 font-bold block">01. Buyer Intent Discovery</span>
-              <p className="text-muted-foreground leading-relaxed">Identified qualified target accounts showing active hiring, expansion, and tech growth signals.</p>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+          {stats.map((stat, idx) => (
+            <div key={idx} className="p-5 rounded-2xl bg-card/75 border border-glass-border">
+              <div className="text-xs font-mono text-platinum/80 uppercase tracking-wider mb-1">
+                {stat.label}
+              </div>
+              <div className="text-3xl sm:text-4xl font-luxury font-bold text-white tracking-tight">
+                {stat.value}
+              </div>
+              <div className="text-xs text-slate-300 mt-1 font-modern">
+                {stat.detail}
+              </div>
             </div>
-            <div className="p-4 rounded-xl bg-card/60 border border-border/50 text-xs space-y-2">
-              <span className="font-mono text-emerald-400 font-bold block">02. Deep Account Research</span>
-              <p className="text-muted-foreground leading-relaxed">Reviewed recent company announcements, strategic initiatives, and executive interviews for context.</p>
-            </div>
-            <div className="p-4 rounded-xl bg-card/60 border border-border/50 text-xs space-y-2">
-              <span className="font-mono text-emerald-400 font-bold block">03. Confirmed Calendar Bookings</span>
-              <p className="text-muted-foreground leading-relaxed">Sent personalized executive messages and placed qualified meetings directly on your sales calendar.</p>
-            </div>
-          </div>
+          ))}
         </div>
-
-        <IronmanPipelineWorkflow />
       </div>
     </section>
   );
 }
 
-// --- SECTION 5: THE IRONMAN OUTBOUND SYSTEM ---
+// --- GRAVITY SYSTEM PILLARS SECTION ---
 function OutboundSystemPillarsSection({ onOpenAudit }: { onOpenAudit: () => void }) {
   const pillars = [
     {
-      step: "01",
-      title: "Buyer Intent Discovery",
-      desc: "Identifies accounts actively hiring, raising capital, or expanding leadership teams so your outreach reaches buyers at the exact right moment.",
-      benefit: "No cold list fatigue",
+      num: "01",
       icon: Target,
+      title: "Buyer Intent Discovery",
+      desc: "Filters and pinpoints decision-makers actively experiencing the exact problem your high-ticket offer solves. Monitors hiring spikes, technology updates, and executive appointments.",
+      tags: ["Funding & Hiring Triggers", "ICP Precision Filtering", "Zero Cold Scraping"],
     },
     {
-      step: "02",
-      title: "Deep Account Research",
-      desc: "Reviews recent company announcements, strategic priorities, and executive interviews to understand what prospects genuinely care about.",
-      benefit: "100% relevant context",
+      num: "02",
       icon: Search,
+      title: "Deep Account Context",
+      desc: "Reviews recent company announcements, executive interviews, and business priorities for every target account to craft authentic, peer-level observations.",
+      tags: ["100% Contextual Relevance", "Executive Priority Mapping", "Peer-Level Talking Points"],
     },
     {
-      step: "03",
-      title: "Personalized Executive Messaging",
-      desc: "Writes authentic 1-to-1 emails in your natural voice that decision-makers actually read, answer, and forward to internal champions.",
-      benefit: "18.4% average response rate",
+      num: "03",
       icon: Send,
+      title: "1-to-1 Executive Messaging",
+      desc: "Crafts bespoke messages written in your natural executive tone. Reads like a thoughtful peer conversation rather than automated sales copy.",
+      tags: ["Founder Voice Calibration", "High Response Velocity", "Natural Conversational Flows"],
     },
     {
-      step: "04",
-      title: "Inbox Protection & Calendar Booking",
-      desc: "Maintains dedicated sending domains to ensure primary inbox delivery, automatically handling scheduling directly on your sales calendar.",
-      benefit: "12-25+ meetings / month",
-      icon: CheckCircle2,
+      num: "04",
+      icon: ShieldCheck,
+      title: "Account Safety & Meeting Placement",
+      desc: "Protects your accounts with gradual warming, daily limits, and human-like pacing while placing confirmed sales calls directly onto rep calendars.",
+      tags: ["Multi-Account Distribution", "Daily Pacing Safeguards", "Direct Calendar Scheduling"],
     },
   ];
 
   return (
-    <section className="py-24 text-left">
-      <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
-        <div className="text-center space-y-4 mb-16">
-          <span className="text-xs font-mono text-platinum uppercase tracking-wider block">
-            System Architecture
-          </span>
+    <section id="system-pillars" className="py-24 text-left bg-background relative overflow-hidden">
+      <div className="container mx-auto px-6 lg:px-8 max-w-6xl space-y-16">
+        <div className="text-center space-y-4 max-w-2xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-secondary border border-primary/20 text-xs font-medium text-platinum">
+            <Zap size={13} className="text-platinum-glow" />
+            Core Architecture
+          </div>
           <h2 className="text-3xl sm:text-5xl font-luxury text-white">
-            The IRONMAN™ Outbound System
+            The 4 Pillars of ChroniqAI Gravity
           </h2>
-          <p className="text-muted-foreground text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-            Four core capabilities working together to eliminate manual prospecting and deliver consistent sales meetings.
+          <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-modern">
+            Every layer of executive outbound client acquisition engineered into a reliable, self-operating pipeline engine.
           </p>
         </div>
 
-        {/* Flagship Hero Card */}
-        <div className="mb-10 p-8 md:p-10 rounded-2xl border-2 border-primary/50 bg-gradient-to-br from-card to-secondary/80 backdrop-blur-xl relative overflow-hidden shadow-2xl">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-8 space-y-4">
-              <div className="p-3 w-fit rounded-xl bg-secondary border border-border text-platinum-glow">
-                <Send size={24} />
-              </div>
-              <h3 className="text-3xl font-luxury text-white">Dedicated Outbound Pipeline Machine</h3>
-              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
-                Replaces manual SDR prospecting with verified buyer signals, in-depth account research, and authentic executive messaging that consistently books meetings with qualified decision-makers.
-              </p>
-              <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-emerald-400 pt-2">
-                <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20">
-                  ✓ 12-25+ Qualified Meetings / Mo
-                </span>
-                <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20">
-                  ✓ 18.4% Average Response Rate
-                </span>
-                <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20">
-                  ✓ Zero Manual Prospecting Required
-                </span>
-              </div>
-            </div>
-            <div className="lg:col-span-4 flex flex-col justify-center gap-3">
-              <LuxuryButton
-                variant="platinum"
-                size="default"
-                onClick={onOpenAudit}
-                className="w-full flex items-center justify-center gap-2"
-              >
-                <span>Audit Your Outbound Setup</span>
-                <ArrowRight size={16} />
-              </LuxuryButton>
-              <Link to="/ironman" className="text-center text-xs text-muted-foreground hover:text-white transition-colors">
-                View Full Outbound System Details →
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* 4 Pillars Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {pillars.map((p) => {
-            const Icon = p.icon;
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {pillars.map((pillar) => {
+            const Icon = pillar.icon;
             return (
-              <div key={p.step} className="p-6 rounded-xl border border-glass-border bg-card/60 space-y-3 flex flex-col justify-between hover:border-primary/40 transition-colors">
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-mono text-xs text-platinum font-bold">Pillar {p.step}</span>
-                    <Icon size={18} className="text-platinum-glow" />
+              <div
+                key={pillar.num}
+                className="p-8 rounded-3xl border border-glass-border bg-card/80 backdrop-blur-xl space-y-5 hover:border-primary/50 transition-colors shadow-xl group"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="p-3 rounded-2xl bg-secondary/80 border border-primary/25 text-platinum-glow">
+                    <Icon size={24} />
                   </div>
-                  <h4 className="text-lg font-luxury text-white mb-2">{p.title}</h4>
-                  <p className="text-xs text-muted-foreground leading-relaxed">
-                    {p.desc}
-                  </p>
-                </div>
-                <div className="pt-3 border-t border-border/30">
-                  <span className="text-[11px] font-mono text-emerald-400">
-                    {p.benefit}
+                  <span className="font-mono text-sm text-platinum/50 font-bold">
+                    Pillar {pillar.num}
                   </span>
+                </div>
+
+                <h3 className="text-2xl font-luxury text-white group-hover:text-platinum transition-colors">
+                  {pillar.title}
+                </h3>
+
+                <p className="text-sm text-slate-300 leading-relaxed font-modern">
+                  {pillar.desc}
+                </p>
+
+                <div className="pt-2 border-t border-border/40 flex flex-wrap gap-2">
+                  {pillar.tags.map((tag, tIdx) => (
+                    <span
+                      key={tIdx}
+                      className="px-2.5 py-1 rounded-md bg-secondary/60 border border-border/50 text-[11px] font-mono text-platinum/90"
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
               </div>
             );
           })}
         </div>
+
+        <div className="p-8 rounded-3xl bg-secondary/40 border border-primary/30 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div>
+            <h4 className="text-xl font-luxury text-white mb-1">
+              Want Gravity Deployed For Your B2B Offer?
+            </h4>
+            <p className="text-xs text-slate-300 font-modern max-w-lg">
+              We audit your target market and provide a complete 14-day trial roadmap to book 6-10+ qualified sales meetings.
+            </p>
+          </div>
+
+          <LuxuryButton
+            variant="platinum"
+            size="lg"
+            onClick={onOpenAudit}
+            className="shrink-0"
+          >
+            Apply for 14-Day Gravity Trial
+          </LuxuryButton>
+        </div>
       </div>
     </section>
   );
 }
 
-// --- SECTION 6: CASE STUDIES ---
-function CaseStudiesSection({ onOpenAudit }: { onOpenAudit: () => void }) {
+// --- GRAVITY SPOTLIGHT BANNER ---
+function GravitySpotlightBanner() {
   return (
-    <section className="py-24 bg-secondary/10 border-y border-border/50 text-left">
+    <section className="py-20 bg-secondary/15 border-y border-border/50 text-left">
       <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-          <div>
-            <span className="text-xs font-mono text-platinum uppercase tracking-wider block mb-2">
-              Outcome-Led Proof
+        <div className="p-8 md:p-14 rounded-3xl border border-glass-border bg-gradient-card relative overflow-hidden shadow-2xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-8 space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary border border-primary/25 text-xs font-mono text-platinum">
+                <Sparkles size={13} className="text-platinum-glow" />
+                Featured Acquisition System
+              </div>
+
+              <h2 className="text-3xl sm:text-5xl font-luxury text-white tracking-tight">
+                Gravity by Chroniq
+              </h2>
+
+              <p className="text-base text-slate-200 leading-relaxed font-modern max-w-2xl">
+                &ldquo;Stop chasing clients. Let them fall into your calendar.&rdquo; Gravity is our specialized LinkedIn client acquisition system for high-ticket B2B founders. Includes our proven black-hole positioning philosophy, 14-day trial, and verified meeting guarantee.
+              </p>
+
+              <div className="pt-2 flex flex-wrap items-center gap-4">
+                <Link to="/gravity">
+                  <LuxuryButton variant="platinum" size="lg" className="flex items-center gap-2">
+                    <span>Explore Gravity by Chroniq</span>
+                    <ArrowRight size={17} />
+                  </LuxuryButton>
+                </Link>
+
+                <span className="text-xs font-mono text-platinum/80">
+                  By application only • Limited founder cohort
+                </span>
+              </div>
+            </div>
+
+            <div className="lg:col-span-4 flex justify-center">
+              <div className="w-full p-6 rounded-2xl bg-card/85 border border-primary/30 space-y-3 text-center">
+                <div className="text-xs font-mono text-platinum uppercase">Standard Monthly Delivery</div>
+                <div className="text-3xl font-luxury font-bold text-white">6 - 30</div>
+                <div className="text-xs text-emerald-400 font-semibold font-mono">
+                  Qualified Meetings Booked
+                </div>
+                <p className="text-[11px] text-slate-300 leading-relaxed pt-2 border-t border-border/50">
+                  Backed by our commitment: if we don&apos;t deliver the monthly minimum, the next month is free.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// --- CASE STUDIES HIGHLIGHT ---
+function CaseStudiesHighlightSection() {
+  const studies = [
+    {
+      client: "ScaleMetrics",
+      niche: "DevOps Enterprise SaaS",
+      result: "$1.4M ARR Pipeline",
+      metric: "22 Meetings / Mo",
+      link: "/case-studies/scalemetrics-devops",
+    },
+    {
+      client: "Aegis Security",
+      niche: "Enterprise Cybersecurity",
+      result: "$120k Average ACV",
+      metric: "18 CISO Meetings / Mo",
+      link: "/case-studies/cybersecurity-enterprise",
+    },
+    {
+      client: "NeuralFlow",
+      niche: "AI Analytics Platform",
+      result: "54% CAC Reduction",
+      metric: "20+ Enterprise Demos / Mo",
+      link: "/case-studies/ai-saas-platform",
+    },
+  ];
+
+  return (
+    <section className="py-24 text-left bg-background">
+      <div className="container mx-auto px-6 lg:px-8 max-w-6xl space-y-16">
+        <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
+          <div className="space-y-3">
+            <span className="text-xs font-mono text-platinum uppercase tracking-wider block">
+              Verified Track Record
             </span>
             <h2 className="text-3xl sm:text-5xl font-luxury text-white">
-              Measurable Revenue Results
+              Proven Pipeline Case Studies
             </h2>
+            <p className="text-slate-300 text-sm sm:text-base font-modern max-w-xl">
+              Real high-ticket B2B outcomes generated through the ChroniqAI Gravity client acquisition engine.
+            </p>
           </div>
 
           <Link to="/case-studies">
-            <LuxuryButton variant="outline" size="sm" className="shrink-0">
-              View All Case Studies →
-            </LuxuryButton>
-          </Link>
-        </div>
-
-        {/* Featured Case Study Card */}
-        <div className="p-8 md:p-12 rounded-2xl border border-glass-border bg-card/80 backdrop-blur-xl relative overflow-hidden">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-7 space-y-6">
-              <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider">
-                DevOps & Enterprise SaaS Case Study
-              </span>
-
-              <h3 className="text-2xl sm:text-4xl font-luxury text-white">
-                ScaleMetrics: $310k Pipeline in 45 Days
-              </h3>
-
-              <div className="space-y-3 text-sm text-muted-foreground">
-                <div>
-                  <strong className="text-white">Problem:</strong> SDR team was spending 30 hours/week manually messaging with sub-1% reply rates.
-                </div>
-                <div>
-                  <strong className="text-white">System Built:</strong> IRONMAN Outbound + Operations with 10-K research intent triggers.
-                </div>
-              </div>
-
-              <div className="p-4 rounded-xl bg-secondary/50 border border-border/60 text-xs font-luxury italic text-white/90">
-                &ldquo;ChroniqAI didn&apos;t just give us leads; they built a revenue engine that books VP-level meetings every single week.&rdquo;
-                <div className="font-mono not-italic text-platinum font-bold mt-1 text-[11px]">
-                  — Marcus Vance, VP Revenue
-                </div>
-              </div>
-            </div>
-
-            <div className="lg:col-span-5 p-6 rounded-xl bg-secondary/40 border border-border/60 space-y-4">
-              <div className="text-xs font-mono text-muted-foreground uppercase tracking-wider">
-                Key Metrics Achieved
-              </div>
-              <div className="space-y-3">
-                <div className="p-3 rounded-lg bg-background/60 border border-border/40 flex justify-between items-center">
-                  <span className="text-xs text-muted-foreground">New Pipeline Generated</span>
-                  <span className="font-mono font-bold text-emerald-400 text-sm">$310,000</span>
-                </div>
-                <div className="p-3 rounded-lg bg-background/60 border border-border/40 flex justify-between items-center">
-                  <span className="text-xs text-muted-foreground">VP Meetings Booked</span>
-                  <span className="font-mono font-bold text-white text-sm">24 Meetings / 45 Days</span>
-                </div>
-                <div className="p-3 rounded-lg bg-background/60 border border-border/40 flex justify-between items-center">
-                  <span className="text-xs text-muted-foreground">Cold Response Rate</span>
-                  <span className="font-mono font-bold text-platinum text-sm">18.4%</span>
-                </div>
-              </div>
-
-              <LuxuryButton
-                variant="platinum"
-                size="sm"
-                onClick={onOpenAudit}
-                className="w-full flex items-center justify-center gap-2 mt-2"
-              >
-                Build Similar Infrastructure
-                <ArrowRight size={14} />
-              </LuxuryButton>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// --- SECTION 7: HOW WE WORK (DEPLOYMENT PROCESS) ---
-function HowWeWorkSection() {
-  const steps = [
-    { num: "01", name: "Audit", desc: "45-minute review of your target market, buyer profile, and current outbound outreach." },
-    { num: "02", name: "Strategy", desc: "Mapping your buyer triggers, ideal company profile, and messaging angles." },
-    { num: "03", name: "Setup", desc: "Setting up protected email domains, automated research pipelines, and CRM syncing." },
-    { num: "04", name: "Launch", desc: "Testing initial outreach, reviewing executive responses, and refining targeting." },
-    { num: "05", name: "Scale", desc: "Predictable, ongoing meeting bookings delivered straight to your sales calendar." },
-  ];
-
-  return (
-    <section className="py-24 text-left">
-      <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
-        <div className="text-center space-y-4 mb-16">
-          <span className="text-xs font-mono text-platinum uppercase tracking-wider block">
-            Deployment Process
-          </span>
-          <h2 className="text-3xl sm:text-5xl font-luxury text-white">
-            How We Work
-          </h2>
-          <p className="text-muted-foreground text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-            No endless discovery calls or monthly agency fluff. A clean, proven 5-step outbound deployment.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-          {steps.map((step) => (
-            <div
-              key={step.num}
-              className="p-6 rounded-xl bg-card/60 border border-glass-border relative flex flex-col justify-between group hover:border-primary/50 transition-colors"
-            >
-              <div>
-                <span className="font-mono text-xs font-bold text-platinum block mb-3">
-                  Step {step.num}
-                </span>
-                <h3 className="text-xl font-luxury text-white mb-2">{step.name}</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">{step.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// --- SECTION 8: WHY CHRONIQAI (COMPARISON MATRIX) ---
-function WhyChroniqAISection() {
-  const matrix = [
-    { feature: "Primary Approach", agency: "Sends generic template blasts", chroniq: "Researches real buyer intent & company context" },
-    { feature: "Personalization", agency: "Low-effort automated templates", chroniq: "1-to-1 executive messaging in founder voice" },
-    { feature: "Domain Health", agency: "Burned domains & high spam rates", chroniq: "Dedicated secondary domains with inbox protection" },
-    { feature: "Meeting Scheduling", agency: "Manual spreadsheet logs", chroniq: "Confirmed meetings booked straight to AE calendars" },
-    { feature: "Long-Term Value", agency: "Temporary agency retainer", chroniq: "Permanent outbound system your company owns" },
-  ];
-
-  return (
-    <section className="py-24 bg-secondary/10 border-y border-border/50 text-left">
-      <div className="container mx-auto px-6 lg:px-8 max-w-5xl">
-        <div className="text-center space-y-4 mb-16">
-          <span className="text-xs font-mono text-platinum uppercase tracking-wider block">
-            Clear Distinction
-          </span>
-          <h2 className="text-3xl sm:text-5xl font-luxury text-white">
-            Why We Don&apos;t Call Ourselves An Agency
-          </h2>
-          <p className="text-muted-foreground text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-            Agencies sell temporary labor and email blasts. We build an automated outbound engine that consistently books sales meetings.
-          </p>
-        </div>
-
-        <div className="overflow-x-auto rounded-2xl border border-glass-border bg-card/80 backdrop-blur-xl">
-          <table className="w-full text-left text-sm">
-            <thead>
-              <tr className="border-b border-border/60 bg-secondary/40 text-xs font-mono uppercase text-muted-foreground">
-                <th className="p-4 md:p-6">Dimension</th>
-                <th className="p-4 md:p-6 text-muted-foreground">Traditional Agency</th>
-                <th className="p-4 md:p-6 text-platinum font-bold">IRONMAN Outbound System</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-border/40">
-              {matrix.map((row, idx) => (
-                <tr key={idx} className="hover:bg-secondary/20 transition-colors">
-                  <td className="p-4 md:p-6 font-semibold text-white">{row.feature}</td>
-                  <td className="p-4 md:p-6 text-muted-foreground">{row.agency}</td>
-                  <td className="p-4 md:p-6 font-semibold text-platinum flex items-center gap-2">
-                    <CheckCircle2 size={16} className="text-emerald-400 shrink-0" />
-                    {row.chroniq}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// --- SECTION 9: LIVE DASHBOARD PREVIEW ---
-function LiveDashboardSection() {
-  return (
-    <section className="py-24 text-left relative overflow-hidden">
-      <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
-        <div className="text-center space-y-4 mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-medium text-emerald-400">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            Live Client Dashboard
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-luxury text-white">
-            Real-Time Pipeline Visibility
-          </h2>
-          <p className="text-muted-foreground text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-            Unlike agencies that send vague monthly updates, IRONMAN gives you full live visibility into meetings booked, positive response rates, and pipeline value.
-          </p>
-        </div>
-
-        <InteractiveIronmanDashboard compact={false} />
-      </div>
-    </section>
-  );
-}
-
-// --- SECTION 10: MEET THE FOUNDERS ---
-function MeetFoundersSection() {
-  return (
-    <section className="py-24 bg-secondary/10 border-y border-border/50 text-left">
-      <div className="container mx-auto px-6 lg:px-8 max-w-5xl">
-        <div className="text-center space-y-4 mb-16">
-          <span className="text-xs font-mono text-platinum uppercase tracking-wider block">
-            The Builders
-          </span>
-          <h2 className="text-3xl sm:text-5xl font-luxury text-white">
-            Built by Outbound Specialists
-          </h2>
-          <p className="text-muted-foreground text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-            We built ChroniqAI because we were exhausted by manual sales workflows, burned email domains, and fragile agency retainers.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Founder 1 */}
-          <div className="p-8 rounded-2xl border border-glass-border bg-card/70 backdrop-blur-xl space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-secondary border border-border flex items-center justify-center text-platinum font-luxury font-bold text-xl">
-                A
-              </div>
-              <div>
-                <h3 className="text-2xl font-luxury text-white">Abhay</h3>
-                <span className="text-xs font-mono text-platinum">Outbound Strategy & Client Growth</span>
-              </div>
-            </div>
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              Obsessed with one thing: helping B2B companies build predictable sales pipeline. Now our clients don&apos;t worry about outbound prospecting—they focus on closing qualified deals.
-            </p>
-          </div>
-
-          {/* Founder 2 */}
-          <div className="p-8 rounded-2xl border border-glass-border bg-card/70 backdrop-blur-xl space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-secondary border border-border flex items-center justify-center text-platinum font-luxury font-bold text-xl">
-                V
-              </div>
-              <div>
-                <h3 className="text-2xl font-luxury text-white">Ved</h3>
-                <span className="text-xs font-mono text-platinum">AI Outbound Architecture</span>
-              </div>
-            </div>
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              Focused on automating repetitive outbound workflows without sacrificing message relevance or deliverability. Designed the core engine behind IRONMAN Outbound.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// --- SECTION 11: REVENUE SCORE CALCULATOR ---
-function RevenueScoreSection({ onOpenAudit }: { onOpenAudit: (score?: number) => void }) {
-  return (
-    <section className="py-24 text-left relative overflow-hidden">
-      <div className="container mx-auto px-6 lg:px-8">
-        <RevenueScoreCalculator onOpenAudit={onOpenAudit} />
-      </div>
-    </section>
-  );
-}
-
-// --- SECTION 12: RESEARCH LAB ---
-function ResearchLabSection() {
-  const researchItems = [
-    { title: "2026 B2B Outbound Deliverability & Response Benchmarks", type: "Benchmark Report" },
-    { title: "The Executive Outbound Personalization Playbook", type: "Playbook" },
-    { title: "Buyer Intent Signals & Account Trigger Guide", type: "Research Guide" },
-  ];
-
-  return (
-    <section className="py-20 bg-secondary/10 border-y border-border/50 text-left">
-      <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-          <div>
-            <span className="text-xs font-mono text-platinum uppercase tracking-wider block mb-2">
-              Outbound Research & Data
-            </span>
-            <h2 className="text-3xl font-luxury text-white">
-              ChroniqAI Research Lab
-            </h2>
-          </div>
-
-          <Link to="/resources">
-            <LuxuryButton variant="outline" size="sm">
-              Explore All Research →
+            <LuxuryButton variant="outline" size="sm" className="flex items-center gap-2">
+              <span>View All Case Studies</span>
+              <ArrowRight size={14} />
             </LuxuryButton>
           </Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {researchItems.map((r, idx) => (
-            <div key={idx} className="p-6 rounded-xl bg-card/60 border border-glass-border flex flex-col justify-between space-y-4 hover:border-primary/40 transition-colors">
-              <div>
-                <span className="text-[10px] font-mono text-platinum uppercase px-2.5 py-0.5 rounded bg-secondary">
-                  {r.type}
-                </span>
-                <h3 className="text-lg font-luxury text-white mt-3">{r.title}</h3>
+          {studies.map((item, idx) => (
+            <Link
+              key={idx}
+              to={item.link}
+              className="p-7 rounded-2xl border border-glass-border bg-card/75 hover:border-primary/50 transition-all flex flex-col justify-between group shadow-lg"
+            >
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono text-emerald-400 font-semibold px-2.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">
+                    {item.niche}
+                  </span>
+                  <ArrowUpRight size={16} className="text-slate-400 group-hover:text-white transition-colors" />
+                </div>
+
+                <h3 className="text-2xl font-luxury text-white group-hover:text-platinum transition-colors">
+                  {item.client}
+                </h3>
+
+                <div className="space-y-1 pt-2 border-t border-border/40">
+                  <div className="text-xs text-muted-foreground font-mono">Delivered Outcome:</div>
+                  <div className="text-xl font-luxury text-white font-semibold">{item.result}</div>
+                  <div className="text-xs font-mono text-platinum">{item.metric}</div>
+                </div>
               </div>
-              <Link to="/resources" className="text-xs text-platinum hover:text-white flex items-center gap-1 font-semibold">
-                Access Documentation <ArrowRight size={14} />
-              </Link>
+
+              <div className="mt-6 pt-3 border-t border-border/30 text-xs text-platinum font-mono flex items-center gap-1 group-hover:underline">
+                Read full case study breakdown →
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// --- PHILOSOPHY STRIP ---
+function PhilosophyHighlightSection() {
+  return (
+    <section className="py-20 bg-secondary/20 border-y border-border/50 text-left">
+      <div className="container mx-auto px-6 lg:px-8 max-w-5xl space-y-10">
+        <div className="text-center space-y-4">
+          <span className="text-xs font-mono text-platinum uppercase tracking-wider block">
+            Our Principles
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-luxury text-white">
+            Why We Build Acquisition Systems As Assets
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-slate-300 font-modern">
+          <div className="p-6 rounded-2xl bg-card/70 border border-border/50 space-y-3">
+            <h4 className="text-lg font-luxury text-white">No Temporary Retainers</h4>
+            <p className="leading-relaxed text-xs sm:text-sm">
+              Agencies sell fleeting campaigns that vanish the moment you stop paying. We build permanent, repeatable acquisition infrastructure you own.
+            </p>
+          </div>
+
+          <div className="p-6 rounded-2xl bg-card/70 border border-border/50 space-y-3">
+            <h4 className="text-lg font-luxury text-white">Authentic Executive Voice</h4>
+            <p className="leading-relaxed text-xs sm:text-sm">
+              C-suite buyers reject template spam. ChroniqAI calibrates every message to your genuine executive voice so outreach reads like thoughtful peer dialogue.
+            </p>
+          </div>
+
+          <div className="p-6 rounded-2xl bg-card/70 border border-border/50 space-y-3">
+            <h4 className="text-lg font-luxury text-white">Timing Precedes Volume</h4>
+            <p className="leading-relaxed text-xs sm:text-sm">
+              Outbound succeeds when timing is right. We track active buyer signals—hiring appointments, funding rounds, and technical changes—before initiating contact.
+            </p>
+          </div>
+        </div>
+
+        <div className="text-center pt-2">
+          <Link to="/how-we-think" className="text-xs font-mono text-platinum hover:text-white inline-flex items-center gap-1.5 underline underline-offset-4">
+            Explore our complete philosophy breakdown →
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// --- FAQ SECTION ---
+function OfficialFAQSection() {
+  const faqs = [
+    {
+      q: "What is ChroniqAI Gravity?",
+      a: "ChroniqAI Gravity is an AI-powered B2B client acquisition system. It discovers high-intent buyer accounts, conducts deep context research, and books sales-ready executive meetings directly onto your calendar.",
+    },
+    {
+      q: "How does ChroniqAI protect outreach accounts?",
+      a: "We implement gradual warm-up routines, daily activity thresholds, and human-like pacing across 2+ team profiles to ensure complete account safety.",
+    },
+    {
+      q: "What results can we expect from Gravity?",
+      a: "Clients typically see 6-10 qualified meetings in the first month as a minimum, scaling to 24-30 meetings per month depending on niche and ticket size.",
+    },
+    {
+      q: "What is your performance guarantee?",
+      a: "If we do not deliver the agreed monthly minimum meetings, the following month is free until the remaining meetings are delivered.",
+    },
+    {
+      q: "How does the 14-day Gravity trial work?",
+      a: "Week 1 is dedicated to setup and account warm-up. Days 8-21 run as the 14-day trial where you see real conversations and meetings booked before making a long-term commitment.",
+    },
+  ];
+
+  return (
+    <section id="faq" className="py-24 bg-background text-left">
+      <div className="container mx-auto px-6 lg:px-8 max-w-4xl space-y-12">
+        <div className="text-center space-y-4">
+          <span className="text-xs font-mono text-platinum uppercase tracking-wider block">
+            Clear Answers
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-luxury text-white">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-slate-300 text-sm sm:text-base max-w-md mx-auto leading-relaxed font-modern">
+            Everything you need to know about ChroniqAI, the Gravity system, and our engagement terms.
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          {faqs.map((faq, idx) => (
+            <div
+              key={idx}
+              className="p-6 rounded-2xl bg-card/75 border border-glass-border space-y-2 hover:border-primary/40 transition-colors"
+            >
+              <h3 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2.5">
+                <HelpCircle size={18} className="text-platinum shrink-0" />
+                {faq.q}
+              </h3>
+              <p className="text-sm text-slate-300 leading-relaxed pl-7 font-modern">
+                {faq.a}
+              </p>
             </div>
           ))}
         </div>
@@ -694,137 +506,78 @@ function ResearchLabSection() {
   );
 }
 
-// --- SECTION 13: FAQ & FINAL CTA ---
-function FAQAndFinalCTASection({ onOpenAudit }: { onOpenAudit: () => void }) {
-  const faqs = [
-    {
-      q: "Can this replace manual sales prospecting?",
-      a: "Yes. The IRONMAN Outbound System takes over account identification, deep research, and email outreach, allowing your Account Executives to focus entirely on running high-intent sales calls.",
-    },
-    {
-      q: "How soon do we see qualified meetings?",
-      a: "Domain setup and buyer signal calibration take 10-14 days. First qualified meeting bookings typically begin landing between day 18 and day 25.",
-    },
-    {
-      q: "How do you protect our main email domain from being marked as spam?",
-      a: "We never send cold outreach from your primary domain. We configure dedicated secondary domains, enforce strict sending caps, and warm inboxes systematically to guarantee high deliverability.",
-    },
-    {
-      q: "Who is NOT a fit for ChroniqAI?",
-      a: "B2C brands, low-ticket products under $5k deal size, or companies looking for one-off mass spam blasts. We build high-precision B2B outbound systems for enterprise companies.",
-    },
-    {
-      q: "How much founder or team involvement is needed?",
-      a: "Initial onboarding takes about 2 hours to calibrate target accounts and messaging voice. Ongoing involvement is under 30 minutes per week.",
-    },
-  ];
-
+// --- FINAL CTA ---
+function OfficialFinalCTASection({ onOpenAudit }: { onOpenAudit: () => void }) {
   return (
-    <section className="py-24 text-left">
-      <div className="container mx-auto px-6 lg:px-8 max-w-4xl space-y-20">
-        {/* FAQ Accordion */}
-        <div>
-          <div className="text-center space-y-4 mb-12">
-            <span className="text-xs font-mono text-platinum uppercase tracking-wider block">
-              Clear Answers
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-luxury text-white">
-              Frequently Asked Questions
-            </h2>
-          </div>
-
-          <div className="space-y-4">
-            {faqs.map((faq, idx) => (
-              <div key={idx} className="p-6 rounded-xl bg-card/60 border border-glass-border space-y-2">
-                <h3 className="text-base font-semibold text-white flex items-center gap-2">
-                  <HelpCircle size={18} className="text-platinum shrink-0" />
-                  {faq.q}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed pl-6">
-                  {faq.a}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Final Call to Action */}
-        <div className="p-10 md:p-16 rounded-2xl border border-glass-border bg-gradient-card text-center space-y-6 relative overflow-hidden">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary border border-primary/20 text-xs font-medium text-platinum">
+    <section className="py-24 text-left relative overflow-hidden bg-secondary/10 border-t border-border/50">
+      <div className="container mx-auto px-6 lg:px-8 max-w-4xl">
+        <div className="p-10 md:p-16 rounded-3xl border border-glass-border bg-gradient-card text-center space-y-6 relative overflow-hidden shadow-2xl">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary border border-primary/25 text-xs font-medium text-platinum">
             <Sparkles size={14} className="text-platinum-glow" />
-            No Sales Pitch • 100% Actionable Outbound Blueprint
+            Limited Monthly Cohorts
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-luxury text-white tracking-tight">
-            Ready to Build Your Outbound Pipeline Engine?
+            Ready to Build a Predictable Acquisition Engine?
           </h2>
 
-          <p className="text-base sm:text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed font-modern">
-            Schedule a 45-minute Free Outbound System Audit to review your ideal buyer profile, messaging angles, and email deliverability.
+          <p className="text-base sm:text-lg text-slate-200 max-w-xl mx-auto leading-relaxed font-modern">
+            Apply for the 14-day Gravity trial. We will review your offer, define your target ICP, and show you how to generate qualified executive pipeline.
           </p>
 
-          <div className="pt-4">
+          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
             <LuxuryButton
               variant="platinum"
               size="lg"
               onClick={onOpenAudit}
-              className="flex items-center justify-center gap-2 mx-auto"
+              className="flex items-center justify-center gap-2"
             >
-              <span>Get My Free Outbound Audit</span>
+              <span>Apply for 14-Day Gravity Trial</span>
               <ArrowRight size={18} />
             </LuxuryButton>
+
+            <Link to="/gravity">
+              <LuxuryButton variant="outline" size="lg">
+                <span>View Gravity by Chroniq</span>
+              </LuxuryButton>
+            </Link>
           </div>
+
+          <p className="text-xs font-mono text-platinum/80 pt-2">
+            By application only • We review each application within 24 hours.
+          </p>
         </div>
       </div>
     </section>
   );
 }
 
-// --- MAIN INDEX PAGE COMPONENT ---
+// --- MAIN OFFICIAL HOMEPAGE COMPONENT ---
 export default function Index() {
   const [isAuditModalOpen, setIsAuditModalOpen] = useState(false);
-  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
-  const [auditScore, setAuditScore] = useState<number | undefined>(undefined);
-
-  const handleOpenAudit = (score?: number) => {
-    setAuditScore(score);
-    setIsAuditModalOpen(true);
-  };
 
   return (
     <PageLayout>
       <SEOHead
-        title="AI Outbound System for High-Ticket B2B | ChroniqAI"
-        description="ChroniqAI builds the IRONMAN Outbound System for high-ticket B2B companies. Generate predictable sales pipeline through buyer intent signals, deep account research, and personalized executive messaging."
+        title="ChroniqAI | AI Revenue Infrastructure & Client Acquisition"
+        description="ChroniqAI builds predictable sales pipeline with the Gravity client acquisition system through buyer intent discovery, deep account research, and personalized executive messaging."
         canonical="https://chroniqai.com/"
       />
       <OrganizationSchema />
       <WebsiteSchema />
 
-      <HeroSection onOpenAudit={() => handleOpenAudit()} onOpenDemo={() => setIsDemoModalOpen(true)} />
-      <SocialProofSection />
-      <ProblemSection />
-      <MeetIronmanSection />
-      <OutboundSystemPillarsSection onOpenAudit={() => handleOpenAudit()} />
-      <CaseStudiesSection onOpenAudit={() => handleOpenAudit()} />
-      <HowWeWorkSection />
-      <WhyChroniqAISection />
-      <LiveDashboardSection />
-      <MeetFoundersSection />
-      <RevenueScoreSection onOpenAudit={handleOpenAudit} />
-      <ResearchLabSection />
-      <FAQAndFinalCTASection onOpenAudit={() => handleOpenAudit()} />
+      <OfficialHeroSection onOpenAudit={() => setIsAuditModalOpen(true)} />
+      <OfficialStatsSection />
+      <OutboundSystemPillarsSection onOpenAudit={() => setIsAuditModalOpen(true)} />
+      <GravitySpotlightBanner />
+      <CaseStudiesHighlightSection />
+      <PhilosophyHighlightSection />
+      <OfficialFAQSection />
+      <OfficialFinalCTASection onOpenAudit={() => setIsAuditModalOpen(true)} />
 
       <AuditModal
         isOpen={isAuditModalOpen}
         onClose={() => setIsAuditModalOpen(false)}
-        initialScore={auditScore}
-      />
-
-      <IronmanDemoModal
-        isOpen={isDemoModalOpen}
-        onClose={() => setIsDemoModalOpen(false)}
-        onOpenAudit={() => handleOpenAudit()}
       />
     </PageLayout>
   );

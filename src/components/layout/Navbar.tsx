@@ -7,11 +7,11 @@ import { AuditModal } from "@/components/modals/AuditModal";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { name: "IRONMAN™ Outbound", href: "/ironman" },
+  { name: "Gravity by Chroniq", href: "/gravity" },
+  { name: "Pillars", href: "/#system-pillars" },
   { name: "Case Studies", href: "/case-studies" },
   { name: "How We Think", href: "/how-we-think" },
   { name: "Score Calculator", href: "/score-calculator" },
-  { name: "Research", href: "/resources" },
 ];
 
 export function Navbar() {
@@ -48,23 +48,21 @@ export function Navbar() {
               <span className="font-luxury text-2xl font-semibold text-white tracking-wide group-hover:text-platinum-gradient transition-colors duration-300">
                 Chroniq<span className="text-platinum-gradient">AI</span>
               </span>
+              <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-secondary/90 border border-primary/20 text-platinum">
+                Gravity
+              </span>
             </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-8">
               {navLinks.map((link) => (
-                <Link
+                <a
                   key={link.name}
-                  to={link.href}
-                  className={cn(
-                    "font-modern text-sm tracking-wide animated-underline transition-colors duration-300",
-                    location.pathname === link.href
-                      ? "text-foreground font-semibold"
-                      : "text-muted-foreground hover:text-foreground"
-                  )}
+                  href={link.href}
+                  className="font-modern text-sm tracking-wide text-muted-foreground hover:text-foreground animated-underline transition-colors duration-300"
                 >
                   {link.name}
-                </Link>
+                </a>
               ))}
             </div>
 
@@ -76,7 +74,7 @@ export function Navbar() {
                 onClick={() => setIsAuditModalOpen(true)}
                 className="flex items-center gap-2"
               >
-                <span>Get Free Audit</span>
+                <span>Apply for 14-Day Trial</span>
                 <ArrowRight size={14} />
               </LuxuryButton>
             </div>
@@ -103,19 +101,14 @@ export function Navbar() {
             >
               <div className="container mx-auto px-6 py-6 flex flex-col gap-4">
                 {navLinks.map((link) => (
-                  <Link
+                  <a
                     key={link.name}
-                    to={link.href}
+                    href={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className={cn(
-                      "font-modern text-base py-2 transition-colors duration-300",
-                      location.pathname === link.href
-                        ? "text-foreground font-semibold"
-                        : "text-muted-foreground hover:text-foreground"
-                    )}
+                    className="font-modern text-base py-2 text-muted-foreground hover:text-foreground transition-colors duration-300"
                   >
                     {link.name}
-                  </Link>
+                  </a>
                 ))}
                 <LuxuryButton
                   variant="platinum"
@@ -126,7 +119,7 @@ export function Navbar() {
                   }}
                   className="mt-4 w-full flex items-center justify-center gap-2"
                 >
-                  <span>Get Free Revenue System Audit</span>
+                  <span>Apply for 14-Day Gravity Trial</span>
                   <ArrowRight size={16} />
                 </LuxuryButton>
               </div>

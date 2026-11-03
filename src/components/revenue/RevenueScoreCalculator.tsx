@@ -273,8 +273,8 @@ export function RevenueScoreCalculator({ onOpenAudit }: RevenueScoreCalculatorPr
               </div>
               <p className="text-xs text-muted-foreground leading-relaxed">
                 {score >= 80
-                  ? "Your revenue engine has strong foundational elements. Implementing IRONMAN Outbound buyer intent discovery and personalized messaging will unlock an additional 20-30% pipeline scale."
-                  : "Your current setup relies heavily on manual work, leaving pipeline volume fragmented and predictable growth unrealized. An automated outbound engine can double meeting yield within 45 days."}
+                  ? "Your client acquisition engine has strong foundational elements. Implementing ChroniqAI Gravity buyer intent discovery and personalized messaging will unlock an additional 20-30% pipeline scale."
+                  : "Your current setup relies heavily on manual work, leaving pipeline volume fragmented and predictable growth unrealized. ChroniqAI Gravity can double meeting yield within 45 days."}
               </p>
             </div>
           </div>
@@ -311,7 +311,7 @@ export function RevenueScoreCalculator({ onOpenAudit }: RevenueScoreCalculatorPr
                 Outbound Blueprint Ready
               </h4>
               <p className="text-xs text-muted-foreground max-w-md leading-relaxed">
-                Schedule a 45-minute Free Outbound System Audit with our team to review your specific score breakdown and receive a customized deployment plan.
+                Apply for the 14-day trial with our team to review your specific score breakdown and receive a customized Gravity deployment plan.
               </p>
             </div>
 
@@ -321,7 +321,7 @@ export function RevenueScoreCalculator({ onOpenAudit }: RevenueScoreCalculatorPr
               onClick={() => onOpenAudit(score)}
               className="shrink-0 w-full md:w-auto"
             >
-              Get Free Revenue System Audit
+              Apply for 14-Day Gravity Trial
               <ArrowRight size={18} className="ml-2" />
             </LuxuryButton>
           </div>

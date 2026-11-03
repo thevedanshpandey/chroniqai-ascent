@@ -15,13 +15,13 @@ export default function ScaleMetricsCaseStudy() {
     <PageLayout>
       <SEOHead
         title="ScaleMetrics Case Study: $1.4M ARR Pipeline Created via AI Outbound | ChroniqAI"
-        description="How ScaleMetrics generated 22 qualified enterprise meetings/month and $1.4M ARR pipeline in 90 days using ChroniqAI IRONMAN Outbound Infrastructure."
+        description="How ScaleMetrics generated 22 qualified enterprise meetings/month and $1.4M ARR pipeline in 90 days using ChroniqAI Gravity LinkedIn Acquisition System."
         canonical="https://chroniqai.com/case-studies/scalemetrics-devops"
-        keywords="ScaleMetrics case study, B2B AI outbound results, DevOps pipeline generation, IRONMAN case study"
+        keywords="ScaleMetrics case study, B2B AI outbound results, DevOps pipeline generation, Gravity case study"
       />
       <ArticleSchema
         title="ScaleMetrics DevOps Case Study: $1.4M ARR Pipeline via AI Revenue Infrastructure"
-        description="Detailed case study examining how an enterprise DevOps platform achieved 19.2% cold outreach reply rate and $1.4M ARR created pipeline."
+        description="Detailed case study examining how an enterprise DevOps platform achieved 19.2% LinkedIn outreach reply rate and $1.4M ARR created pipeline."
         url="https://chroniqai.com/case-studies/scalemetrics-devops"
         datePublished="2026-06-15"
       />
@@ -53,7 +53,7 @@ export default function ScaleMetricsCaseStudy() {
             </h1>
 
             <p className="text-base sm:text-lg text-muted-foreground font-modern leading-relaxed">
-              Replacing fragmented SDR agencies with IRONMAN™ AI Outbound Infrastructure delivered 19.2% cold response rates and $48,000 ACV deal velocity.
+              Replacing fragmented SDR agencies with ChroniqAI Gravity delivered 19.2% response rates and $48,000 ACV deal velocity.
             </p>
           </div>
 
@@ -68,7 +68,7 @@ export default function ScaleMetricsCaseStudy() {
               <div className="text-2xl font-luxury text-white">22 / Month</div>
             </div>
             <div className="space-y-1">
-              <div className="text-xs font-mono text-muted-foreground uppercase">Cold Response Rate</div>
+              <div className="text-xs font-mono text-muted-foreground uppercase">Response Rate</div>
               <div className="text-2xl font-luxury text-white">19.2%</div>
             </div>
             <div className="space-y-1">
@@ -82,19 +82,19 @@ export default function ScaleMetricsCaseStudy() {
             <div className="space-y-3">
               <h2 className="text-2xl font-luxury text-white">The Challenge</h2>
               <p>
-                ScaleMetrics provides AI-driven Kubernetes telemetry for Fortune 500 engineering teams. Before working with ChroniqAI, they relied on a legacy outsourced lead generation agency spending $12,000/month. The agency dispatched generic template emails to unverified lists, resulting in burned domain deliverability, &lt;1.5% reply rates, and unqualified meetings that wasted AE time.
+                ScaleMetrics provides AI-driven Kubernetes telemetry for Fortune 500 engineering teams. Before working with ChroniqAI, they relied on a legacy outsourced lead generation agency spending $12,000/month. The agency dispatched generic template messages to unverified lists, resulting in burned outreach accounts, &lt;1.5% reply rates, and unqualified meetings that wasted AE time.
               </p>
             </div>
 
             <div className="space-y-3">
               <h2 className="text-2xl font-luxury text-white">The AI Infrastructure Solution</h2>
               <p>
-                ChroniqAI deployed **IRONMAN™ Outbound Infrastructure** configured for enterprise DevOps decision-makers (VP Engineering, CTO, Head of Infrastructure):
+                ChroniqAI deployed **ChroniqAI Gravity** configured for enterprise DevOps decision-makers (VP Engineering, CTO, Head of Infrastructure):
               </p>
               <ul className="space-y-2 font-mono text-xs text-platinum pl-4 border-l-2 border-primary/40">
                 <li>• **Financial & Growth Signal Analysis**: Scanned quarterly announcements and hiring spikes for companies expanding infrastructure teams.</li>
                 <li>• **Deep Account Context**: Reviewed public executive priorities and interviews to extract relevant talking points.</li>
-                <li>• **Dedicated Secondary Domains**: Configured isolated sending domains with automated inbox deliverability protection.</li>
+                <li>• **LinkedIn Account Warming & Safety**: Configured human-like pacing and daily thresholds across team LinkedIn profiles.</li>
                 <li>• **Direct Calendar Scheduling**: Placed qualified VP-level prospects directly into sales team calendars.</li>
               </ul>
             </div>

@@ -9,71 +9,34 @@ export function OrganizationSchema() {
     name: "ChroniqAI",
     url: "https://chroniqai.com",
     logo: "https://chroniqai.com/logo.png",
-    description: "AI Revenue Infrastructure Platform for High-Ticket B2B Companies.",
+    description: "ChroniqAI Gravity | AI-Powered LinkedIn Client Acquisition for High-Ticket B2B Founders.",
     foundingDate: "2024",
     founders: [
       {
         "@type": "Person",
         "@id": "https://chroniqai.com/#vedansh-pandey",
         name: "Vedansh Pandey",
-        jobTitle: "Founder & Platform Architect",
-        url: "https://chroniqai.com/how-we-think",
-        description: "Designs the architecture behind IRONMAN AI Revenue Infrastructure."
-      },
-      {
-        "@type": "Person",
-        "@id": "https://chroniqai.com/#abhay-rawat",
-        name: "Abhay Rawat",
-        jobTitle: "Co-Founder & Revenue Systems Architect",
-        url: "https://chroniqai.com/how-we-think",
-        description: "Helps B2B founders build predictable revenue pipeline engines."
+        jobTitle: "Founder & CEO",
+        url: "https://chroniqai.com",
+        description: "Creator and architect of ChroniqAI Gravity client acquisition system."
       }
     ],
     sameAs: [
-      "https://www.linkedin.com/company/chroniqai"
+      "https://www.linkedin.com/company/chroniqai",
+      "https://www.linkedin.com/in/vedanshpandey/"
     ],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "IRONMAN Revenue Infrastructure Platform Modules",
+      name: "ChroniqAI Gravity System",
       itemListElement: [
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "SoftwareApplication",
-            "@id": "https://chroniqai.com/ironman#software",
-            name: "IRONMAN Outbound Module",
-            description: "Books qualified meetings through signal-based 10-K research and intent triggers.",
-            url: "https://chroniqai.com/ironman"
-          }
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            "@id": "https://chroniqai.com/solutions#authority",
-            name: "IRONMAN Authority Module",
-            description: "Systematizes executive thought leadership and founder brand trust.",
-            url: "https://chroniqai.com/solutions"
-          }
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            "@id": "https://chroniqai.com/solutions#visibility",
-            name: "IRONMAN Visibility Module",
-            description: "Ranks B2B solutions in ChatGPT, Perplexity, and AI search engines.",
-            url: "https://chroniqai.com/solutions"
-          }
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            "@id": "https://chroniqai.com/solutions#operations",
-            name: "IRONMAN Operations Module",
-            description: "Automates CRM sync, lead enrichment, sentiment scoring, and calendar routing.",
-            url: "https://chroniqai.com/solutions"
+            "@id": "https://chroniqai.com/gravity#software",
+            name: "ChroniqAI Gravity",
+            description: "AI-powered LinkedIn client acquisition system for B2B founders with high-ticket offers.",
+            url: "https://chroniqai.com/gravity"
           }
         }
       ]
@@ -87,16 +50,16 @@ export function OrganizationSchema() {
   );
 }
 
-// Software Application Schema for IRONMAN Platform
+// Software Application Schema for ChroniqAI Gravity
 export function SoftwareApplicationSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "@id": "https://chroniqai.com/ironman#software",
-    name: "IRONMAN AI Revenue Infrastructure",
+    "@id": "https://chroniqai.com/gravity#software",
+    name: "ChroniqAI Gravity",
     operatingSystem: "Cloud / Web-based",
     applicationCategory: "BusinessApplication",
-    description: "Proprietary AI Revenue Infrastructure platform automating intent discovery, executive research, and pipeline placement for B2B enterprises.",
+    description: "AI-powered LinkedIn client acquisition system for B2B founders with high-ticket offers.",
     publisher: {
       "@type": "Organization",
       "@id": "https://chroniqai.com/#organization",
@@ -104,7 +67,7 @@ export function SoftwareApplicationSchema() {
     },
     offers: {
       "@type": "Offer",
-      price: "Custom Enterprise",
+      price: "14-Day Trial Available",
       priceCurrency: "USD"
     }
   };

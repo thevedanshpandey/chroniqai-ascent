@@ -10,12 +10,12 @@ const journalEntries = [
   {
     week: "Week 18",
     date: "July 2026",
-    title: "IRONMAN Outbound: Real-Time Executive Hiring & Growth Signal Pipeline",
+    title: "Gravity Outbound: Real-Time Executive Hiring & Growth Signal Pipeline",
     summary: "Integrated real-time feeds for executive hiring appointments and company expansion milestones.",
     changes: [
       "Real-time processing from executive hiring announcements to prioritized lead queues",
       "Automated extraction of strategic company initiatives from recent public updates",
-      "Direct HubSpot and Salesforce synchronization with instant meeting attribution",
+      "Direct CRM synchronization with instant meeting attribution",
     ],
     impact: "Meeting booking velocity increased by 22% across active B2B clients.",
   },
@@ -35,13 +35,13 @@ const journalEntries = [
     week: "Week 14",
     date: "May 2026",
     title: "Executive Voice Personalization & Tone Calibration",
-    summary: "Upgraded message generation to craft natural 1-to-1 emails matching the founder's authentic tone.",
+    summary: "Upgraded message generation to craft natural 1-to-1 conversations matching the founder's authentic tone.",
     changes: [
       "Voice calibration based on founder writing samples and interview transcripts",
       "Contextual follow-up sequences that answer common prospect questions naturally",
-      "Proactive spam filter verification prior to email dispatch",
+      "LinkedIn account warming and daily safety limits verification",
     ],
-    impact: "Average outbound cold reply rate jumped from 11.2% to 18.4%.",
+    impact: "Average outbound reply rate jumped from 11.2% to 18.4%.",
   },
   {
     week: "Week 12",
@@ -51,7 +51,7 @@ const journalEntries = [
     changes: [
       "Automated time zone and sales rep availability coordination",
       "Pre-meeting research briefs automatically attached to Google Calendar invites",
-      "CRM stage progression automatically updated upon positive email response",
+      "CRM stage progression automatically updated upon positive response",
     ],
     impact: "Saved sales reps over 20 hours per week on manual research and scheduling.",
   },
@@ -63,8 +63,8 @@ export default function EngineeringJournal() {
   return (
     <PageLayout>
       <SEOHead
-        title="Engineering Journal — ChroniqAI IRONMAN Development Log"
-        description="Weekly updates, architecture improvements, and performance benchmarks from the ChroniqAI engineering team."
+        title="Engineering Journal — ChroniqAI Gravity Development Log"
+        description="Weekly updates, architecture improvements, and performance benchmarks from the ChroniqAI Gravity engineering team."
       />
 
       <div className="pt-32 pb-24 relative overflow-hidden text-left">
@@ -89,7 +89,7 @@ export default function EngineeringJournal() {
             </h1>
 
             <p className="text-lg sm:text-xl text-muted-foreground font-modern max-w-2xl mx-auto leading-relaxed">
-              We build revenue infrastructure like software. Here is what we changed, optimized, and deployed inside the IRONMAN platform.
+              We build client acquisition infrastructure like software. Here is what we changed, optimized, and deployed inside ChroniqAI Gravity.
             </p>
           </motion.div>
 
@@ -154,10 +154,10 @@ export default function EngineeringJournal() {
             className="mt-20 p-10 md:p-14 rounded-2xl border border-glass-border bg-gradient-card text-center space-y-6"
           >
             <h2 className="text-3xl sm:text-4xl font-luxury text-white">
-              Want This Revenue Engine Inside Your Company?
+              Want This Acquisition System Inside Your Company?
             </h2>
             <p className="text-muted-foreground text-base max-w-xl mx-auto leading-relaxed">
-              Book a 45-minute Free Revenue System Audit to analyze your outbound signals and get a customized IRONMAN deployment roadmap.
+              Apply for the 14-day trial to see how ChroniqAI Gravity books qualified meetings on your calendar.
             </p>
             <div className="pt-4">
               <LuxuryButton
@@ -165,7 +165,7 @@ export default function EngineeringJournal() {
                 size="lg"
                 onClick={() => setIsAuditModalOpen(true)}
               >
-                Get My Free Revenue System Audit
+                Apply for 14-Day Gravity Trial
                 <ArrowRight size={18} className="ml-2" />
               </LuxuryButton>
             </div>
