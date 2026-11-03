@@ -1,0 +1,56 @@
+name: Deploy ChroniqAI to SiteCountry Hosting
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    name: Build & Deploy to cPanel via FTPS
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup Bun environment
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build production app
+        run: bun run build
+
+      - name: Deploy build output to SiteCountry hosting
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: 21
+          protocol: ftps
+          local-dir: ./dist/
+          # In cPanel/SiteCountry, the FTP account root (/home2/chroniqa/domains/chroniqai.com/)
+          # serves the website from the public_html subfolder.
+          # If your FTP user was created pointing directly inside public_html, change server-dir to: ./
+          server-dir: ./public_html/
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.env*
+            **/node_modules/**
+            **/*.map
+            **/.ftp-deploy-sync-state.json
