@@ -10,7 +10,11 @@ import { PostSchema } from "@/components/resources/PostSchema";
 import { ResourcePost as ResourcePostType } from "@/data/resources/types";
 import { fetchWordPressPostBySlug, fetchWordPressPosts } from "@/services/wordpress";
 import { getPostBySlug as getLocalPostBySlug, getRelatedPosts as getLocalRelatedPosts } from "@/data/resources/posts";
-import { getUnlockedResource, saveUnlockedResource } from "@/services/leadCapture";
+import {
+  getUnlockedResource,
+  saveUnlockedResource,
+  isLeadGateActive,
+} from "@/services/leadCapture";
 import {
   Calendar,
   Clock,
@@ -75,6 +79,13 @@ export default function ResourcePost() {
 
   const [isAuditModalOpen, setIsAuditModalOpen] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+
+  // LinkedIn or gate=1 parameter detection for top lead gate (persisted in sessionStorage)
+  const [showTopGate, setShowTopGate] = useState<boolean>(() => isLeadGateActive());
+
+  useEffect(() => {
+    setShowTopGate(isLeadGateActive());
+  }, []);
 
   // Persistent lead-capture unlock state keyed by decoded slug
   const [unlockedLink, setUnlockedLink] = useState<string | null>(() =>
@@ -309,8 +320,28 @@ export default function ResourcePost() {
             )}
           </header>
 
+          {/* LinkedIn-Only Lead Gate: appears BEFORE the article only if utm_source=linkedin or gate=1 */}
+          {showTopGate && (
+            <section aria-label="Access Resource Playbook" className="mb-10 animate-in fade-in duration-300">
+              <PostCTA
+                variant="top-gate"
+                postTitle={post.title}
+                resourceSlug={slug || post.slug}
+                unlockedLink={unlockedLink}
+                onUnlocked={handleUnlocked}
+                onBookCallClick={() => setIsAuditModalOpen(true)}
+                onScrollToArticle={() => {
+                  const target = document.getElementById("article-content");
+                  if (target) {
+                    target.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }
+                }}
+              />
+            </section>
+          )}
+
           {/* Main Grid: Content + Sticky Sidebar */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+          <div id="article-content" className="grid grid-cols-1 lg:grid-cols-12 gap-10 scroll-mt-28">
             {/* Sticky TOC on Left / Desktop */}
             <aside className="lg:col-span-4 order-2 lg:order-1">
               <div className="lg:sticky lg:top-28 space-y-6">

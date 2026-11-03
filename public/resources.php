@@ -198,23 +198,29 @@ if ($slug) {
 
         // Helper to generate SSR Lead-Capture Box
         $generate_cta_box = function($box_variant, $box_title, $box_slug) {
-            $variant_badge = ($box_variant === 'mid') ? 'Mid-Article Resource' : 'Executive System Guide';
+            $is_top = ($box_variant === 'top');
+            $is_mid = ($box_variant === 'mid');
+            $variant_badge = $is_top ? 'Free resource' : ($is_mid ? 'Mid-Article Resource' : 'Executive System Guide');
+            $box_heading = $is_top ? htmlspecialchars($box_title) : ('Get the free ' . htmlspecialchars($box_title));
+            $box_value = ($is_top || $is_mid)
+                ? 'Download the complete framework, trigger checklists, and daily outreach safety caps formatted for your team.'
+                : 'Access the full resource instantly. Then let ChroniqAI Gravity deploy the verified infrastructure, warmup routines, and high-ticket pipeline for you.';
             $form_id = 'lead_form_' . $box_variant . '_' . preg_replace('/[^a-zA-Z0-9]/', '', $box_slug);
             return '
-            <aside class="lead-capture-box" style="margin: 40px 0; border-radius: 16px; border: 1px solid rgba(226, 232, 240, 0.25); background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.85)); padding: 30px; color: #f8fafc;">
+            <aside class="lead-capture-box" data-variant="' . $box_variant . '" style="margin: ' . ($is_top ? '20px 0 40px 0' : '40px 0') . '; border-radius: 16px; border: 1px solid rgba(226, 232, 240, 0.25); background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.85)); padding: 30px; color: #f8fafc;">
               <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; align-items: flex-start;">
                 <div style="max-width: 500px;">
                   <span style="display: inline-block; padding: 4px 12px; border-radius: 9999px; background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(56, 189, 248, 0.3); font-size: 11px; font-family: monospace; color: #38bdf8; margin-bottom: 12px;">' . $variant_badge . '</span>
-                  <h3 style="font-size: 1.5rem; margin: 0 0 10px 0; color: #ffffff; line-height: 1.3;">Get the free ' . htmlspecialchars($box_title) . '</h3>
-                  <p style="font-size: 14px; color: #94a3b8; line-height: 1.6; margin: 0 0 16px 0;">Download the complete framework, trigger checklists, and daily outreach safety caps formatted for your team.</p>
+                  <h3 style="font-size: 1.5rem; margin: 0 0 10px 0; color: #ffffff; line-height: 1.3;">' . $box_heading . '</h3>
+                  <p style="font-size: 14px; color: #94a3b8; line-height: 1.6; margin: 0 0 16px 0;">' . $box_value . '</p>
                   <div style="font-size: 12px; font-family: monospace;">
                     <a href="/gravity" style="color: #38bdf8; text-decoration: underline; margin-right: 15px;">Explore Gravity System &rarr;</a>
                     <a href="/score-calculator" style="color: #94a3b8; text-decoration: none;">Book Strategy Call</a>
                   </div>
                 </div>
 
-                <div style="width: 100%; max-width: 360px; background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px;">
-                  <form id="' . $form_id . '" onsubmit="handleLeadSubmit(event, \'' . htmlspecialchars($box_slug) . '\', \'' . $form_id . '\')" style="display: flex; flex-direction: column; gap: 12px;">
+                <div class="lead-action-col" style="width: 100%; max-width: 360px; background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px;">
+                  <form id="' . $form_id . '" onsubmit="handleLeadSubmit(event, \'' . htmlspecialchars($box_slug) . '\', \'' . $form_id . '\', \'' . $box_variant . '\')" style="display: flex; flex-direction: column; gap: 12px;">
                     <div style="position: absolute; opacity: 0; z-index: -1; pointer-events: none; height: 0; width: 0; overflow: hidden;">
                       <label>Do not fill this</label>
                       <input type="text" name="hp" tabindex="-1" autocomplete="off" />
@@ -237,12 +243,23 @@ if ($slug) {
                     <p style="font-size: 11px; color: #94a3b8; text-align: center; margin: 4px 0 0 0; line-height: 1.4;">
                       We\'ll send you the resource and occasionally email you about client acquisition. Unsubscribe anytime.
                     </p>
+                    ' . ($is_top ? '
+                    <div style="text-align: center; margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.1);">
+                      <a href="#article-content" onclick="document.getElementById(\'article-content\').scrollIntoView({behavior:\'smooth\'}); return false;" style="color: #94a3b8; font-size: 11px; font-family: monospace; text-decoration: underline;">Skip to article &darr;</a>
+                    </div>' : '') . '
                     <div class="form-status" style="display: none; font-size: 12px; text-align: center; margin-top: 8px;"></div>
                   </form>
                 </div>
               </div>
             </aside>';
         };
+
+        // Check for LinkedIn-only top lead gate
+        $utm_source = strtolower(trim($_GET['utm_source'] ?? ''));
+        $gate_param = trim($_GET['gate'] ?? '');
+        $is_linkedin_gate = ($utm_source === 'linkedin' || $gate_param === '1');
+
+        $top_cta_html = $generate_cta_box('top', $title, $slug);
 
         // Split content for mid-article CTA
         $h2_count = substr_count(strtolower($raw_content), '</h2>');
@@ -286,7 +303,12 @@ if ($slug) {
           <p style="margin-bottom: 0; font-size: 16px; line-height: 1.6; color: #f8fafc;">' . htmlspecialchars($tldr) . '</p>
         </div>
       </header>
-      <main class="ssr-article-content" style="line-height: 1.8; font-size: 16px; color: #cbd5e1;">
+
+      <div id="ssr-top-gate" style="' . ($is_linkedin_gate ? 'display: block;' : 'display: none;') . '">
+        ' . $top_cta_html . '
+      </div>
+
+      <main id="article-content" class="ssr-article-content" style="line-height: 1.8; font-size: 16px; color: #cbd5e1;">
         ' . $content_part1 . '
         ' . $mid_cta_html . '
         ' . $content_part2 . '
@@ -297,7 +319,38 @@ if ($slug) {
         <p><a href="/resources" style="color: #94a3b8;">&larr; Back to all resources</a></p>
       </footer>
       <script>
-      function handleLeadSubmit(e, rawSlug, formId) {
+      (function() {
+        try {
+          var sp = new URLSearchParams(window.location.search);
+          var qs = (sp.get("utm_source") || "").toLowerCase().trim();
+          var qg = (sp.get("gate") || "").trim();
+          if (qs === "linkedin" || qg === "1") {
+            sessionStorage.setItem("chroniq_lead_gate_active", "1");
+          }
+          if (sessionStorage.getItem("chroniq_lead_gate_active") === "1") {
+            var topGate = document.getElementById("ssr-top-gate");
+            if (topGate) topGate.style.display = "block";
+          }
+          var decodedSlug = decodeURIComponent(' . json_encode($slug) . ' || "");
+          var unlockedRaw = localStorage.getItem("chroniq_unlocked_" + decodedSlug);
+          if (unlockedRaw) {
+            var parsed = JSON.parse(unlockedRaw);
+            if (parsed && parsed.link) {
+              document.querySelectorAll(".lead-capture-box").forEach(function(box) {
+                var variant = box.getAttribute("data-variant");
+                var actionCol = box.querySelector(".lead-action-col");
+                if (actionCol) {
+                  actionCol.innerHTML = \'<div style="text-align: center; padding: 15px;"><div style="color: #4ade80; font-size: 14px; margin-bottom: 8px; font-weight: bold;">&check; Thanks, here\\\'s your resource</div><a href="\' + parsed.link + \'" target="_blank" style="display: block; width: 100%; padding: 10px; background: #10b981; color: #020617; border-radius: 6px; font-weight: bold; font-size: 12px; font-family: monospace; text-transform: uppercase; text-decoration: none; margin-bottom: 8px; box-sizing: border-box;">Open Resource &rarr;</a>\' +
+                  (variant === "top" ? \'<a href="#article-content" onclick="document.getElementById(\\\'article-content\\\').scrollIntoView({behavior:\\\'smooth\\\'}); return false;" style="color: #cbd5e1; font-size: 11px; text-decoration: underline;">Continue to article &darr;</a>\' : \'\') +
+                  \'</div>\';
+                }
+              });
+            }
+          }
+        } catch(e) {}
+      })();
+
+      function handleLeadSubmit(e, rawSlug, formId, variant) {
         e.preventDefault();
         var form = document.getElementById(formId);
         var hp = form.querySelector(\'input[name="hp"]\').value;
@@ -309,7 +362,12 @@ if ($slug) {
         var btn = form.querySelector(\'button[type="submit"]\');
         btn.disabled = true;
         btn.innerText = "Unlocking Resource...";
-        var decodedSlug = decodeURIComponent(rawSlug || "");
+        var decodedSlug = "";
+        try {
+          decodedSlug = decodeURIComponent(rawSlug || "");
+        } catch(err) {
+          decodedSlug = rawSlug || "";
+        }
         var payload = {
           name: name,
           email: email,
@@ -328,9 +386,16 @@ if ($slug) {
         }).then(function(r) { return r.json(); })
           .then(function(data) {
             if (data.ok && data.link) {
+              try {
+                localStorage.setItem("chroniq_unlocked_" + decodedSlug, JSON.stringify({ link: data.link, unlockedAt: Date.now() }));
+              } catch(e) {}
               status.style.display = "block";
               status.style.color = "#4ade80";
-              status.innerHTML = \'Resource unlocked! <a href="\' + data.link + \'" target="_blank" style="color: #38bdf8; text-decoration: underline; font-weight: bold;">Click here to access</a>\';
+              var successHtml = \'Resource unlocked! <a href="\' + data.link + \'" target="_blank" style="color: #38bdf8; text-decoration: underline; font-weight: bold; margin-right: 12px;">Open Resource &rarr;</a>\';
+              if (variant === "top") {
+                successHtml += \' <a href="#article-content" onclick="document.getElementById(\\\'article-content\\\').scrollIntoView({behavior:\\\'smooth\\\'}); return false;" style="color: #cbd5e1; font-size: 11px; text-decoration: underline;">Continue to article &darr;</a>\';
+              }
+              status.innerHTML = successHtml;
               btn.innerText = "Access Granted";
             } else {
               status.style.display = "block";

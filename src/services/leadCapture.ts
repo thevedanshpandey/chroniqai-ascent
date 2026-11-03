@@ -78,6 +78,29 @@ export function getTrackingParams(): TrackingParams {
 }
 
 /**
+ * Checks if the LinkedIn-only top lead gate should be displayed.
+ * Only triggers if URL has utm_source=linkedin or gate=1.
+ * Persists in sessionStorage so it remains active across reloads and navigations within the session.
+ */
+export function isLeadGateActive(): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const qSource = (urlParams.get("utm_source") || "").toLowerCase().trim();
+    const qGate = (urlParams.get("gate") || "").trim();
+
+    if (qSource === "linkedin" || qGate === "1") {
+      sessionStorage.setItem("chroniq_lead_gate_active", "1");
+      return true;
+    }
+
+    return sessionStorage.getItem("chroniq_lead_gate_active") === "1";
+  } catch {
+    return false;
+  }
+}
+
+/**
  * Validates email format with a standard RFC compliant regular expression.
  */
 export function isValidEmail(email: string): boolean {

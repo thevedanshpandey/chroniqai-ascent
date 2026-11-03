@@ -4,6 +4,7 @@ import {
   Download,
   CheckCircle2,
   ArrowRight,
+  ArrowDown,
   Calendar,
   Sparkles,
   ExternalLink,
@@ -21,12 +22,13 @@ import {
 } from "@/services/leadCapture";
 
 interface PostCTAProps {
-  variant?: "mid-article" | "end-of-article";
+  variant?: "mid-article" | "end-of-article" | "top-gate";
   postTitle: string;
   resourceSlug: string;
   unlockedLink: string | null;
   onUnlocked: (link: string) => void;
   onBookCallClick: () => void;
+  onScrollToArticle?: () => void;
 }
 
 export function PostCTA({
@@ -36,8 +38,10 @@ export function PostCTA({
   unlockedLink,
   onUnlocked,
   onBookCallClick,
+  onScrollToArticle,
 }: PostCTAProps) {
   const isMid = variant === "mid-article";
+  const isTopGate = variant === "top-gate";
   const nameId = useId();
   const emailId = useId();
   const websiteId = useId();
@@ -134,12 +138,31 @@ export function PostCTA({
     }
   };
 
+  const handleScrollToArticle = () => {
+    if (onScrollToArticle) {
+      onScrollToArticle();
+      return;
+    }
+    const target = document.getElementById("article-content");
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <aside
-      aria-label={`Get the free ${postTitle || "Resource Guide"}`}
-      className={`my-12 rounded-2xl border bg-gradient-to-b from-card/95 via-card/75 to-card/95 backdrop-blur-xl p-6 sm:p-8 md:p-10 relative overflow-hidden text-left shadow-2xl transition-all ${
+      aria-label={
+        isTopGate
+          ? `Free resource: ${postTitle || "Resource Guide"}`
+          : `Get the free ${postTitle || "Resource Guide"}`
+      }
+      className={`rounded-2xl border bg-gradient-to-b from-card/95 via-card/75 to-card/95 backdrop-blur-xl p-6 sm:p-8 md:p-10 relative overflow-hidden text-left shadow-2xl transition-all ${
+        isTopGate ? "mb-12" : "my-12"
+      } ${
         unlockedLink
           ? "border-emerald-500/40 ring-1 ring-emerald-500/20"
+          : isTopGate
+          ? "border-primary/50 ring-1 ring-primary/30"
           : isMid
           ? "border-primary/40 ring-1 ring-primary/20"
           : "border-platinum/40 ring-1 ring-platinum/20"
@@ -164,7 +187,13 @@ export function PostCTA({
             ) : (
               <>
                 <Sparkles size={12} className="text-platinum-glow" />
-                <span>{isMid ? "Mid-Article Resource" : "Executive System Guide"}</span>
+                <span>
+                  {isTopGate
+                    ? "Free resource"
+                    : isMid
+                    ? "Mid-Article Resource"
+                    : "Executive System Guide"}
+                </span>
               </>
             )}
           </div>
@@ -172,12 +201,16 @@ export function PostCTA({
           <h3 className="text-2xl sm:text-3xl font-luxury text-white tracking-tight leading-snug">
             {unlockedLink
               ? "Thanks, here's your resource"
+              : isTopGate
+              ? postTitle || "Resource Guide"
               : `Get the free ${postTitle || "Resource Guide"}`}
           </h3>
 
           <p className="text-sm text-muted-foreground leading-relaxed font-modern">
             {unlockedLink
               ? "Your direct link has been unlocked. Click the button to view the uncompressed playbook in a new tab."
+              : isTopGate
+              ? "Download the complete framework, trigger checklists, and daily outreach safety caps formatted for your team."
               : isMid
               ? "Download the complete framework, trigger checklists, and daily outreach safety caps formatted for your team."
               : "Access the full resource instantly. Then let ChroniqAI Gravity deploy the verified infrastructure, warmup routines, and high-ticket pipeline for you."}
@@ -196,7 +229,7 @@ export function PostCTA({
             <button
               type="button"
               onClick={onBookCallClick}
-              className="text-muted-foreground hover:text-white flex items-center gap-1.5 transition-colors"
+              className="text-muted-foreground hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer"
             >
               <Calendar size={12} />
               <span>Book Strategy Call</span>
@@ -232,11 +265,21 @@ export function PostCTA({
                 <ExternalLink size={14} />
               </a>
 
-              <div className="pt-2 border-t border-emerald-500/20">
+              <div className="pt-2 border-t border-emerald-500/20 space-y-2">
+                {isTopGate && (
+                  <button
+                    type="button"
+                    onClick={handleScrollToArticle}
+                    className="text-xs font-mono text-platinum hover:text-white flex items-center justify-center gap-1.5 mx-auto transition-colors cursor-pointer"
+                  >
+                    <span>Continue to article</span>
+                    <ArrowDown size={12} />
+                  </button>
+                )}
                 <button
                   type="button"
                   onClick={onBookCallClick}
-                  className="text-xs text-platinum hover:text-white flex items-center justify-center gap-1 mx-auto transition-colors"
+                  className="text-xs text-muted-foreground hover:text-white flex items-center justify-center gap-1 mx-auto transition-colors cursor-pointer"
                 >
                   <span>Need help scaling this? Apply for 14-Day Trial</span>
                   <ArrowRight size={12} />
@@ -413,6 +456,19 @@ export function PostCTA({
                 <p className="text-[11px] text-muted-foreground/80 text-center leading-relaxed font-modern pt-1">
                   We'll send you the resource and occasionally email you about client acquisition. Unsubscribe anytime.
                 </p>
+
+                {/* Skip to article link for top-gate variant */}
+                {isTopGate && (
+                  <div className="pt-2 text-center border-t border-border/40 mt-3">
+                    <button
+                      type="button"
+                      onClick={handleScrollToArticle}
+                      className="text-xs font-mono text-muted-foreground hover:text-white transition-colors underline underline-offset-4 cursor-pointer"
+                    >
+                      Skip to article &darr;
+                    </button>
+                  </div>
+                )}
               </form>
             </div>
           )}
