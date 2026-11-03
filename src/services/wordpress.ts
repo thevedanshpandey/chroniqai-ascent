@@ -550,7 +550,14 @@ export async function fetchWordPressPosts(options?: {
 export async function fetchWordPressPostBySlug(
   slug: string
 ): Promise<{ post: ResourcePost | undefined; isFromWp: boolean }> {
-  const cacheKey = `post_${slug}`;
+  let cleanSlug = "";
+  try {
+    cleanSlug = decodeURIComponent(slug || "").trim();
+  } catch {
+    cleanSlug = (slug || "").trim();
+  }
+
+  const cacheKey = `post_${cleanSlug}`;
   const cached = getFromCache<ResourcePost>(cacheKey);
 
   if (cached) {
@@ -559,7 +566,7 @@ export async function fetchWordPressPostBySlug(
 
   try {
     const url = new URL(`${WP_API_BASE}/posts`);
-    url.searchParams.set("slug", slug);
+    url.searchParams.set("slug", cleanSlug);
     url.searchParams.set("_embed", "1");
 
     const controller = new AbortController();

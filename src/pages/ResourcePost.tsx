@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { PageLayout } from "@/components/layout/PageLayout";
 import { SEOHead } from "@/components/seo/SEOHead";
@@ -29,13 +29,13 @@ import { toast } from "sonner";
 function splitHtmlContent(html: string): [string, string] {
   if (!html) return ["", ""];
 
-  // 1. Try splitting after the middle </h2> tag
-  const h2Matches = [...html.matchAll(/<\/h2>/gi)];
+  // 1. Try splitting before the middle <h2> tag (so the section heading begins the second half)
+  const h2Matches = [...html.matchAll(/<h2[^>]*>/gi)];
   if (h2Matches.length >= 2) {
     const splitIndex = Math.floor(h2Matches.length / 2);
-    const targetMatch = h2Matches[splitIndex - 1];
-    if (targetMatch && targetMatch.index !== undefined) {
-      const cutPoint = targetMatch.index + targetMatch[0].length;
+    const targetMatch = h2Matches[splitIndex];
+    if (targetMatch && targetMatch.index !== undefined && targetMatch.index > 0) {
+      const cutPoint = targetMatch.index;
       return [html.slice(0, cutPoint), html.slice(cutPoint)];
     }
   }
@@ -51,15 +51,32 @@ function splitHtmlContent(html: string): [string, string] {
     }
   }
 
+  // 3. Fallback: If at least 1 paragraph exists, split after it
+  if (pMatches.length > 0 && pMatches[0].index !== undefined) {
+    const cutPoint = pMatches[0].index + pMatches[0][0].length;
+    return [html.slice(0, cutPoint), html.slice(cutPoint)];
+  }
+
   return [html, ""];
 }
 
 export default function ResourcePost() {
-  const { slug } = useParams<{ slug: string }>();
+  const { slug: rawSlug } = useParams<{ slug: string }>();
+
+  // Ensure slug is cleanly decoded with decodeURIComponent
+  const slug = useMemo(() => {
+    if (!rawSlug) return "";
+    try {
+      return decodeURIComponent(rawSlug).trim();
+    } catch {
+      return rawSlug.trim();
+    }
+  }, [rawSlug]);
+
   const [isAuditModalOpen, setIsAuditModalOpen] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
-  // Persistent lead-capture unlock state keyed by slug
+  // Persistent lead-capture unlock state keyed by decoded slug
   const [unlockedLink, setUnlockedLink] = useState<string | null>(() =>
     slug ? getUnlockedResource(slug) : null
   );

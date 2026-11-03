@@ -196,6 +196,77 @@ if ($slug) {
     <script type="application/ld+json">' . json_encode($breadcrumb_schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . '</script>
 ';
 
+        // Helper to generate SSR Lead-Capture Box
+        $generate_cta_box = function($box_variant, $box_title, $box_slug) {
+            $variant_badge = ($box_variant === 'mid') ? 'Mid-Article Resource' : 'Executive System Guide';
+            $form_id = 'lead_form_' . $box_variant . '_' . preg_replace('/[^a-zA-Z0-9]/', '', $box_slug);
+            return '
+            <aside class="lead-capture-box" style="margin: 40px 0; border-radius: 16px; border: 1px solid rgba(226, 232, 240, 0.25); background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.85)); padding: 30px; color: #f8fafc;">
+              <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; align-items: flex-start;">
+                <div style="max-width: 500px;">
+                  <span style="display: inline-block; padding: 4px 12px; border-radius: 9999px; background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(56, 189, 248, 0.3); font-size: 11px; font-family: monospace; color: #38bdf8; margin-bottom: 12px;">' . $variant_badge . '</span>
+                  <h3 style="font-size: 1.5rem; margin: 0 0 10px 0; color: #ffffff; line-height: 1.3;">Get the free ' . htmlspecialchars($box_title) . '</h3>
+                  <p style="font-size: 14px; color: #94a3b8; line-height: 1.6; margin: 0 0 16px 0;">Download the complete framework, trigger checklists, and daily outreach safety caps formatted for your team.</p>
+                  <div style="font-size: 12px; font-family: monospace;">
+                    <a href="/gravity" style="color: #38bdf8; text-decoration: underline; margin-right: 15px;">Explore Gravity System &rarr;</a>
+                    <a href="/score-calculator" style="color: #94a3b8; text-decoration: none;">Book Strategy Call</a>
+                  </div>
+                </div>
+
+                <div style="width: 100%; max-width: 360px; background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px;">
+                  <form id="' . $form_id . '" onsubmit="handleLeadSubmit(event, \'' . htmlspecialchars($box_slug) . '\', \'' . $form_id . '\')" style="display: flex; flex-direction: column; gap: 12px;">
+                    <div style="position: absolute; opacity: 0; z-index: -1; pointer-events: none; height: 0; width: 0; overflow: hidden;">
+                      <label>Do not fill this</label>
+                      <input type="text" name="hp" tabindex="-1" autocomplete="off" />
+                    </div>
+                    <div>
+                      <label style="display: block; font-size: 11px; font-family: monospace; color: #94a3b8; margin-bottom: 4px;">Your Name *</label>
+                      <input type="text" name="name" required placeholder="e.g. Alex Vance" style="width: 100%; padding: 8px 12px; font-size: 13px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: rgba(15,23,42,0.8); color: #fff; box-sizing: border-box;" />
+                    </div>
+                    <div>
+                      <label style="display: block; font-size: 11px; font-family: monospace; color: #94a3b8; margin-bottom: 4px;">Work Email *</label>
+                      <input type="email" name="email" required placeholder="alex@company.com" style="width: 100%; padding: 8px 12px; font-size: 13px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: rgba(15,23,42,0.8); color: #fff; box-sizing: border-box;" />
+                    </div>
+                    <div>
+                      <label style="display: block; font-size: 11px; font-family: monospace; color: #94a3b8; margin-bottom: 4px;">Company Website *</label>
+                      <input type="text" name="website" required placeholder="company.com" style="width: 100%; padding: 8px 12px; font-size: 13px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: rgba(15,23,42,0.8); color: #fff; box-sizing: border-box;" />
+                    </div>
+                    <button type="submit" style="width: 100%; padding: 10px; background: #f8fafc; color: #020617; border: none; border-radius: 6px; font-weight: bold; font-size: 12px; font-family: monospace; text-transform: uppercase; cursor: pointer; margin-top: 4px;">
+                      Get Free Resource
+                    </button>
+                    <p style="font-size: 11px; color: #94a3b8; text-align: center; margin: 4px 0 0 0; line-height: 1.4;">
+                      We\'ll send you the resource and occasionally email you about client acquisition. Unsubscribe anytime.
+                    </p>
+                    <div class="form-status" style="display: none; font-size: 12px; text-align: center; margin-top: 8px;"></div>
+                  </form>
+                </div>
+              </div>
+            </aside>';
+        };
+
+        // Split content for mid-article CTA
+        $h2_count = substr_count(strtolower($raw_content), '</h2>');
+        $content_part1 = $raw_content;
+        $content_part2 = '';
+
+        if ($h2_count >= 2) {
+            $target_index = floor($h2_count / 2);
+            $parts = preg_split('/(<h2[^>]*>)/i', $raw_content, -1, PREG_SPLIT_DELIM_CAPTURE);
+            if (count($parts) >= ($target_index * 2 + 1)) {
+                $split_point = $target_index * 2;
+                $content_part1 = implode('', array_slice($parts, 0, $split_point));
+                $content_part2 = implode('', array_slice($parts, $split_point));
+            }
+        } elseif (substr_count(strtolower($raw_content), '</p>') >= 4) {
+            $p_parts = explode('</p>', $raw_content);
+            $mid_p = floor(count($p_parts) / 2);
+            $content_part1 = implode('</p>', array_slice($p_parts, 0, $mid_p)) . '</p>';
+            $content_part2 = implode('</p>', array_slice($p_parts, $mid_p));
+        }
+
+        $mid_cta_html = $generate_cta_box('mid', $title, $slug);
+        $end_cta_html = $generate_cta_box('end', $title, $slug);
+
         // Prepare Semantic Body to inject inside <div id="root">
         $ssr_body = '
     <article class="ssr-article-wrapper" style="max-width: 900px; margin: 40px auto; padding: 20px; font-family: system-ui, sans-serif; color: #e2e8f0; background: #030712;">
@@ -216,12 +287,67 @@ if ($slug) {
         </div>
       </header>
       <main class="ssr-article-content" style="line-height: 1.8; font-size: 16px; color: #cbd5e1;">
-        ' . $raw_content . '
+        ' . $content_part1 . '
+        ' . $mid_cta_html . '
+        ' . $content_part2 . '
+        ' . $end_cta_html . '
       </main>
       <footer style="margin-top: 50px; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.1);">
         <p><a href="/gravity" style="color: #38bdf8; font-weight: bold; text-decoration: underline;">Discover ChroniqAI Gravity</a> — AI-powered LinkedIn client acquisition for high-ticket B2B founders.</p>
         <p><a href="/resources" style="color: #94a3b8;">&larr; Back to all resources</a></p>
       </footer>
+      <script>
+      function handleLeadSubmit(e, rawSlug, formId) {
+        e.preventDefault();
+        var form = document.getElementById(formId);
+        var hp = form.querySelector(\'input[name="hp"]\').value;
+        if (hp && hp.trim().length > 0) return;
+        var name = form.querySelector(\'input[name="name"]\').value.trim();
+        var email = form.querySelector(\'input[name="email"]\').value.trim();
+        var website = form.querySelector(\'input[name="website"]\').value.trim();
+        var status = form.querySelector(\'.form-status\');
+        var btn = form.querySelector(\'button[type="submit"]\');
+        btn.disabled = true;
+        btn.innerText = "Unlocking Resource...";
+        var decodedSlug = decodeURIComponent(rawSlug || "");
+        var payload = {
+          name: name,
+          email: email,
+          website: website,
+          resource_slug: decodedSlug,
+          hp: "",
+          utm_source: sessionStorage.getItem("chroniq_utm_source") || "",
+          utm_medium: sessionStorage.getItem("chroniq_utm_medium") || "",
+          utm_campaign: sessionStorage.getItem("chroniq_utm_campaign") || "",
+          referrer: document.referrer || ""
+        };
+        fetch("https://script.google.com/macros/s/AKfycbyGjp78Ees6UTTAYwoFoisP3Cynfnzsew51XXTxYpKQTlncDeB_vYmz939ooRStKhRa/exec", {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(payload)
+        }).then(function(r) { return r.json(); })
+          .then(function(data) {
+            if (data.ok && data.link) {
+              status.style.display = "block";
+              status.style.color = "#4ade80";
+              status.innerHTML = \'Resource unlocked! <a href="\' + data.link + \'" target="_blank" style="color: #38bdf8; text-decoration: underline; font-weight: bold;">Click here to access</a>\';
+              btn.innerText = "Access Granted";
+            } else {
+              status.style.display = "block";
+              status.style.color = "#f87171";
+              status.innerText = data.error || "Submission failed. Please retry.";
+              btn.disabled = false;
+              btn.innerText = "Get Free Resource";
+            }
+          }).catch(function() {
+            status.style.display = "block";
+            status.style.color = "#f87171";
+            status.innerText = "Network error. Please try again.";
+            btn.disabled = false;
+            btn.innerText = "Get Free Resource";
+          });
+      }
+      </script>
     </article>
 ';
 

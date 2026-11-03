@@ -145,11 +145,18 @@ export async function submitLeadCapture(
 
   const tracking = getTrackingParams();
 
+  let cleanSlug = "";
+  try {
+    cleanSlug = decodeURIComponent(params.resource_slug || "").trim();
+  } catch {
+    cleanSlug = (params.resource_slug || "").trim();
+  }
+
   const body: LeadSubmissionPayload = {
     name: params.name.trim(),
     email: params.email.trim(),
     website: params.website.trim(),
-    resource_slug: params.resource_slug.trim(),
+    resource_slug: cleanSlug,
     hp: "",
     utm_source: tracking.utm_source,
     utm_medium: tracking.utm_medium,

@@ -1,4 +1,4 @@
-import { useState, useId } from "react";
+import React, { useState, useId } from "react";
 import { Link } from "react-router-dom";
 import {
   Download,
@@ -105,16 +105,17 @@ export function PostCTA({
     setIsSubmitting(true);
 
     try {
+      const safeSlug = decodeURIComponent(resourceSlug || "").trim();
       const response = await submitLeadCapture({
         name: name.trim(),
         email: email.trim(),
         website: website.trim(),
-        resource_slug: resourceSlug,
+        resource_slug: safeSlug,
         hp,
       });
 
       if (response.ok && response.link) {
-        saveUnlockedResource(resourceSlug, response.link);
+        saveUnlockedResource(safeSlug, response.link);
         onUnlocked(response.link);
         toast.success("Resource unlocked! Click below to access your guide.");
       } else {
@@ -135,7 +136,7 @@ export function PostCTA({
 
   return (
     <aside
-      aria-label={`Get the free ${postTitle}`}
+      aria-label={`Get the free ${postTitle || "Resource Guide"}`}
       className={`my-12 rounded-2xl border bg-gradient-to-b from-card/95 via-card/75 to-card/95 backdrop-blur-xl p-6 sm:p-8 md:p-10 relative overflow-hidden text-left shadow-2xl transition-all ${
         unlockedLink
           ? "border-emerald-500/40 ring-1 ring-emerald-500/20"
@@ -171,7 +172,7 @@ export function PostCTA({
           <h3 className="text-2xl sm:text-3xl font-luxury text-white tracking-tight leading-snug">
             {unlockedLink
               ? "Thanks, here's your resource"
-              : `Get the free ${postTitle}`}
+              : `Get the free ${postTitle || "Resource Guide"}`}
           </h3>
 
           <p className="text-sm text-muted-foreground leading-relaxed font-modern">
