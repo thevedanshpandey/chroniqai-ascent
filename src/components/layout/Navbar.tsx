@@ -11,6 +11,7 @@ const navLinks = [
   { name: "Pillars", href: "/#system-pillars" },
   { name: "Case Studies", href: "/case-studies" },
   { name: "How We Think", href: "/how-we-think" },
+  { name: "Resources", href: "/resources" },
   { name: "Score Calculator", href: "/score-calculator" },
 ];
 

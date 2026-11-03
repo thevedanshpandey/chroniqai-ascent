@@ -9,6 +9,7 @@ import CaseStudies from "./pages/CaseStudies";
 import HowWeThink from "./pages/HowWeThink";
 import ScoreCalculatorPage from "./pages/ScoreCalculatorPage";
 import Resources from "./pages/Resources";
+import ResourcePost from "./pages/ResourcePost";
 import EngineeringJournal from "./pages/EngineeringJournal";
 import GravityPlatform from "./pages/GravityPlatform";
 import ScaleMetricsCaseStudy from "./pages/case-studies/ScaleMetricsCaseStudy";
@@ -41,6 +42,7 @@ const App = () => (
           <Route path="/how-we-think" element={<HowWeThink />} />
           <Route path="/score-calculator" element={<ScoreCalculatorPage />} />
           <Route path="/resources" element={<Resources />} />
+          <Route path="/resources/:slug" element={<ResourcePost />} />
           <Route path="/journal" element={<EngineeringJournal />} />
           <Route path="/engineering-journal" element={<EngineeringJournal />} />
 

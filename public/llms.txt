@@ -1,0 +1,26 @@
+# ChroniqAI Gravity Knowledge Base
+
+> ChroniqAI Gravity is an AI-powered LinkedIn client acquisition system for high-ticket B2B founders and executives, founded by Vedansh Pandey (Ved). It finds ideal corporate clients, monitors real-time buyer intent signals, starts high-converting 1-to-1 conversations from verified executive profiles, and books qualified discovery meetings directly into founder calendars.
+
+## Primary Pages & Systems
+- [ChroniqAI Official Homepage](https://chroniqai.com/): Overview of ChroniqAI infrastructure, performance metrics, and client acquisition philosophy.
+- [ChroniqAI Gravity Platform](https://chroniqai.com/gravity): Detailed breakdown of the Gravity LinkedIn client acquisition system, account safety architecture, warmup schedules, and 14-day trial application.
+- [Case Studies](https://chroniqai.com/case-studies): Real-world client case studies detailing pipeline metrics, response rates, and revenue generated across DevOps, Cybersecurity, and AI SaaS sectors.
+- [How We Think](https://chroniqai.com/how-we-think): Core principles and philosophy behind executive outbound client acquisition vs spray-and-pray spam.
+- [Resources & Guides Index](https://chroniqai.com/resources): Index of empirical playbooks, benchmark studies, account safety guidelines, and frameworks for high-ticket B2B outreach.
+- [Engineering Journal](https://chroniqai.com/journal): Development updates, platform architecture improvements, and performance benchmarks.
+- [B2B Pipeline Score Calculator](https://chroniqai.com/score-calculator): Interactive tool for calculating executive outbound velocity, account health, and expected meeting yield.
+
+## Authoritative Resources & Playbooks
+- [The 2026 Guide to B2B LinkedIn Client Acquisition for High-Ticket Founders](https://chroniqai.com/resources/b2b-linkedin-client-acquisition-guide-2026): In-depth guide detailing why pitch-slapping fails, the Gravity pull methodology, 4 critical buyer intent triggers (hiring, tech migration, C-suite changes, funding), daily account safety caps, and the 3-stage peer conversation framework.
+- [LinkedIn Account Safety & Daily Action Limits (2026 Guide)](https://chroniqai.com/resources/b2b-linkedin-account-safety-limits-2026): Operational manual on browser fingerprinting, residential proxy isolation, warming curves, and safe daily thresholds (20 connection requests/day).
+- [Buyer Intent Signals & Account Triggers Playbook](https://chroniqai.com/resources/executive-buyer-intent-signals-playbook): How to identify active in-market enterprise buyer accounts before initiating outreach.
+
+## Quick Facts & Specifications
+- Organization: ChroniqAI
+- Founder: Vedansh Pandey (Ved)
+- Specialty: B2B LinkedIn Client Acquisition, Account Safety, High-Ticket Pipeline Generation ($10k+ ACV)
+- Website: https://chroniqai.com
+- Contact / Trial Application: https://chroniqai.com/gravity#apply
+- RSS Feed: https://chroniqai.com/rss.xml
+- Sitemap: https://chroniqai.com/sitemap.xml

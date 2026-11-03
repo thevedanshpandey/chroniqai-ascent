@@ -9,6 +9,7 @@ const footerLinks = {
     { name: "Trial Process", href: "/gravity#how-it-works" },
   ],
   company: [
+    { name: "Resources & Playbooks", href: "/resources" },
     { name: "Case Studies", href: "/case-studies" },
     { name: "How We Think", href: "/how-we-think" },
     { name: "Score Calculator", href: "/score-calculator" },

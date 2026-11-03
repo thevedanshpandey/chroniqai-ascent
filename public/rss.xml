@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ChroniqAI Gravity Resources &amp; Playbooks</title>
+    <link>https://chroniqai.com/resources</link>
+    <description>Tactical playbooks, benchmark studies, account safety guides, and frameworks for high-ticket B2B LinkedIn client acquisition.</description>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 29 Jul 2026 12:00:00 GMT</lastBuildDate>
+    <atom:link href="https://chroniqai.com/rss.xml" rel="self" type="application/rss+xml"/>
+    
+    <item>
+      <title>The 2026 Guide to B2B LinkedIn Client Acquisition for High-Ticket Founders</title>
+      <link>https://chroniqai.com/resources/b2b-linkedin-client-acquisition-guide-2026</link>
+      <guid isPermaLink="true">https://chroniqai.com/resources/b2b-linkedin-client-acquisition-guide-2026</guid>
+      <pubDate>Mon, 20 Jul 2026 08:00:00 GMT</pubDate>
+      <author>vedanshpandey222161@gmail.com (Vedansh Pandey)</author>
+      <category>Acquisition Playbooks</category>
+      <description><![CDATA[Learn how B2B founders generate qualified high-ticket meetings on LinkedIn in 2026 without pitch-slapping, using trigger signals and the Gravity pull system.]]></description>
+    </item>
+
+    <item>
+      <title>LinkedIn Account Safety &amp; Daily Action Limits: The 2026 Founder Guide</title>
+      <link>https://chroniqai.com/resources/b2b-linkedin-account-safety-limits-2026</link>
+      <guid isPermaLink="true">https://chroniqai.com/resources/b2b-linkedin-account-safety-limits-2026</guid>
+      <pubDate>Wed, 15 Jul 2026 08:00:00 GMT</pubDate>
+      <author>vedanshpandey222161@gmail.com (Vedansh Pandey)</author>
+      <category>Account Safety</category>
+      <description><![CDATA[The definitive guide to LinkedIn daily safety caps, browser fingerprinting, residential proxies, and keeping your founder profile in good standing.]]></description>
+    </item>
+
+    <item>
+      <title>Buyer Intent Signals &amp; Account Triggers: How to Reach Prospects at the Perfect Moment</title>
+      <link>https://chroniqai.com/resources/executive-buyer-intent-signals-playbook</link>
+      <guid isPermaLink="true">https://chroniqai.com/resources/executive-buyer-intent-signals-playbook</guid>
+      <pubDate>Fri, 10 Jul 2026 08:00:00 GMT</pubDate>
+      <author>vedanshpandey222161@gmail.com (Vedansh Pandey)</author>
+      <category>Strategy &amp; Intent</category>
+      <description><![CDATA[Stop guessing who wants your product. Learn how to monitor hiring spikes, technology migrations, and funding rounds to contact buyers during active purchase cycles.]]></description>
+    </item>
+  </channel>
+</rss>

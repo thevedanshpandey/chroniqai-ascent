@@ -1,8 +1,32 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+
+  # 1. Allow direct access to physical files and directories
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # 2. Server-Side Rendering for /resources and /resources/[slug] via PHP
+  # This serves full semantic HTML, Schema.org JSON-LD, and Rank Math/Yoast SEO
+  # to Googlebot, GPTBot, ClaudeBot, PerplexityBot, and all visitors
+  RewriteRule ^resources/?$ /resources.php [L,QSA]
+  RewriteRule ^resources/([^/]+)/?$ /resources.php?slug=$1 [L,QSA]
+
+  # 3. Standard SPA Fallback for all other frontend routes
   RewriteRule ^index\.html$ - [L]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule . /index.html [L]
+</IfModule>
+
+# Caching and Security Headers
+<IfModule mod_headers.c>
+  # Enable CORS for public feeds and font assets
+  <FilesMatch "\.(xml|txt|json)$">
+    Header set Access-Control-Allow-Origin "*"
+  </FilesMatch>
+
+  # Prevent clickjacking in untrusted frames
+  Header always set X-Content-Type-Options "nosniff"
 </IfModule>
