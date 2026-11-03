@@ -10,6 +10,7 @@ import { PostSchema } from "@/components/resources/PostSchema";
 import { ResourcePost as ResourcePostType } from "@/data/resources/types";
 import { fetchWordPressPostBySlug, fetchWordPressPosts } from "@/services/wordpress";
 import { getPostBySlug as getLocalPostBySlug, getRelatedPosts as getLocalRelatedPosts } from "@/data/resources/posts";
+import { getUnlockedResource, saveUnlockedResource } from "@/services/leadCapture";
 import {
   Calendar,
   Clock,
@@ -57,6 +58,24 @@ export default function ResourcePost() {
   const { slug } = useParams<{ slug: string }>();
   const [isAuditModalOpen, setIsAuditModalOpen] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+
+  // Persistent lead-capture unlock state keyed by slug
+  const [unlockedLink, setUnlockedLink] = useState<string | null>(() =>
+    slug ? getUnlockedResource(slug) : null
+  );
+
+  useEffect(() => {
+    if (slug) {
+      setUnlockedLink(getUnlockedResource(slug));
+    }
+  }, [slug]);
+
+  const handleUnlocked = (link: string) => {
+    setUnlockedLink(link);
+    if (slug) {
+      saveUnlockedResource(slug, link);
+    }
+  };
 
   const [post, setPost] = useState<ResourcePostType | undefined>(() =>
     slug ? getLocalPostBySlug(slug) : undefined
@@ -320,6 +339,9 @@ export default function ResourcePost() {
                   <PostCTA
                     variant="mid-article"
                     postTitle={post.title}
+                    resourceSlug={slug || post.slug}
+                    unlockedLink={unlockedLink}
+                    onUnlocked={handleUnlocked}
                     onBookCallClick={() => setIsAuditModalOpen(true)}
                   />
 
@@ -435,6 +457,9 @@ export default function ResourcePost() {
                   <PostCTA
                     variant="mid-article"
                     postTitle={post.title}
+                    resourceSlug={slug || post.slug}
+                    unlockedLink={unlockedLink}
+                    onUnlocked={handleUnlocked}
                     onBookCallClick={() => setIsAuditModalOpen(true)}
                   />
 
@@ -542,6 +567,9 @@ export default function ResourcePost() {
               <PostCTA
                 variant="end-of-article"
                 postTitle={post.title}
+                resourceSlug={slug || post.slug}
+                unlockedLink={unlockedLink}
+                onUnlocked={handleUnlocked}
                 onBookCallClick={() => setIsAuditModalOpen(true)}
               />
 
