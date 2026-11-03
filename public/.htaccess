@@ -2,31 +2,57 @@
   RewriteEngine On
   RewriteBase /
 
-  # 1. Allow direct access to physical files and directories
+  # 1. Allow direct access to real physical static files and assets (e.g. /assets/*, favicon, xml, txt)
+  # EXCLUDE /resources requests so that any legacy folder or directory index on the server is NEVER served directly
+  RewriteCond %{REQUEST_URI} !^/resources(/.*)?$ [NC]
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  # 2. Server-Side Rendering for /resources and /resources/[slug] via PHP
-  # This serves full semantic HTML, Schema.org JSON-LD, and Rank Math/Yoast SEO
-  # to Googlebot, GPTBot, ClaudeBot, PerplexityBot, and all visitors
+  # 2. Server-Side Rendering for /resources and /resources/[slug] for AI crawlers & Search Bots
+  # (Googlebot, Bingbot, GPTBot, ClaudeBot, PerplexityBot, Google-Extended, Applebot, Twitterbot, LinkedInBot, Facebook, etc.)
+  # Also accessible anytime by passing ?ssr=1 in the query string
+  RewriteCond %{HTTP_USER_AGENT} (googlebot|bingbot|yandex|duckduckbot|slurp|baiduspider|gptbot|claudebot|perplexitybot|google-extended|applebot|twitterbot|facebookexternalhit|linkedinbot|embedly|quora|pinterest) [NC,OR]
+  RewriteCond %{QUERY_STRING} ssr=1
   RewriteRule ^resources/?$ /resources.php [L,QSA]
+
+  RewriteCond %{HTTP_USER_AGENT} (googlebot|bingbot|yandex|duckduckbot|slurp|baiduspider|gptbot|claudebot|perplexitybot|google-extended|applebot|twitterbot|facebookexternalhit|linkedinbot|embedly|quora|pinterest) [NC,OR]
+  RewriteCond %{QUERY_STRING} ssr=1
   RewriteRule ^resources/([^/]+)/?$ /resources.php?slug=$1 [L,QSA]
 
-  # 3. Standard SPA Fallback for all other frontend routes
+  # 3. Direct access to /resources and /resources/* for all modern browsers
+  # Serves the complete dark luxury React SPA index.html with live WordPress integration
+  RewriteRule ^resources(/.*)?$ /index.html [L,QSA]
+
+  # 4. Standard Single Page Application (SPA) Fallback for all other frontend routes
   RewriteRule ^index\.html$ - [L]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule . /index.html [L]
 </IfModule>
 
-# Caching and Security Headers
+# Caching, Security and CORS Headers
 <IfModule mod_headers.c>
   # Enable CORS for public feeds and font assets
   <FilesMatch "\.(xml|txt|json)$">
     Header set Access-Control-Allow-Origin "*"
   </FilesMatch>
 
-  # Prevent clickjacking in untrusted frames
+  # Prevent MIME type sniffing
   Header always set X-Content-Type-Options "nosniff"
+
+  # Cache compiled Vite static assets with hashes indefinitely (1 year)
+  <FilesMatch "\.(js|css|webp|png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$">
+    Header set Cache-Control "max-age=31536000, public, immutable"
+  </FilesMatch>
+
+  # HTML, PHP, and dynamic entrypoints should not be aggressively cached by browsers
+  <FilesMatch "\.(html|php)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires 0
+  </FilesMatch>
 </IfModule>
+
+# Prevent directory indexing
+Options -Indexes

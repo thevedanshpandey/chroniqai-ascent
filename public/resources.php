@@ -17,32 +17,64 @@ if (!is_dir(CACHE_DIR)) {
     @mkdir(CACHE_DIR, 0755, true);
 }
 
-// Helper: HTTP GET with cURL, timeout, and caching
+// Helper: HTTP GET with cURL, stream_context fallback, timeout, and caching
 function fetch_wp_data($url) {
     $cache_file = CACHE_DIR . '/' . md5($url) . '.json';
     if (file_exists($cache_file) && (time() - filemtime($cache_file) < CACHE_TTL)) {
         $content = @file_get_contents($cache_file);
         if ($content) {
-            return json_decode($content, true);
+            $decoded = json_decode($content, true);
+            if ($decoded !== null) {
+                return $decoded;
+            }
         }
     }
 
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 6);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        'Accept: application/json',
-        'User-Agent: ChroniqAI-SSREngine/1.0 (+https://chroniqai.com)'
-    ]);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+    $response = null;
 
-    $response = curl_exec($ch);
-    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
+    // Method 1: cURL (Preferred)
+    if (function_exists('curl_init')) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 6);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Accept: application/json',
+            'User-Agent: ChroniqAI-SSREngine/1.0 (+https://chroniqai.com)'
+        ]);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
-    if ($http_code === 200 && $response) {
+        $exec = curl_exec($ch);
+        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        if ($http_code === 200 && $exec) {
+            $response = $exec;
+        }
+    }
+
+    // Method 2: stream context fallback
+    if (!$response && ini_get('allow_url_fopen')) {
+        $opts = [
+            'http' => [
+                'method' => 'GET',
+                'timeout' => 5,
+                'header' => "Accept: application/json\r\nUser-Agent: ChroniqAI-SSREngine/1.0 (+https://chroniqai.com)\r\n"
+            ],
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false
+            ]
+        ];
+        $context = stream_context_create($opts);
+        $stream_exec = @file_get_contents($url, false, $context);
+        if ($stream_exec) {
+            $response = $stream_exec;
+        }
+    }
+
+    if ($response) {
         @file_put_contents($cache_file, $response);
         return json_decode($response, true);
     }
@@ -248,6 +280,11 @@ if (is_array($posts_data) && !empty($posts_data)) {
 } else {
     // Built-in static catalog if WP offline
     $ssr_list .= '
+        <div style="border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; background: rgba(15,23,42,0.6);">
+          <h2 style="font-size: 1.25rem; margin-top: 0;"><a href="/resources/ai-automation-b2b-lead-generation" style="color: #f8fafc; text-decoration: none;">How AI Automation Is Transforming B2B Lead Generation</a></h2>
+          <p style="font-size: 14px; color: #94a3b8;">Discover how AI automation enables hyper-personalized outbound workflows, intent signal tracking, and scalable executive client acquisition.</p>
+          <a href="/resources/ai-automation-b2b-lead-generation" style="color: #38bdf8; font-size: 12px;">Read Guide &rarr;</a>
+        </div>
         <div style="border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; background: rgba(15,23,42,0.6);">
           <h2 style="font-size: 1.25rem; margin-top: 0;"><a href="/resources/b2b-linkedin-client-acquisition-guide-2026" style="color: #f8fafc; text-decoration: none;">The 2026 Guide to B2B LinkedIn Client Acquisition for High-Ticket Founders</a></h2>
           <p style="font-size: 14px; color: #94a3b8;">Learn how B2B founders generate qualified high-ticket meetings on LinkedIn in 2026 without pitch-slapping.</p>

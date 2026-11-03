@@ -12,6 +12,7 @@
 - [B2B Pipeline Score Calculator](https://chroniqai.com/score-calculator): Interactive tool for calculating executive outbound velocity, account health, and expected meeting yield.
 
 ## Authoritative Resources & Playbooks
+- [How AI Automation Is Transforming B2B Lead Generation](https://chroniqai.com/resources/ai-automation-b2b-lead-generation): Comprehensive breakdown of AI-powered lead generation architectures, intent signal detection, automated account enrichment, and executive conversation workflows.
 - [The 2026 Guide to B2B LinkedIn Client Acquisition for High-Ticket Founders](https://chroniqai.com/resources/b2b-linkedin-client-acquisition-guide-2026): In-depth guide detailing why pitch-slapping fails, the Gravity pull methodology, 4 critical buyer intent triggers (hiring, tech migration, C-suite changes, funding), daily account safety caps, and the 3-stage peer conversation framework.
 - [LinkedIn Account Safety & Daily Action Limits (2026 Guide)](https://chroniqai.com/resources/b2b-linkedin-account-safety-limits-2026): Operational manual on browser fingerprinting, residential proxy isolation, warming curves, and safe daily thresholds (20 connection requests/day).
 - [Buyer Intent Signals & Account Triggers Playbook](https://chroniqai.com/resources/executive-buyer-intent-signals-playbook): How to identify active in-market enterprise buyer accounts before initiating outreach.
