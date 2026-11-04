@@ -90,6 +90,15 @@ export function isLeadGateActive(): boolean {
     const qSource = (urlParams.get("utm_source") || "").toLowerCase().trim();
     const qGate = (urlParams.get("gate") || "").trim();
 
+    // Check if visiting from Google search or other search engines
+    const ref = (document.referrer || "").toLowerCase();
+    const isSearchReferrer =
+      ref.includes("google.") ||
+      ref.includes("bing.") ||
+      ref.includes("duckduckgo.") ||
+      ref.includes("yahoo.");
+
+    // Direct LinkedIn signal in URL params
     if (
       qMedium === "linkedin" ||
       qMedium.includes("linkedin") ||
@@ -99,6 +108,16 @@ export function isLeadGateActive(): boolean {
     ) {
       sessionStorage.setItem("chroniq_lead_gate_active", "1");
       return true;
+    }
+
+    // If coming from Google search or explicit non-linkedin source/medium, clear gate session
+    if (
+      isSearchReferrer ||
+      (qSource && !qSource.includes("linkedin")) ||
+      (qMedium && !qMedium.includes("linkedin"))
+    ) {
+      sessionStorage.removeItem("chroniq_lead_gate_active");
+      return false;
     }
 
     return sessionStorage.getItem("chroniq_lead_gate_active") === "1";

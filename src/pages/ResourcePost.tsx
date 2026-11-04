@@ -29,40 +29,6 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 
-// Helper to split long HTML content around the midpoint for mid-article CTA placement
-function splitHtmlContent(html: string): [string, string] {
-  if (!html) return ["", ""];
-
-  // 1. Try splitting before the middle <h2> tag (so the section heading begins the second half)
-  const h2Matches = [...html.matchAll(/<h2[^>]*>/gi)];
-  if (h2Matches.length >= 2) {
-    const splitIndex = Math.floor(h2Matches.length / 2);
-    const targetMatch = h2Matches[splitIndex];
-    if (targetMatch && targetMatch.index !== undefined && targetMatch.index > 0) {
-      const cutPoint = targetMatch.index;
-      return [html.slice(0, cutPoint), html.slice(cutPoint)];
-    }
-  }
-
-  // 2. Fallback: Split after the middle paragraph </p> tag
-  const pMatches = [...html.matchAll(/<\/p>/gi)];
-  if (pMatches.length >= 4) {
-    const splitIndex = Math.floor(pMatches.length / 2);
-    const targetMatch = pMatches[splitIndex - 1];
-    if (targetMatch && targetMatch.index !== undefined) {
-      const cutPoint = targetMatch.index + targetMatch[0].length;
-      return [html.slice(0, cutPoint), html.slice(cutPoint)];
-    }
-  }
-
-  // 3. Fallback: If at least 1 paragraph exists, split after it
-  if (pMatches.length > 0 && pMatches[0].index !== undefined) {
-    const cutPoint = pMatches[0].index + pMatches[0][0].length;
-    return [html.slice(0, cutPoint), html.slice(cutPoint)];
-  }
-
-  return [html, ""];
-}
 
 export default function ResourcePost() {
   const { slug: rawSlug } = useParams<{ slug: string }>();
@@ -112,6 +78,20 @@ export default function ResourcePost() {
     slug ? getLocalRelatedPosts(slug) : []
   );
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [readingProgress, setReadingProgress] = useState<number>(0);
+
+  // Track scroll reading progress for UX & engagement
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight > 0) {
+        const progress = Math.min(100, Math.max(0, (window.scrollY / totalHeight) * 100));
+        setReadingProgress(progress);
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     if (!slug) return;
@@ -175,16 +155,7 @@ export default function ResourcePost() {
   const seoTitle = post.seo?.metaTitle || `${post.title} — ChroniqAI Resources`;
   const seoDescription = post.seo?.metaDescription || post.metaDescription;
 
-  // Split HTML content if post has WordPress rendered content
-  const [firstHalfHtml, secondHalfHtml] = post.contentHtml
-    ? splitHtmlContent(post.contentHtml)
-    : ["", ""];
-
-  // Split structured sections if post uses legacy section format
   const sections = post.sections || [];
-  const midPoint = Math.ceil(sections.length / 2);
-  const firstHalfSections = sections.slice(0, midPoint);
-  const secondHalfSections = sections.slice(midPoint);
 
   // LinkedIn Lead Gate: Visitors with utm_medium=linkedin land on this page first
   // which ONLY contains the container and nothing else.
@@ -228,6 +199,13 @@ export default function ResourcePost() {
 
   return (
     <PageLayout>
+      {/* Reading Progress Indicator for Long-Form Guide UX */}
+      <div
+        className="fixed top-0 left-0 h-[3px] bg-gradient-to-r from-platinum via-platinum-glow to-white z-50 pointer-events-none transition-all duration-150 ease-out"
+        style={{ width: `${readingProgress}%` }}
+        aria-hidden="true"
+      />
+
       <SEOHead
         title={seoTitle}
         description={seoDescription}
@@ -414,98 +392,57 @@ export default function ResourcePost() {
             </aside>
 
             {/* Main Article Body on Right */}
-            <main className="lg:col-span-8 order-1 lg:order-2 space-y-10">
+            <main className="lg:col-span-8 order-1 lg:order-2 space-y-12">
               {/* WordPress Rendered Content (if available) */}
               {post.contentHtml ? (
-                <>
-                  <div
-                    className="prose prose-invert prose-emerald max-w-none text-muted-foreground font-modern leading-relaxed space-y-6 prose-headings:font-luxury prose-headings:text-white prose-headings:tracking-tight prose-headings:scroll-mt-28 prose-h2:text-2xl sm:prose-h2:text-3xl prose-h2:leading-snug prose-h2:mt-10 prose-h2:mb-4 prose-h3:text-xl sm:prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-3 prose-p:text-sm sm:prose-p:text-base prose-p:leading-relaxed prose-a:text-platinum prose-a:underline hover:prose-a:text-white prose-strong:text-white prose-ul:my-4 prose-li:my-1 prose-table:border prose-table:border-glass-border prose-th:bg-secondary/80 prose-th:text-white prose-td:text-muted-foreground prose-img:rounded-xl"
-                    dangerouslySetInnerHTML={{ __html: firstHalfHtml }}
-                  />
-
-                  {/* Mid-Article CTA Box */}
-                  <PostCTA
-                    variant="mid-article"
-                    postTitle={post.title}
-                    resourceSlug={slug || post.slug}
-                    unlockedLink={unlockedLink}
-                    onUnlocked={handleUnlocked}
-                    onBookCallClick={() => setIsAuditModalOpen(true)}
-                  />
-
-                  {secondHalfHtml && (
-                    <div
-                      className="prose prose-invert prose-emerald max-w-none text-muted-foreground font-modern leading-relaxed space-y-6 prose-headings:font-luxury prose-headings:text-white prose-headings:tracking-tight prose-headings:scroll-mt-28 prose-h2:text-2xl sm:prose-h2:text-3xl prose-h2:leading-snug prose-h2:mt-10 prose-h2:mb-4 prose-h3:text-xl sm:prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-3 prose-p:text-sm sm:prose-p:text-base prose-p:leading-relaxed prose-a:text-platinum prose-a:underline hover:prose-a:text-white prose-strong:text-white prose-ul:my-4 prose-li:my-1 prose-table:border prose-table:border-glass-border prose-th:bg-secondary/80 prose-th:text-white prose-td:text-muted-foreground prose-img:rounded-xl"
-                      dangerouslySetInnerHTML={{ __html: secondHalfHtml }}
-                    />
-                  )}
-                </>
+                <div
+                  className="blog-article-content max-w-none"
+                  dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+                />
               ) : (
                 /* Structured Sections (Legacy fallback) */
-                <>
-                  {firstHalfSections.map((section) => (
+                <div className="blog-article-content max-w-none">
+                  {sections.map((section) => (
                     <section
                       key={section.id}
                       id={section.id}
-                      className="space-y-4 scroll-mt-28"
+                      className="scroll-mt-28"
                     >
-                      <h2 className="text-2xl sm:text-3xl font-luxury text-white leading-snug">
-                        {section.heading}
-                      </h2>
+                      <h2>{section.heading}</h2>
                       {section.subheading && (
-                        <p className="text-xs sm:text-sm font-mono text-platinum/80">
-                          {section.subheading}
-                        </p>
+                        <h3>{section.subheading}</h3>
                       )}
 
-                      <div className="space-y-4 text-muted-foreground text-sm sm:text-base font-modern leading-relaxed">
-                        {section.content.map((p, pIdx) => (
-                          <p key={pIdx}>{p}</p>
-                        ))}
-                      </div>
+                      {section.content.map((p, pIdx) => (
+                        <p key={pIdx}>{p}</p>
+                      ))}
 
                       {section.listItems && (
-                        <ul className="space-y-2.5 my-4 pt-2">
+                        <ul>
                           {section.listItems.map((item, lIdx) => (
-                            <li
-                              key={lIdx}
-                              className="flex items-start gap-2.5 text-xs sm:text-sm text-foreground"
-                            >
-                              <CheckCircle2
-                                size={16}
-                                className="text-platinum shrink-0 mt-0.5"
-                              />
-                              <span>{item}</span>
-                            </li>
+                            <li key={lIdx}>{item}</li>
                           ))}
                         </ul>
                       )}
 
                       {section.table && (
                         <div className="my-6 overflow-x-auto rounded-xl border border-glass-border">
-                          <table className="w-full text-left text-xs font-modern border-collapse">
+                          <table>
                             <thead>
-                              <tr className="bg-secondary/80 border-b border-border/80 text-white font-mono">
+                              <tr>
                                 {section.table.headers.map((h, hIdx) => (
-                                  <th key={hIdx} className="p-3.5">
-                                    {h}
-                                  </th>
+                                  <th key={hIdx}>{h}</th>
                                 ))}
                               </tr>
                             </thead>
-                            <tbody className="divide-y divide-border/40 bg-card/40">
+                            <tbody>
                               {section.table.rows.map((row, rIdx) => (
-                                <tr
-                                  key={rIdx}
-                                  className="hover:bg-secondary/30 transition-colors"
-                                >
-                                  <td className="p-3.5 font-semibold text-white font-mono">
+                                <tr key={rIdx}>
+                                  <td className="font-semibold text-white font-mono">
                                     {row.feature}
                                   </td>
-                                  <td className="p-3.5 text-muted-foreground">
-                                    {row.traditional}
-                                  </td>
-                                  <td className="p-3.5 text-platinum font-medium">
+                                  <td>{row.traditional}</td>
+                                  <td className="text-platinum font-medium">
                                     {row.gravity}
                                   </td>
                                 </tr>
@@ -516,150 +453,31 @@ export default function ResourcePost() {
                       )}
 
                       {section.callout && (
-                        <div
-                          className={`my-6 p-5 rounded-xl border flex items-start gap-3 text-xs sm:text-sm ${
-                            section.callout.type === "warning"
-                              ? "bg-amber-500/10 border-amber-500/30 text-amber-300"
-                              : "bg-emerald-500/10 border-emerald-500/30 text-emerald-300"
-                          }`}
-                        >
-                          {section.callout.type === "warning" ? (
-                            <AlertTriangle size={18} className="shrink-0 mt-0.5" />
-                          ) : (
-                            <Lightbulb size={18} className="shrink-0 mt-0.5" />
-                          )}
-                          <div>
-                            <div className="font-bold font-mono uppercase tracking-wider mb-1">
-                              {section.callout.title}
-                            </div>
-                            <div className="text-foreground/90 font-modern">
-                              {section.callout.text}
-                            </div>
+                        <blockquote className="my-6">
+                          <div className="font-bold font-mono uppercase tracking-wider mb-1 text-platinum not-italic text-xs">
+                            {section.callout.title}
                           </div>
-                        </div>
+                          <p className="not-italic text-sm sm:text-base">
+                            {section.callout.text}
+                          </p>
+                        </blockquote>
                       )}
                     </section>
                   ))}
-
-                  {/* Mid-Article CTA Box */}
-                  <PostCTA
-                    variant="mid-article"
-                    postTitle={post.title}
-                    resourceSlug={slug || post.slug}
-                    unlockedLink={unlockedLink}
-                    onUnlocked={handleUnlocked}
-                    onBookCallClick={() => setIsAuditModalOpen(true)}
-                  />
-
-                  {secondHalfSections.map((section) => (
-                    <section
-                      key={section.id}
-                      id={section.id}
-                      className="space-y-4 scroll-mt-28"
-                    >
-                      <h2 className="text-2xl sm:text-3xl font-luxury text-white leading-snug">
-                        {section.heading}
-                      </h2>
-                      {section.subheading && (
-                        <p className="text-xs sm:text-sm font-mono text-platinum/80">
-                          {section.subheading}
-                        </p>
-                      )}
-
-                      <div className="space-y-4 text-muted-foreground text-sm sm:text-base font-modern leading-relaxed">
-                        {section.content.map((p, pIdx) => (
-                          <p key={pIdx}>{p}</p>
-                        ))}
-                      </div>
-
-                      {section.listItems && (
-                        <ul className="space-y-2.5 my-4 pt-2">
-                          {section.listItems.map((item, lIdx) => (
-                            <li
-                              key={lIdx}
-                              className="flex items-start gap-2.5 text-xs sm:text-sm text-foreground"
-                            >
-                              <CheckCircle2
-                                size={16}
-                                className="text-platinum shrink-0 mt-0.5"
-                              />
-                              <span>{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-
-                      {section.table && (
-                        <div className="my-6 overflow-x-auto rounded-xl border border-glass-border">
-                          <table className="w-full text-left text-xs font-modern border-collapse">
-                            <thead>
-                              <tr className="bg-secondary/80 border-b border-border/80 text-white font-mono">
-                                {section.table.headers.map((h, hIdx) => (
-                                  <th key={hIdx} className="p-3.5">
-                                    {h}
-                                  </th>
-                                ))}
-                              </tr>
-                            </thead>
-                            <tbody className="divide-y divide-border/40 bg-card/40">
-                              {section.table.rows.map((row, rIdx) => (
-                                <tr
-                                  key={rIdx}
-                                  className="hover:bg-secondary/30 transition-colors"
-                                >
-                                  <td className="p-3.5 font-semibold text-white font-mono">
-                                    {row.feature}
-                                  </td>
-                                  <td className="p-3.5 text-muted-foreground">
-                                    {row.traditional}
-                                  </td>
-                                  <td className="p-3.5 text-platinum font-medium">
-                                    {row.gravity}
-                                  </td>
-                                </tr>
-                              ))}
-                            </tbody>
-                          </table>
-                        </div>
-                      )}
-
-                      {section.callout && (
-                        <div
-                          className={`my-6 p-5 rounded-xl border flex items-start gap-3 text-xs sm:text-sm ${
-                            section.callout.type === "warning"
-                              ? "bg-amber-500/10 border-amber-500/30 text-amber-300"
-                              : "bg-emerald-500/10 border-emerald-500/30 text-emerald-300"
-                          }`}
-                        >
-                          {section.callout.type === "warning" ? (
-                            <AlertTriangle size={18} className="shrink-0 mt-0.5" />
-                          ) : (
-                            <Lightbulb size={18} className="shrink-0 mt-0.5" />
-                          )}
-                          <div>
-                            <div className="font-bold font-mono uppercase tracking-wider mb-1">
-                              {section.callout.title}
-                            </div>
-                            <div className="text-foreground/90 font-modern">
-                              {section.callout.text}
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                    </section>
-                  ))}
-                </>
+                </div>
               )}
 
-              {/* End-of-Article CTA Box */}
-              <PostCTA
-                variant="end-of-article"
-                postTitle={post.title}
-                resourceSlug={slug || post.slug}
-                unlockedLink={unlockedLink}
-                onUnlocked={handleUnlocked}
-                onBookCallClick={() => setIsAuditModalOpen(true)}
-              />
+              {/* End-of-Article CTA Box - ONLY shown if visitor is from LinkedIn */}
+              {showTopGate && (
+                <PostCTA
+                  variant="end-of-article"
+                  postTitle={post.title}
+                  resourceSlug={slug || post.slug}
+                  unlockedLink={unlockedLink}
+                  onUnlocked={handleUnlocked}
+                  onBookCallClick={() => setIsAuditModalOpen(true)}
+                />
+              )}
 
               {/* FAQs Section */}
               {post.faqs && post.faqs.length > 0 && (

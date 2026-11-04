@@ -114,9 +114,15 @@ export function processHeadingsAndToc(htmlContent: string): {
   const toc: TableOfContentsItem[] = [];
   if (!htmlContent) return { processedHtml: "", toc };
 
+  // 1. SEO Rule: Normalize internal <h1> tags to <h2> so the page strictly maintains a single H1 (the page title)
+  let normalizedHtml = htmlContent.replace(/<h1([^>]*)>(.*?)<\/h1>/gi, "<h2$1>$2</h2>");
+
+  // 2. Remove empty paragraphs sometimes output by WordPress blocks
+  normalizedHtml = normalizedHtml.replace(/<p[^>]*>\s*(?:&nbsp;|<br\s*\/?>)?\s*<\/p>/gi, "");
+
   let count = 0;
-  const processedHtml = htmlContent.replace(
-    /<h([23])([^>]*)>(.*?)<\/h\1>/gi,
+  const processedHtml = normalizedHtml.replace(
+    /<h([2-4])([^>]*)>(.*?)<\/h\1>/gi,
     (match, levelStr, attrs, innerText) => {
       const level = parseInt(levelStr, 10);
       const cleanTitle = decodeHtmlEntities(stripHtmlTags(innerText));
@@ -126,20 +132,25 @@ export function processHeadingsAndToc(htmlContent: string): {
       const idMatch = attrs.match(/id=["']([^"']+)["']/i);
       let id = idMatch ? idMatch[1] : "";
       if (!id) {
-        id = slugify(cleanTitle) || `heading-${count++}`;
+        id = slugify(cleanTitle) || `section-${count++}`;
       }
 
-      toc.push({
-        id,
-        heading: cleanTitle,
-        level,
-      });
+      // Add H2 and H3 to the Table of Contents for clear navigation
+      if (level <= 3) {
+        toc.push({
+          id,
+          heading: cleanTitle,
+          level,
+        });
+      }
 
-      // Insert id if not present
+      // Clean or append id attribute to heading
+      let newAttrs = attrs;
       if (!idMatch) {
-        return `<h${level}${attrs} id="${id}">${innerText}</h${level}>`;
+        newAttrs = ` id="${id}"` + newAttrs;
       }
-      return match;
+
+      return `<h${level}${newAttrs}>${innerText}</h${level}>`;
     }
   );
 

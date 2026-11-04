@@ -178,7 +178,10 @@ if ($slug) {
             ]
         ];
 
-        // Prepare SEO Meta Tags to inject into <head>
+        // Normalize internal <h1> to <h2> for single H1 SEO compliance
+        $raw_content = preg_replace('/<h1([^>]*)>(.*?)<\/h1>/i', '<h2$1>$2</h2>', $raw_content);
+
+        // Prepare SEO Meta Tags and typography CSS to inject into <head>
         $seo_meta = '
     <title>' . htmlspecialchars($meta_title) . '</title>
     <meta name="description" content="' . htmlspecialchars($meta_desc) . '" />
@@ -192,6 +195,26 @@ if ($slug) {
     <meta name="twitter:title" content="' . htmlspecialchars($meta_title) . '" />
     <meta name="twitter:description" content="' . htmlspecialchars($meta_desc) . '" />
     <meta name="twitter:image" content="' . htmlspecialchars($image) . '" />
+    <style>
+      .blog-article-content { font-family: system-ui, -apple-system, sans-serif; color: #cbd5e1; font-size: 17px; line-height: 1.85; }
+      .blog-article-content h1, .blog-article-content h2 { font-size: 2rem; font-weight: 700; color: #ffffff; margin-top: 2.75rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 0.5rem; line-height: 1.3; }
+      .blog-article-content h3 { font-size: 1.5rem; font-weight: 600; color: #f8fafc; margin-top: 2rem; margin-bottom: 0.75rem; line-height: 1.35; }
+      .blog-article-content h4 { font-size: 1.2rem; font-weight: 600; color: #38bdf8; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+      .blog-article-content h5 { font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; margin-top: 1.25rem; margin-bottom: 0.5rem; }
+      .blog-article-content p { font-size: 17px; line-height: 1.85; color: #cbd5e1; margin-bottom: 1.5rem; margin-top: 0; }
+      .blog-article-content strong, .blog-article-content b { color: #ffffff; font-weight: 600; }
+      .blog-article-content ul { list-style-type: disc; padding-left: 24px; margin: 20px 0; }
+      .blog-article-content ol { list-style-type: decimal; padding-left: 24px; margin: 20px 0; }
+      .blog-article-content li { margin-bottom: 10px; line-height: 1.7; color: #cbd5e1; }
+      .blog-article-content blockquote { border-left: 3px solid #38bdf8; background: rgba(30, 41, 59, 0.5); padding: 16px 20px; margin: 24px 0; border-radius: 0 8px 8px 0; font-style: italic; color: #f1f5f9; }
+      .blog-article-content a { color: #38bdf8; text-decoration: underline; }
+      .blog-article-content code { background: rgba(30, 41, 59, 0.8); color: #38bdf8; padding: 2px 6px; border-radius: 4px; font-size: 14px; }
+      .blog-article-content pre { background: #0b1120; border: 1px solid rgba(255,255,255,0.1); padding: 16px; border-radius: 8px; overflow-x: auto; color: #e2e8f0; }
+      .blog-article-content table { width: 100%; border-collapse: collapse; margin: 24px 0; border: 1px solid rgba(255,255,255,0.1); }
+      .blog-article-content th { background: rgba(30, 41, 59, 0.8); color: #fff; padding: 12px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.15); }
+      .blog-article-content td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); color: #cbd5e1; }
+      .blog-article-content img { max-width: 100%; height: auto; border-radius: 12px; margin: 20px auto; display: block; border: 1px solid rgba(255,255,255,0.1); }
+    </style>
     <script type="application/ld+json">' . json_encode($article_schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . '</script>
     <script type="application/ld+json">' . json_encode($breadcrumb_schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . '</script>
 ';
@@ -254,32 +277,12 @@ if ($slug) {
         $utm_medium = strtolower(trim($_GET['utm_medium'] ?? ''));
         $utm_source = strtolower(trim($_GET['utm_source'] ?? ''));
         $gate_param = trim($_GET['gate'] ?? '');
-        $is_linkedin_gate = ($utm_medium === 'linkedin' || strpos($utm_medium, 'linkedin') !== false || $utm_source === 'linkedin' || $gate_param === '1');
+        $referrer = strtolower(trim($_SERVER['HTTP_REFERER'] ?? ''));
+        $is_search_engine = (strpos($referrer, 'google.') !== false || strpos($referrer, 'bing.') !== false || strpos($referrer, 'duckduckgo.') !== false);
 
-        $top_cta_html = $generate_cta_box('top', $title, $slug);
+        $is_linkedin_gate = (!$is_search_engine && ($utm_medium === 'linkedin' || strpos($utm_medium, 'linkedin') !== false || $utm_source === 'linkedin' || $gate_param === '1'));
 
-        // Split content for mid-article CTA
-        $h2_count = substr_count(strtolower($raw_content), '</h2>');
-        $content_part1 = $raw_content;
-        $content_part2 = '';
-
-        if ($h2_count >= 2) {
-            $target_index = floor($h2_count / 2);
-            $parts = preg_split('/(<h2[^>]*>)/i', $raw_content, -1, PREG_SPLIT_DELIM_CAPTURE);
-            if (count($parts) >= ($target_index * 2 + 1)) {
-                $split_point = $target_index * 2;
-                $content_part1 = implode('', array_slice($parts, 0, $split_point));
-                $content_part2 = implode('', array_slice($parts, $split_point));
-            }
-        } elseif (substr_count(strtolower($raw_content), '</p>') >= 4) {
-            $p_parts = explode('</p>', $raw_content);
-            $mid_p = floor(count($p_parts) / 2);
-            $content_part1 = implode('</p>', array_slice($p_parts, 0, $mid_p)) . '</p>';
-            $content_part2 = implode('</p>', array_slice($p_parts, $mid_p));
-        }
-
-        $mid_cta_html = $generate_cta_box('mid', $title, $slug);
-        $end_cta_html = $generate_cta_box('end', $title, $slug);
+        $top_cta_html = $is_linkedin_gate ? $generate_cta_box('top', $title, $slug) : '';
 
         // Prepare Semantic Body to inject inside <div id="root">
         $ssr_body = '
@@ -290,9 +293,7 @@ if ($slug) {
         <span style="color: #38bdf8;">' . htmlspecialchars($title) . '</span>
       </nav>
 
-      <div id="ssr-top-gate" style="' . ($is_linkedin_gate ? 'display: block;' : 'display: none;') . '">
-        ' . $top_cta_html . '
-      </div>
+      ' . ($is_linkedin_gate ? '<div id="ssr-top-gate" style="display: block;">' . $top_cta_html . '</div>' : '') . '
 
       <header id="article-header" style="' . ($is_linkedin_gate ? 'display: none;' : 'display: block;') . '; margin-bottom: 30px;">
         <h1 style="font-size: 2.5rem; line-height: 1.2; color: #ffffff; margin-bottom: 15px;">' . htmlspecialchars($title) . '</h1>
@@ -306,11 +307,8 @@ if ($slug) {
         </div>
       </header>
 
-      <main id="article-content" class="ssr-article-content" style="' . ($is_linkedin_gate ? 'display: none;' : 'display: block;') . '; line-height: 1.8; font-size: 16px; color: #cbd5e1;">
-        ' . $content_part1 . '
-        ' . $mid_cta_html . '
-        ' . $content_part2 . '
-        ' . $end_cta_html . '
+      <main id="article-content" class="ssr-article-content blog-article-content" style="' . ($is_linkedin_gate ? 'display: none;' : 'display: block;') . '">
+        ' . $raw_content . '
       </main>
       <footer style="margin-top: 50px; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.1);">
         <p><a href="/gravity" style="color: #38bdf8; font-weight: bold; text-decoration: underline;">Discover ChroniqAI Gravity</a> — AI-powered LinkedIn client acquisition for high-ticket B2B founders.</p>
