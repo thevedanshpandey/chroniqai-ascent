@@ -86,10 +86,17 @@ export function isLeadGateActive(): boolean {
   if (typeof window === "undefined") return false;
   try {
     const urlParams = new URLSearchParams(window.location.search);
+    const qMedium = (urlParams.get("utm_medium") || "").toLowerCase().trim();
     const qSource = (urlParams.get("utm_source") || "").toLowerCase().trim();
     const qGate = (urlParams.get("gate") || "").trim();
 
-    if (qSource === "linkedin" || qGate === "1") {
+    if (
+      qMedium === "linkedin" ||
+      qMedium.includes("linkedin") ||
+      qSource === "linkedin" ||
+      qSource.includes("linkedin") ||
+      qGate === "1"
+    ) {
       sessionStorage.setItem("chroniq_lead_gate_active", "1");
       return true;
     }

@@ -186,6 +186,46 @@ export default function ResourcePost() {
   const firstHalfSections = sections.slice(0, midPoint);
   const secondHalfSections = sections.slice(midPoint);
 
+  // LinkedIn Lead Gate: Visitors with utm_medium=linkedin land on this page first
+  // which ONLY contains the container and nothing else.
+  // When they enter their details on the container, the resource is unlocked and revealed.
+  if (showTopGate && !unlockedLink) {
+    return (
+      <PageLayout>
+        <SEOHead
+          title={seoTitle}
+          description={seoDescription}
+          canonical={pageCanonical}
+          ogImage={post.seo?.ogImage || post.coverImage}
+          ogType="article"
+        />
+        <PostSchema post={post} />
+
+        <main className="pt-32 pb-24 relative overflow-hidden text-left min-h-[80vh] flex flex-col justify-center">
+          {/* Subtle luxury ambient glow */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[450px] hero-gradient pointer-events-none -z-10" />
+
+          <div className="container mx-auto px-6 max-w-4xl">
+            <PostCTA
+              variant="top-gate"
+              postTitle={post.title}
+              resourceSlug={slug || post.slug}
+              unlockedLink={null}
+              onUnlocked={handleUnlocked}
+              onBookCallClick={() => setIsAuditModalOpen(true)}
+              allowSkip={false}
+            />
+          </div>
+        </main>
+
+        <AuditModal
+          isOpen={isAuditModalOpen}
+          onClose={() => setIsAuditModalOpen(false)}
+        />
+      </PageLayout>
+    );
+  }
+
   return (
     <PageLayout>
       <SEOHead

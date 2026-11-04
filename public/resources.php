@@ -243,10 +243,6 @@ if ($slug) {
                     <p style="font-size: 11px; color: #94a3b8; text-align: center; margin: 4px 0 0 0; line-height: 1.4;">
                       We\'ll send you the resource and occasionally email you about client acquisition. Unsubscribe anytime.
                     </p>
-                    ' . ($is_top ? '
-                    <div style="text-align: center; margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.1);">
-                      <a href="#article-content" onclick="document.getElementById(\'article-content\').scrollIntoView({behavior:\'smooth\'}); return false;" style="color: #94a3b8; font-size: 11px; font-family: monospace; text-decoration: underline;">Skip to article &darr;</a>
-                    </div>' : '') . '
                     <div class="form-status" style="display: none; font-size: 12px; text-align: center; margin-top: 8px;"></div>
                   </form>
                 </div>
@@ -255,9 +251,10 @@ if ($slug) {
         };
 
         // Check for LinkedIn-only top lead gate
+        $utm_medium = strtolower(trim($_GET['utm_medium'] ?? ''));
         $utm_source = strtolower(trim($_GET['utm_source'] ?? ''));
         $gate_param = trim($_GET['gate'] ?? '');
-        $is_linkedin_gate = ($utm_source === 'linkedin' || $gate_param === '1');
+        $is_linkedin_gate = ($utm_medium === 'linkedin' || strpos($utm_medium, 'linkedin') !== false || $utm_source === 'linkedin' || $gate_param === '1');
 
         $top_cta_html = $generate_cta_box('top', $title, $slug);
 
@@ -292,7 +289,12 @@ if ($slug) {
         <a href="/resources" style="color: #cbd5e1;">Resources</a> &gt; 
         <span style="color: #38bdf8;">' . htmlspecialchars($title) . '</span>
       </nav>
-      <header style="margin-bottom: 30px;">
+
+      <div id="ssr-top-gate" style="' . ($is_linkedin_gate ? 'display: block;' : 'display: none;') . '">
+        ' . $top_cta_html . '
+      </div>
+
+      <header id="article-header" style="' . ($is_linkedin_gate ? 'display: none;' : 'display: block;') . '; margin-bottom: 30px;">
         <h1 style="font-size: 2.5rem; line-height: 1.2; color: #ffffff; margin-bottom: 15px;">' . htmlspecialchars($title) . '</h1>
         <div style="font-size: 14px; color: #94a3b8; margin-bottom: 20px;">
           By <strong>Ved, Founder of ChroniqAI</strong> | Published: ' . htmlspecialchars($date) . ' | Read Time: ' . htmlspecialchars($read_time) . '
@@ -304,11 +306,7 @@ if ($slug) {
         </div>
       </header>
 
-      <div id="ssr-top-gate" style="' . ($is_linkedin_gate ? 'display: block;' : 'display: none;') . '">
-        ' . $top_cta_html . '
-      </div>
-
-      <main id="article-content" class="ssr-article-content" style="line-height: 1.8; font-size: 16px; color: #cbd5e1;">
+      <main id="article-content" class="ssr-article-content" style="' . ($is_linkedin_gate ? 'display: none;' : 'display: block;') . '; line-height: 1.8; font-size: 16px; color: #cbd5e1;">
         ' . $content_part1 . '
         ' . $mid_cta_html . '
         ' . $content_part2 . '
@@ -322,29 +320,43 @@ if ($slug) {
       (function() {
         try {
           var sp = new URLSearchParams(window.location.search);
+          var qm = (sp.get("utm_medium") || "").toLowerCase().trim();
           var qs = (sp.get("utm_source") || "").toLowerCase().trim();
           var qg = (sp.get("gate") || "").trim();
-          if (qs === "linkedin" || qg === "1") {
+          if (qm === "linkedin" || qm.indexOf("linkedin") !== -1 || qs === "linkedin" || qg === "1") {
             sessionStorage.setItem("chroniq_lead_gate_active", "1");
           }
-          if (sessionStorage.getItem("chroniq_lead_gate_active") === "1") {
-            var topGate = document.getElementById("ssr-top-gate");
-            if (topGate) topGate.style.display = "block";
-          }
+          var isGateActive = (sessionStorage.getItem("chroniq_lead_gate_active") === "1");
           var decodedSlug = decodeURIComponent(' . json_encode($slug) . ' || "");
           var unlockedRaw = localStorage.getItem("chroniq_unlocked_" + decodedSlug);
+          var isUnlocked = false;
+
           if (unlockedRaw) {
-            var parsed = JSON.parse(unlockedRaw);
-            if (parsed && parsed.link) {
-              document.querySelectorAll(".lead-capture-box").forEach(function(box) {
-                var variant = box.getAttribute("data-variant");
-                var actionCol = box.querySelector(".lead-action-col");
-                if (actionCol) {
-                  actionCol.innerHTML = \'<div style="text-align: center; padding: 15px;"><div style="color: #4ade80; font-size: 14px; margin-bottom: 8px; font-weight: bold;">&check; Thanks, here\\\'s your resource</div><a href="\' + parsed.link + \'" target="_blank" style="display: block; width: 100%; padding: 10px; background: #10b981; color: #020617; border-radius: 6px; font-weight: bold; font-size: 12px; font-family: monospace; text-transform: uppercase; text-decoration: none; margin-bottom: 8px; box-sizing: border-box;">Open Resource &rarr;</a>\' +
-                  (variant === "top" ? \'<a href="#article-content" onclick="document.getElementById(\\\'article-content\\\').scrollIntoView({behavior:\\\'smooth\\\'}); return false;" style="color: #cbd5e1; font-size: 11px; text-decoration: underline;">Continue to article &darr;</a>\' : \'\') +
-                  \'</div>\';
-                }
-              });
+            try {
+              var parsed = JSON.parse(unlockedRaw);
+              if (parsed && parsed.link) {
+                isUnlocked = true;
+                document.querySelectorAll(".lead-capture-box").forEach(function(box) {
+                  var actionCol = box.querySelector(".lead-action-col");
+                  if (actionCol) {
+                    actionCol.innerHTML = \'<div style="text-align: center; padding: 15px;"><div style="color: #4ade80; font-size: 14px; margin-bottom: 8px; font-weight: bold;">&check; Thanks, here\\\'s your resource</div><a href="\' + parsed.link + \'" target="_blank" style="display: block; width: 100%; padding: 10px; background: #10b981; color: #020617; border-radius: 6px; font-weight: bold; font-size: 12px; font-family: monospace; text-transform: uppercase; text-decoration: none; margin-bottom: 8px; box-sizing: border-box;">Open Resource &rarr;</a></div>\';
+                  }
+                });
+              }
+            } catch(e) {}
+          }
+
+          if (isGateActive) {
+            var topGate = document.getElementById("ssr-top-gate");
+            var artHeader = document.getElementById("article-header");
+            var artContent = document.getElementById("article-content");
+            if (topGate) topGate.style.display = "block";
+            if (!isUnlocked) {
+              if (artHeader) artHeader.style.display = "none";
+              if (artContent) artContent.style.display = "none";
+            } else {
+              if (artHeader) artHeader.style.display = "block";
+              if (artContent) artContent.style.display = "block";
             }
           }
         } catch(e) {}

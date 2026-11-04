@@ -29,6 +29,7 @@ interface PostCTAProps {
   onUnlocked: (link: string) => void;
   onBookCallClick: () => void;
   onScrollToArticle?: () => void;
+  allowSkip?: boolean;
 }
 
 export function PostCTA({
@@ -39,6 +40,7 @@ export function PostCTA({
   onUnlocked,
   onBookCallClick,
   onScrollToArticle,
+  allowSkip = false,
 }: PostCTAProps) {
   const isMid = variant === "mid-article";
   const isTopGate = variant === "top-gate";
@@ -457,8 +459,8 @@ export function PostCTA({
                   We'll send you the resource and occasionally email you about client acquisition. Unsubscribe anytime.
                 </p>
 
-                {/* Skip to article link for top-gate variant */}
-                {isTopGate && (
+                {/* Skip to article link for top-gate variant if explicitly allowed */}
+                {isTopGate && allowSkip && (
                   <div className="pt-2 text-center border-t border-border/40 mt-3">
                     <button
                       type="button"
