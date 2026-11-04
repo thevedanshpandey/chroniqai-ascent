@@ -65,7 +65,7 @@ function OfficialHeroSection({ onOpenAudit }: { onOpenAudit: () => void }) {
                 onClick={onOpenAudit}
                 className="flex items-center justify-center gap-2 text-sm"
               >
-                <span>Apply for 14-Day Gravity Trial</span>
+                <span>Book a Free Strategy Session</span>
                 <ArrowRight size={17} />
               </LuxuryButton>
 
@@ -239,7 +239,7 @@ function OutboundSystemPillarsSection({ onOpenAudit }: { onOpenAudit: () => void
               Want Gravity Deployed For Your B2B Offer?
             </h4>
             <p className="text-xs text-slate-300 font-modern max-w-lg">
-              We audit your target market and provide a complete 14-day trial roadmap to book 6-10+ qualified sales meetings.
+              Book a free strategy session with our founders to get your complimentary pipeline audit and roadmap to book 6-10+ qualified sales meetings.
             </p>
           </div>
 
@@ -249,7 +249,7 @@ function OutboundSystemPillarsSection({ onOpenAudit }: { onOpenAudit: () => void
             onClick={onOpenAudit}
             className="shrink-0"
           >
-            Apply for 14-Day Gravity Trial
+            Book Free Strategy Session & Pipeline Audit
           </LuxuryButton>
         </div>
       </div>
@@ -275,7 +275,7 @@ function GravitySpotlightBanner() {
               </h2>
 
               <p className="text-base text-slate-200 leading-relaxed font-modern max-w-2xl">
-                &ldquo;Stop chasing clients. Let them fall into your calendar.&rdquo; Gravity is our specialized LinkedIn client acquisition system for high-ticket B2B founders. Includes our proven black-hole positioning philosophy, 14-day trial, and verified meeting guarantee.
+                &ldquo;Stop chasing clients. Let them fall into your calendar.&rdquo; Gravity is our specialized LinkedIn client acquisition system for high-ticket B2B founders. Includes our proven black-hole positioning philosophy, free strategy session with our founders, and verified meeting guarantee.
               </p>
 
               <div className="pt-2 flex flex-wrap items-center gap-4">
@@ -522,7 +522,7 @@ function OfficialFinalCTASection({ onOpenAudit }: { onOpenAudit: () => void }) {
           </h2>
 
           <p className="text-base sm:text-lg text-slate-200 max-w-xl mx-auto leading-relaxed font-modern">
-            Apply for the 14-day Gravity trial. We will review your offer, define your target ICP, and show you how to generate qualified executive pipeline.
+            Book a free strategy session with our founders and get a free pipeline audit. We will review your offer, define your target ICP, and show you how to generate qualified executive pipeline.
           </p>
 
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -532,7 +532,7 @@ function OfficialFinalCTASection({ onOpenAudit }: { onOpenAudit: () => void }) {
               onClick={onOpenAudit}
               className="flex items-center justify-center gap-2"
             >
-              <span>Apply for 14-Day Gravity Trial</span>
+              <span>Book a Free Strategy Session</span>
               <ArrowRight size={18} />
             </LuxuryButton>
 

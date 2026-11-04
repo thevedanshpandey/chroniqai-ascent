@@ -23,12 +23,20 @@ export function PostSchema({ post }: PostSchemaProps) {
     "image": [post.coverImage],
     "datePublished": `${post.publishDate}T08:00:00+00:00`,
     "dateModified": `${post.updatedDate}T08:00:00+00:00`,
-    "author": {
-      "@type": "Person",
-      "name": post.author.name,
-      "jobTitle": post.author.role,
-      "url": post.author.linkedinUrl || "https://www.linkedin.com/in/vedanshpandey/",
-    },
+    "author": [
+      {
+        "@type": "Person",
+        "name": "Vedansh Pandey",
+        "jobTitle": "Founder & CEO",
+        "url": "https://www.linkedin.com/in/vedansh-pandey/"
+      },
+      {
+        "@type": "Person",
+        "name": "Abhay Rawat",
+        "jobTitle": "Co-Founder",
+        "url": "https://www.linkedin.com/in/abhayrawat15/"
+      }
+    ],
     "publisher": {
       "@type": "Organization",
       "name": "ChroniqAI",
@@ -85,12 +93,25 @@ export function PostSchema({ post }: PostSchemaProps) {
     "url": "https://chroniqai.com",
     "logo": "https://chroniqai.com/favicon.ico",
     "description": "ChroniqAI Gravity — AI-Powered LinkedIn Client Acquisition for High-Ticket B2B Founders.",
-    "founder": {
-      "@type": "Person",
-      "name": "Vedansh Pandey",
-      "jobTitle": "Founder & CEO",
-    },
-    "sameAs": ["https://www.linkedin.com/in/vedanshpandey/"],
+    "founders": [
+      {
+        "@type": "Person",
+        "name": "Vedansh Pandey",
+        "jobTitle": "Founder & CEO",
+        "url": "https://www.linkedin.com/in/vedansh-pandey/"
+      },
+      {
+        "@type": "Person",
+        "name": "Abhay Rawat",
+        "jobTitle": "Co-Founder",
+        "url": "https://www.linkedin.com/in/abhayrawat15/"
+      }
+    ],
+    "sameAs": [
+      "https://www.linkedin.com/company/chroniqai",
+      "https://www.linkedin.com/in/vedansh-pandey/",
+      "https://www.linkedin.com/in/abhayrawat15/"
+    ],
   };
 
   // If WordPress Yoast or Rank Math gave us complete schema, inject that alongside

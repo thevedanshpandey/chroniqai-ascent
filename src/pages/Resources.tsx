@@ -308,7 +308,7 @@ export default function Resources() {
               Want These Outbound Systems Deployed For You?
             </h2>
             <p className="text-muted-foreground text-base max-w-xl mx-auto leading-relaxed font-modern">
-              Apply for the 14-day trial to experience how ChroniqAI Gravity fills your calendar with qualified B2B decision-makers.
+              Book a free strategy session with our founders to get a free pipeline audit and see how ChroniqAI Gravity fills your calendar with qualified B2B decision-makers.
             </p>
             <div className="pt-4">
               <LuxuryButton
@@ -316,7 +316,7 @@ export default function Resources() {
                 size="lg"
                 onClick={() => setIsAuditModalOpen(true)}
               >
-                Apply for 14-Day Gravity Trial
+                Book a Free Strategy Session & Pipeline Audit
                 <ArrowRight size={18} className="ml-2" />
               </LuxuryButton>
             </div>

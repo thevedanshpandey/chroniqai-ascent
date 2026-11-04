@@ -283,7 +283,7 @@ export function PostCTA({
                   onClick={onBookCallClick}
                   className="text-xs text-muted-foreground hover:text-white flex items-center justify-center gap-1 mx-auto transition-colors cursor-pointer"
                 >
-                  <span>Need help scaling this? Apply for 14-Day Trial</span>
+                  <span>Need help scaling this? Book a Free Strategy Session With Our Founders</span>
                   <ArrowRight size={12} />
                 </button>
               </div>

@@ -448,12 +448,12 @@ export function transformWordPressPost(rawPost: WordPressPostRaw): ResourcePost 
       tldr.slice(0, 160),
     category: primaryCategory,
     author: {
-      name: "Ved",
-      role: "Founder of ChroniqAI",
+      name: "Vedansh Pandey & Abhay Rawat",
+      role: "Founders of ChroniqAI",
       avatar:
         rawPost._embedded?.author?.[0]?.avatar_urls?.["96"] ||
         "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=256&q=80",
-      linkedinUrl: "https://www.linkedin.com/in/vedanshpandey/",
+      linkedinUrl: "https://www.linkedin.com/in/vedansh-pandey/",
     },
     publishDate: pubDateStr,
     updatedDate: modDateStr,

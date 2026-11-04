@@ -23,6 +23,7 @@ import {
   ChevronRight,
   CheckCircle2,
   HelpCircle,
+  Linkedin,
   Sparkles,
   AlertTriangle,
   Lightbulb,
@@ -260,21 +261,46 @@ export default function ResourcePost() {
 
             {/* Author Byline & Metadata Bar */}
             <div className="flex flex-wrap items-center justify-between gap-4 py-4 border-y border-border/50 text-xs font-mono text-muted-foreground">
-              <div className="flex items-center gap-3">
-                <img
-                  src={
-                    post.author.avatar ||
-                    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=256&q=80"
-                  }
-                  alt={post.author.name}
-                  className="w-9 h-9 rounded-full object-cover border border-platinum/30"
-                />
-                <div>
-                  <div className="text-white font-medium">
-                    {post.author.name}
+              <div className="flex flex-wrap items-center gap-4">
+                <div className="flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-full bg-secondary border border-platinum/40 flex items-center justify-center text-[10px] font-luxury font-bold text-platinum">
+                    VP
                   </div>
-                  <div className="text-muted-foreground text-[11px]">
-                    {post.author.role}
+                  <div>
+                    <a
+                      href="https://www.linkedin.com/in/vedansh-pandey/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white hover:text-platinum font-medium inline-flex items-center gap-1 transition-colors hover:underline underline-offset-2"
+                    >
+                      <span>Vedansh Pandey</span>
+                      <Linkedin size={11} className="text-[#0A66C2]" />
+                    </a>
+                    <div className="text-muted-foreground text-[10px]">
+                      Founder & CEO
+                    </div>
+                  </div>
+                </div>
+
+                <span className="text-border">|</span>
+
+                <div className="flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-full bg-secondary border border-platinum/40 flex items-center justify-center text-[10px] font-luxury font-bold text-platinum">
+                    AR
+                  </div>
+                  <div>
+                    <a
+                      href="https://www.linkedin.com/in/abhayrawat15/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white hover:text-platinum font-medium inline-flex items-center gap-1 transition-colors hover:underline underline-offset-2"
+                    >
+                      <span>Abhay Rawat</span>
+                      <Linkedin size={11} className="text-[#0A66C2]" />
+                    </a>
+                    <div className="text-muted-foreground text-[10px]">
+                      Co-Founder
+                    </div>
                   </div>
                 </div>
               </div>
@@ -385,7 +411,7 @@ export default function ResourcePost() {
                     onClick={() => setIsAuditModalOpen(true)}
                     className="w-full mt-2"
                   >
-                    Apply for 14-Day Trial
+                    Book a Free Strategy Session
                   </LuxuryButton>
                 </div>
               </div>

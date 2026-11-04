@@ -64,13 +64,13 @@ export function AuditModal({ isOpen, onClose, initialScore }: AuditModalProps) {
               <div className="mb-6">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/90 border border-primary/20 mb-3 text-xs font-medium text-platinum">
                   <Sparkles size={13} className="text-platinum-glow" />
-                  ChroniqAI Gravity • 14-Day Trial Application
+                  ChroniqAI Gravity • Free Strategy Session & Pipeline Audit
                 </div>
                 <h3 className="text-2xl md:text-3xl font-luxury text-white mb-2">
-                  Apply for the 14-Day Gravity Trial
+                  Book a Free Strategy Session With Our Founders
                 </h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">
-                  By application only. We take on a limited number of founders to ensure dedicated focus, account safety, and guaranteed meeting delivery.
+                  Book a free strategy session with our founders, Vedansh and Abhay, and get a complimentary pipeline audit to diagnose your high-ticket B2B client acquisition bottlenecks.
                 </p>
 
                 {initialScore && (
@@ -186,11 +186,11 @@ export function AuditModal({ isOpen, onClose, initialScore }: AuditModalProps) {
                     {isSubmitting ? (
                       <span className="flex items-center gap-2">
                         <span className="animate-spin rounded-full h-4 w-4 border-2 border-obsidian border-t-transparent" />
-                        Submitting Application...
+                        Scheduling Strategy Session...
                       </span>
                     ) : (
                       <span className="flex items-center gap-2">
-                        Submit 14-Day Gravity Trial Application
+                        Book Strategy Session & Free Pipeline Audit
                         <ArrowRight size={18} />
                       </span>
                     )}
@@ -218,12 +218,12 @@ export function AuditModal({ isOpen, onClose, initialScore }: AuditModalProps) {
               <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mx-auto text-emerald-400">
                 <CheckCircle2 size={36} />
               </div>
-              <h3 className="text-2xl font-luxury text-white">Application Received</h3>
+              <h3 className="text-2xl font-luxury text-white">Strategy Session Request Received</h3>
               <p className="text-muted-foreground text-sm max-w-md mx-auto leading-relaxed">
-                Thank you, <span className="text-foreground font-semibold">{formData.name}</span>. Vedansh Pandey and the Gravity team are personally reviewing your offer and market fit for <span className="text-foreground font-semibold">{formData.company}</span>.
+                Thank you, <span className="text-foreground font-semibold">{formData.name}</span>. Vedansh Pandey, Abhay Rawat, and the Gravity team are personally reviewing your offer and market fit for <span className="text-foreground font-semibold">{formData.company}</span>.
               </p>
               <p className="text-xs text-muted-foreground/90 max-w-sm mx-auto">
-                We will email <span className="text-platinum font-mono font-semibold">{formData.email}</span> within 24 hours with our review and next steps.
+                We will email <span className="text-platinum font-mono font-semibold">{formData.email}</span> within 24 hours to schedule your strategy session and deliver your free pipeline audit.
               </p>
 
               <div className="pt-4">

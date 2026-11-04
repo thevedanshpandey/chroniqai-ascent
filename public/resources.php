@@ -152,10 +152,18 @@ if ($slug) {
             'datePublished' => $date . 'T08:00:00+00:00',
             'dateModified' => $modified . 'T08:00:00+00:00',
             'author' => [
-                '@type' => 'Person',
-                'name' => 'Ved',
-                'jobTitle' => 'Founder of ChroniqAI',
-                'url' => 'https://www.linkedin.com/in/vedanshpandey/'
+                [
+                    '@type' => 'Person',
+                    'name' => 'Vedansh Pandey',
+                    'jobTitle' => 'Founder & CEO',
+                    'url' => 'https://www.linkedin.com/in/vedansh-pandey/'
+                ],
+                [
+                    '@type' => 'Person',
+                    'name' => 'Abhay Rawat',
+                    'jobTitle' => 'Co-Founder',
+                    'url' => 'https://www.linkedin.com/in/abhayrawat15/'
+                ]
             ],
             'publisher' => [
                 '@type' => 'Organization',
@@ -298,7 +306,7 @@ if ($slug) {
       <header id="article-header" style="' . ($is_linkedin_gate ? 'display: none;' : 'display: block;') . '; margin-bottom: 30px;">
         <h1 style="font-size: 2.5rem; line-height: 1.2; color: #ffffff; margin-bottom: 15px;">' . htmlspecialchars($title) . '</h1>
         <div style="font-size: 14px; color: #94a3b8; margin-bottom: 20px;">
-          By <strong>Ved, Founder of ChroniqAI</strong> | Published: ' . htmlspecialchars($date) . ' | Read Time: ' . htmlspecialchars($read_time) . '
+          By <a href="https://www.linkedin.com/in/vedansh-pandey/" target="_blank" rel="noopener noreferrer" style="color: #cbd5e1; text-decoration: underline;">Vedansh Pandey</a> (Founder & CEO) & <a href="https://www.linkedin.com/in/abhayrawat15/" target="_blank" rel="noopener noreferrer" style="color: #cbd5e1; text-decoration: underline;">Abhay Rawat</a> (Co-Founder) | Published: ' . htmlspecialchars($date) . ' | Read Time: ' . htmlspecialchars($read_time) . '
         </div>
         ' . ($image ? '<div style="margin-bottom: 25px;"><img src="' . htmlspecialchars($image) . '" alt="' . htmlspecialchars($title) . '" style="width: 100%; border-radius: 12px; max-height: 480px; object-fit: cover;" /></div>' : '') . '
         <div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; padding: 20px; margin-bottom: 30px;">

@@ -75,7 +75,7 @@ export function Navbar() {
                 onClick={() => setIsAuditModalOpen(true)}
                 className="flex items-center gap-2"
               >
-                <span>Apply for 14-Day Trial</span>
+                <span>Book a Free Strategy Session</span>
                 <ArrowRight size={14} />
               </LuxuryButton>
             </div>
@@ -120,7 +120,7 @@ export function Navbar() {
                   }}
                   className="mt-4 w-full flex items-center justify-center gap-2"
                 >
-                  <span>Apply for 14-Day Gravity Trial</span>
+                  <span>Book a Free Strategy Session</span>
                   <ArrowRight size={16} />
                 </LuxuryButton>
               </div>

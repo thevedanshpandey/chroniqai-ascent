@@ -12,6 +12,7 @@ import {
   CheckCircle2,
   Clock,
   HelpCircle,
+  Linkedin,
   Lock,
   ShieldCheck,
   Sparkles,
@@ -80,7 +81,7 @@ function GravityHeroSection({ onOpenApply }: { onOpenApply: () => void }) {
                   size="lg"
                   className="w-full sm:w-auto flex items-center justify-center gap-2 text-sm"
                 >
-                  <span>Apply for the 14-Day Gravity Trial</span>
+                  <span>Book a Call With Our Founders</span>
                   <ArrowRight size={17} />
                 </LuxuryButton>
               </a>
@@ -204,49 +205,90 @@ function GravityBlackHoleStorySection() {
           </p>
         </div>
 
-        {/* Block 2: Built by a founder who had the same problem */}
+        {/* Block 2: Built by founders who had the same problem */}
         <div className="p-8 md:p-12 rounded-3xl border border-glass-border bg-secondary/35 backdrop-blur-xl relative overflow-hidden shadow-2xl">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
             {/* Story Text */}
-            <div className="md:col-span-8 space-y-4">
+            <div className="md:col-span-7 space-y-4">
               <span className="text-xs font-mono text-platinum uppercase tracking-wider block">
                 Origin Story
               </span>
 
               <h3 className="text-2xl sm:text-4xl font-luxury text-white">
-                Built by a founder who had the same problem
+                Built by founders who had the same problem
               </h3>
 
               <p className="text-base text-slate-200 font-modern leading-relaxed">
-                &ldquo;I&apos;m Ved. I had a great offer but no clients, so I built a system for myself, and it booked 300+ calls before I ever sold it to anyone. Gravity is that system, now built for founders like you.&rdquo;
+                &ldquo;We built ChroniqAI out of frustration with generic cold outreach that burned domain reputations and booked unqualified chats. We engineered Gravity for ourselves, booking 300+ high-ticket enterprise calls before opening it to client partners. Now our founders personally review your offer, audit your pipeline, and build your high-converting acquisition engine.&rdquo;
               </p>
 
-              <div className="pt-2 flex items-center gap-3">
-                <div className="text-xs font-mono text-platinum font-semibold">
-                  Vedansh Pandey
-                </div>
+              <div className="pt-2 flex flex-wrap items-center gap-4 text-xs font-mono">
+                <a
+                  href="https://www.linkedin.com/in/vedansh-pandey/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-platinum hover:text-white transition-colors underline-offset-4 hover:underline"
+                >
+                  <Linkedin size={13} className="text-[#0A66C2]" />
+                  <span>Vedansh Pandey (Founder & CEO)</span>
+                </a>
                 <span className="text-border">|</span>
-                <div className="text-xs text-slate-400">
-                  Founder & CEO, ChroniqAI
-                </div>
+                <a
+                  href="https://www.linkedin.com/in/abhayrawat15/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-platinum hover:text-white transition-colors underline-offset-4 hover:underline"
+                >
+                  <Linkedin size={13} className="text-[#0A66C2]" />
+                  <span>Abhay Rawat (Co-Founder)</span>
+                </a>
               </div>
             </div>
 
-            {/* Founder Photo / Placeholder */}
-            <div className="md:col-span-4 flex flex-col items-center justify-center">
-              <div className="w-44 h-48 sm:w-48 sm:h-52 rounded-2xl border-2 border-primary/40 bg-gradient-to-b from-card to-secondary/80 p-4 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-xl group">
-                <div className="w-16 h-16 rounded-full bg-secondary border border-border flex items-center justify-center text-platinum font-luxury text-2xl font-bold mb-3 shadow-inner">
+            {/* Founder Cards */}
+            <div className="md:col-span-5 grid grid-cols-2 gap-4">
+              {/* Vedansh Pandey Card */}
+              <div className="rounded-2xl border border-primary/30 bg-gradient-to-b from-card to-secondary/80 p-4 flex flex-col items-center justify-center text-center shadow-xl group hover:border-primary/60 transition-colors">
+                <div className="w-14 h-14 rounded-full bg-secondary border border-border flex items-center justify-center text-platinum font-luxury text-xl font-bold mb-2 shadow-inner">
                   VP
-                </div>
-                <div className="text-xs font-mono text-emerald-400 font-bold mb-1">
-                  [FOUNDER_PHOTO]
                 </div>
                 <div className="text-xs font-semibold text-white">
                   Vedansh Pandey
                 </div>
-                <div className="text-[11px] text-slate-400 mt-0.5">
+                <div className="text-[11px] text-slate-400 mt-0.5 mb-2.5">
                   Founder & CEO
                 </div>
+                <a
+                  href="https://www.linkedin.com/in/vedansh-pandey/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#0A66C2]/15 text-[#70b5f9] hover:bg-[#0A66C2]/30 text-[10px] font-mono font-medium transition-colors border border-[#0A66C2]/30"
+                >
+                  <Linkedin size={11} />
+                  <span>LinkedIn</span>
+                </a>
+              </div>
+
+              {/* Abhay Rawat Card */}
+              <div className="rounded-2xl border border-primary/30 bg-gradient-to-b from-card to-secondary/80 p-4 flex flex-col items-center justify-center text-center shadow-xl group hover:border-primary/60 transition-colors">
+                <div className="w-14 h-14 rounded-full bg-secondary border border-border flex items-center justify-center text-platinum font-luxury text-xl font-bold mb-2 shadow-inner">
+                  AR
+                </div>
+                <div className="text-xs font-semibold text-white">
+                  Abhay Rawat
+                </div>
+                <div className="text-[11px] text-slate-400 mt-0.5 mb-2.5">
+                  Co-Founder
+                </div>
+                <a
+                  href="https://www.linkedin.com/in/abhayrawat15/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#0A66C2]/15 text-[#70b5f9] hover:bg-[#0A66C2]/30 text-[10px] font-mono font-medium transition-colors border border-[#0A66C2]/30"
+                >
+                  <Linkedin size={11} />
+                  <span>LinkedIn</span>
+                </a>
               </div>
             </div>
           </div>
@@ -266,7 +308,7 @@ function GravityProcessSection() {
     },
     {
       timeframe: "Days 8-21",
-      name: "14-Day Gravity Trial",
+      name: "Outreach Launch & Pipeline Test",
       desc: "We launch outreach and test the system on your offer and niche. You see real conversations and real meetings before committing.",
     },
     {
@@ -479,7 +521,7 @@ function GravityResultsCaseStudySection({ onOpenApply }: { onOpenApply: () => vo
               onClick={onOpenApply}
               className="shrink-0"
             >
-              Apply for Your 14-Day Trial
+              Book a Call With Our Founders
             </LuxuryButton>
           </div>
 
@@ -505,7 +547,7 @@ function GravityFAQSection() {
     },
     {
       q: "How long before I see meetings?",
-      a: "Week 1 is setup. Your 14-day trial starts after that, and meetings begin during the trial.",
+      a: "Week 1 is setup. Outreach launches immediately after, and meetings begin as soon as our warm-up and targeting phases go live.",
     },
     {
       q: "How many meetings can I expect?",
@@ -532,7 +574,7 @@ function GravityFAQSection() {
             Frequently Asked Questions
           </h2>
           <p className="text-slate-300 text-sm sm:text-base max-w-md mx-auto leading-relaxed">
-            Everything you need to know about ChroniqAI Gravity and the 14-day trial.
+            Everything you need to know about ChroniqAI Gravity and our client acquisition process.
           </p>
         </div>
 
@@ -573,7 +615,7 @@ function GravityFinalCTASection({ onOpenApply }: { onOpenApply: () => void }) {
           </h2>
 
           <p className="text-base sm:text-lg text-slate-200 max-w-xl mx-auto leading-relaxed font-modern">
-            Apply for the 14-day trial. We&apos;ll personally review your application and tell you whether Gravity is a fit.
+            Book a call directly with our founders, Vedansh and Abhay. We&apos;ll audit your pipeline, review your offer, and show you exactly how Gravity books qualified meetings on your calendar.
           </p>
 
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -593,7 +635,7 @@ function GravityFinalCTASection({ onOpenApply }: { onOpenApply: () => void }) {
                 size="lg"
                 className="flex items-center justify-center gap-2"
               >
-                <span>Apply for the 14-Day Gravity Trial</span>
+                <span>Book a Call With Our Founders</span>
                 <ArrowRight size={18} />
               </LuxuryButton>
             </a>
@@ -623,7 +665,7 @@ export default function GravityPlatform() {
     },
     {
       question: "How long before I see meetings?",
-      answer: "Week 1 is setup. Your 14-day trial starts after that, and meetings begin during the trial."
+      answer: "Week 1 is setup. Outreach launches immediately after, and meetings begin as soon as our warm-up and targeting phases go live."
     },
     {
       question: "How many meetings can I expect?",
@@ -645,7 +687,7 @@ export default function GravityPlatform() {
         title="ChroniqAI Gravity | AI Client Acquisition for B2B Founders"
         description="Stop chasing clients. Let them fall into your calendar. ChroniqAI Gravity is an AI-powered LinkedIn client acquisition system for B2B founders with high-ticket offers."
         canonical="https://chroniqai.com/gravity"
-        keywords="ChroniqAI Gravity, LinkedIn client acquisition, B2B sales meetings, high-ticket offers, 14-day trial"
+        keywords="ChroniqAI Gravity, LinkedIn client acquisition, B2B sales meetings, high-ticket offers, book a call with founders, free pipeline audit"
       />
       <SoftwareApplicationSchema />
       <FAQPageSchema faqs={gravityFaqs} />

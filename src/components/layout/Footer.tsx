@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
-import { Linkedin } from "lucide-react";
 
 const footerLinks = {
   platform: [
     { name: "Gravity by Chroniq", href: "/gravity" },
     { name: "System Pillars", href: "/#system-pillars" },
     { name: "Why Gravity", href: "/gravity#why-gravity" },
-    { name: "Trial Process", href: "/gravity#how-it-works" },
+    { name: "How It Works", href: "/gravity#how-it-works" },
   ],
   company: [
     { name: "Resources & Playbooks", href: "/resources" },
@@ -38,19 +37,6 @@ export function Footer() {
             <p className="font-luxury text-sm text-platinum italic font-medium tracking-wide">
               &ldquo;Stop chasing clients. Let them fall into your calendar.&rdquo;
             </p>
-
-            {/* Founder LinkedIn link */}
-            <div className="pt-2">
-              <a
-                href="https://www.linkedin.com/in/vedanshpandey/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-xs font-mono text-platinum hover:text-white bg-secondary/60 hover:bg-secondary px-3 py-1.5 rounded-lg border border-border/60 transition-colors"
-              >
-                <Linkedin size={14} className="text-[#0A66C2]" />
-                <span>Connect with Vedansh Pandey (Founder & CEO)</span>
-              </a>
-            </div>
           </div>
 
           {/* Gravity System */}

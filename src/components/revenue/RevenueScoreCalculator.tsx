@@ -311,7 +311,7 @@ export function RevenueScoreCalculator({ onOpenAudit }: RevenueScoreCalculatorPr
                 Outbound Blueprint Ready
               </h4>
               <p className="text-xs text-muted-foreground max-w-md leading-relaxed">
-                Apply for the 14-day trial with our team to review your specific score breakdown and receive a customized Gravity deployment plan.
+                Book a free strategy session with our founders to review your specific score breakdown, get a free pipeline audit, and receive a customized Gravity deployment plan.
               </p>
             </div>
 
@@ -321,7 +321,7 @@ export function RevenueScoreCalculator({ onOpenAudit }: RevenueScoreCalculatorPr
               onClick={() => onOpenAudit(score)}
               className="shrink-0 w-full md:w-auto"
             >
-              Apply for 14-Day Gravity Trial
+              Book Free Strategy Session & Pipeline Audit
               <ArrowRight size={18} className="ml-2" />
             </LuxuryButton>
           </div>

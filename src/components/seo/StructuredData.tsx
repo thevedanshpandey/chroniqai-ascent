@@ -17,13 +17,24 @@ export function OrganizationSchema() {
         "@id": "https://chroniqai.com/#vedansh-pandey",
         name: "Vedansh Pandey",
         jobTitle: "Founder & CEO",
-        url: "https://chroniqai.com",
-        description: "Creator and architect of ChroniqAI Gravity client acquisition system."
+        url: "https://www.linkedin.com/in/vedansh-pandey/",
+        sameAs: "https://www.linkedin.com/in/vedansh-pandey/",
+        description: "Co-creator and architect of ChroniqAI Gravity client acquisition system."
+      },
+      {
+        "@type": "Person",
+        "@id": "https://chroniqai.com/#abhay-rawat",
+        name: "Abhay Rawat",
+        jobTitle: "Co-Founder",
+        url: "https://www.linkedin.com/in/abhayrawat15/",
+        sameAs: "https://www.linkedin.com/in/abhayrawat15/",
+        description: "Co-founder of ChroniqAI and client acquisition systems architect."
       }
     ],
     sameAs: [
       "https://www.linkedin.com/company/chroniqai",
-      "https://www.linkedin.com/in/vedanshpandey/"
+      "https://www.linkedin.com/in/vedansh-pandey/",
+      "https://www.linkedin.com/in/abhayrawat15/"
     ],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
@@ -67,7 +78,7 @@ export function SoftwareApplicationSchema() {
     },
     offers: {
       "@type": "Offer",
-      price: "14-Day Trial Available",
+      price: "Free Strategy Session & Pipeline Audit",
       priceCurrency: "USD"
     }
   };

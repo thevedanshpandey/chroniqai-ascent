@@ -157,7 +157,7 @@ export default function EngineeringJournal() {
               Want This Acquisition System Inside Your Company?
             </h2>
             <p className="text-muted-foreground text-base max-w-xl mx-auto leading-relaxed">
-              Apply for the 14-day trial to see how ChroniqAI Gravity books qualified meetings on your calendar.
+              Book a free strategy session with our founders to get a free pipeline audit and see how ChroniqAI Gravity books qualified meetings on your calendar.
             </p>
             <div className="pt-4">
               <LuxuryButton
@@ -165,7 +165,7 @@ export default function EngineeringJournal() {
                 size="lg"
                 onClick={() => setIsAuditModalOpen(true)}
               >
-                Apply for 14-Day Gravity Trial
+                Book a Free Strategy Session & Pipeline Audit
                 <ArrowRight size={18} className="ml-2" />
               </LuxuryButton>
             </div>
