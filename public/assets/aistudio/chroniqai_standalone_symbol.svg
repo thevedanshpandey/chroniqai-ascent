@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">CHRONIQAI standalone orbital symbol</title>
+  <desc id="desc">A white circular ring crossed by a tapered Core Blue orbit stroke, on a transparent background.</desc>
+  <defs>
+    <style>
+      .ring { fill: #FFFFFF; }
+      .orbit { fill: #2563FF; }
+    </style>
+  </defs>
+  <!-- Transparent background. The orbit overlays the ring to create the two visible breaks. -->
+  <path class="ring" fill-rule="evenodd" d="
+    M 256,48
+    A 208,208 0 1 0 256,464
+    A 208,208 0 0 0 256,48 Z
+    M 256,96
+    A 160,160 0 1 1 256,416
+    A 160,160 0 0 1 256,96 Z"/>
+  <path class="orbit" d="
+    M 42,324
+    C 112,286 306,217 470,183
+    C 438,218 224,291 42,324 Z"/>
+</svg>

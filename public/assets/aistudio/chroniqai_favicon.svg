@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">CHRONIQAI favicon</title>
+  <rect width="64" height="64" rx="12" fill="#080B12"/>
+  <!-- Simplified, thick ring with the blue orbit creating the two openings -->
+  <path fill="#FFFFFF" fill-rule="evenodd" d="
+    M32 7
+    A25 25 0 1 0 32 57
+    A25 25 0 0 0 32 7 Z
+    M32 17
+    A15 15 0 1 1 32 47
+    A15 15 0 0 1 32 17 Z"/>
+  <path fill="#2563FF" d="M5 42 C16 35 42 26 59 22 C54 29 26 39 5 42 Z"/>
+</svg>
