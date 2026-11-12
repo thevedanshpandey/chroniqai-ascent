@@ -7,6 +7,7 @@ import { OrganizationSchema, WebsiteSchema } from "@/components/seo/StructuredDa
 import { LuxuryButton } from "@/components/ui/luxury-button";
 import { AuditModal, FORM_LINK } from "@/components/modals/AuditModal";
 import { InteractiveGravityDashboard } from "@/components/revenue/InteractiveGravityDashboard";
+import { BRAND_ASSETS } from "@/lib/brandAssets";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -28,7 +29,19 @@ import {
 function OfficialHeroSection({ onOpenAudit }: { onOpenAudit: () => void }) {
   return (
     <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden text-left">
-      {/* Background radial gradient */}
+      {/* Background radial gradient & subtle dark brand ambience */}
+      <img
+        src={BRAND_ASSETS.overEarthNightBg}
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover opacity-15 pointer-events-none -z-20"
+      />
+      <img
+        src={BRAND_ASSETS.triangularPattern}
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover opacity-[0.05] pointer-events-none -z-10"
+      />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[650px] hero-gradient pointer-events-none -z-10" />
 
       <div className="container mx-auto px-6 lg:px-8 relative z-10">
@@ -40,9 +53,16 @@ function OfficialHeroSection({ onOpenAudit }: { onOpenAudit: () => void }) {
             transition={{ duration: 0.6 }}
             className="lg:col-span-6 space-y-6"
           >
+            {/* Official Hero Logo */}
+            <img
+              src={BRAND_ASSETS.heroLogo}
+              alt="ChroniqAI"
+              className="h-10 sm:h-12 w-auto object-contain"
+            />
+
             {/* Eyebrow Badge */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary/90 border border-primary/25 text-xs font-medium text-platinum backdrop-blur-md">
-              <Sparkles size={14} className="text-platinum-glow" />
+              <img src={BRAND_ASSETS.standaloneSymbolSvg} alt="" aria-hidden="true" className="w-4 h-4 object-contain shrink-0" />
               <span>AI Revenue Infrastructure Platform</span>
             </div>
 
@@ -263,10 +283,16 @@ function GravitySpotlightBanner() {
     <section className="py-20 bg-secondary/15 border-y border-border/50 text-left">
       <div className="container mx-auto px-6 lg:px-8 max-w-6xl">
         <div className="p-8 md:p-14 rounded-3xl border border-glass-border bg-gradient-card relative overflow-hidden shadow-2xl">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <img
+            src={BRAND_ASSETS.darkWatermark}
+            alt=""
+            aria-hidden="true"
+            className="absolute right-0 bottom-0 h-48 sm:h-64 w-auto object-contain opacity-[0.07] pointer-events-none select-none"
+          />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
             <div className="lg:col-span-8 space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary border border-primary/25 text-xs font-mono text-platinum">
-                <Sparkles size={13} className="text-platinum-glow" />
+                <img src={BRAND_ASSETS.standaloneSymbolSvg} alt="" aria-hidden="true" className="w-3.5 h-3.5 object-contain shrink-0" />
                 Featured Acquisition System
               </div>
 
@@ -512,10 +538,22 @@ function OfficialFinalCTASection({ onOpenAudit }: { onOpenAudit: () => void }) {
     <section className="py-24 text-left relative overflow-hidden bg-secondary/10 border-t border-border/50">
       <div className="container mx-auto px-6 lg:px-8 max-w-4xl">
         <div className="p-10 md:p-16 rounded-3xl border border-glass-border bg-gradient-card text-center space-y-6 relative overflow-hidden shadow-2xl">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary border border-primary/25 text-xs font-medium text-platinum">
-            <Sparkles size={14} className="text-platinum-glow" />
-            Limited Monthly Cohorts
-          </div>
+          <img
+            src={BRAND_ASSETS.nightOfficeBg}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover opacity-15 pointer-events-none"
+          />
+          <div className="relative z-10 space-y-6">
+            <img
+              src={BRAND_ASSETS.revenueInfraLogo}
+              alt="ChroniqAI Revenue Infrastructure"
+              className="h-8 sm:h-9 w-auto object-contain mx-auto"
+            />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary border border-primary/25 text-xs font-medium text-platinum">
+              <img src={BRAND_ASSETS.standaloneSymbolSvg} alt="" aria-hidden="true" className="w-3.5 h-3.5 object-contain shrink-0" />
+              Limited Monthly Cohorts
+            </div>
 
           <h2 className="text-3xl sm:text-5xl font-luxury text-white tracking-tight">
             Ready to Build a Predictable Acquisition Engine?
@@ -546,6 +584,7 @@ function OfficialFinalCTASection({ onOpenAudit }: { onOpenAudit: () => void }) {
           <p className="text-xs font-mono text-platinum/80 pt-2">
             By application only • We review each application within 24 hours.
           </p>
+          </div>
         </div>
       </div>
     </section>

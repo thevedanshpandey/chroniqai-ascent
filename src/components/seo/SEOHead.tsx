@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { BRAND_ASSET_URLS } from "@/lib/brandAssets";
 
 interface SEOHeadProps {
   title: string;
@@ -13,7 +14,7 @@ export function SEOHead({
   title,
   description,
   canonical,
-  ogImage = "https://chroniqai.com/og-image.png",
+  ogImage = BRAND_ASSET_URLS.ogCover,
   ogType = "website",
   keywords,
 }: SEOHeadProps) {

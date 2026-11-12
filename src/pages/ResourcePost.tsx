@@ -8,6 +8,7 @@ import { TableOfContents } from "@/components/resources/TableOfContents";
 import { PostCTA } from "@/components/resources/PostCTA";
 import { PostSchema } from "@/components/resources/PostSchema";
 import { ResourcePost as ResourcePostType } from "@/data/resources/types";
+import { BRAND_ASSETS } from "@/lib/brandAssets";
 import { fetchWordPressPostBySlug, fetchWordPressPosts } from "@/services/wordpress";
 import { getPostBySlug as getLocalPostBySlug, getRelatedPosts as getLocalRelatedPosts } from "@/data/resources/posts";
 import {
@@ -138,12 +139,21 @@ export default function ResourcePost() {
   if (isLoading && !post) {
     return (
       <PageLayout>
-        <div className="pt-32 pb-24 container mx-auto px-6 max-w-4xl text-left space-y-8 animate-pulse">
-          <div className="h-4 bg-secondary/80 rounded w-24" />
-          <div className="h-12 bg-secondary/80 rounded w-4/5" />
-          <div className="h-6 bg-secondary/60 rounded w-1/3" />
-          <div className="aspect-[16/9] bg-secondary/60 rounded-2xl" />
-          <div className="h-28 bg-secondary/40 rounded-2xl" />
+        <div className="pt-32 pb-24 container mx-auto px-6 max-w-4xl text-left space-y-8">
+          <div className="flex justify-center pb-2">
+            <img
+              src={BRAND_ASSETS.brandLoader}
+              alt="Loading ChroniqAI resource"
+              className="h-14 w-auto object-contain"
+            />
+          </div>
+          <div className="space-y-8 animate-pulse">
+            <div className="h-4 bg-secondary/80 rounded w-24" />
+            <div className="h-12 bg-secondary/80 rounded w-4/5" />
+            <div className="h-6 bg-secondary/60 rounded w-1/3" />
+            <div className="aspect-[16/9] bg-secondary/60 rounded-2xl" />
+            <div className="h-28 bg-secondary/40 rounded-2xl" />
+          </div>
         </div>
       </PageLayout>
     );

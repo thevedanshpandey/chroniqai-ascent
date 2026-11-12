@@ -171,7 +171,7 @@ if ($slug) {
                 'url' => SITE_URL,
                 'logo' => [
                     '@type' => 'ImageObject',
-                    'url' => SITE_URL . '/favicon.ico'
+                    'url' => SITE_URL . '/assets/ChroniqAI%20App%20icon%2064px.png'
                 ]
             ]
         ];
@@ -464,6 +464,9 @@ $index_meta = '
     <meta property="og:description" content="' . htmlspecialchars($seo_desc) . '" />
     <meta property="og:url" content="' . htmlspecialchars($canonical) . '" />
     <meta property="og:type" content="website" />
+    <meta property="og:image" content="' . SITE_URL . '/assets/CHRONIQAI_%20AI%20Revenue%20Infrastructure%20Linkedin%20Cover.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="' . SITE_URL . '/assets/CHRONIQAI_%20AI%20Revenue%20Infrastructure%20Linkedin%20Cover.png" />
 ';
 
 $ssr_list = '

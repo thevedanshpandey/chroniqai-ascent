@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { BRAND_ASSET_URLS } from "@/lib/brandAssets";
 
 // Organization Schema
 export function OrganizationSchema() {
@@ -8,7 +9,8 @@ export function OrganizationSchema() {
     "@id": "https://chroniqai.com/#organization",
     name: "ChroniqAI",
     url: "https://chroniqai.com",
-    logo: "https://chroniqai.com/logo.png",
+    logo: BRAND_ASSET_URLS.organizationLogo,
+    image: BRAND_ASSET_URLS.logoOnBlack,
     description: "ChroniqAI Gravity | AI-Powered LinkedIn Client Acquisition for High-Ticket B2B Founders.",
     foundingDate: "2024",
     founders: [
@@ -106,7 +108,7 @@ export function ArticleSchema({
   url,
   datePublished = "2026-07-01",
   authorName = "ChroniqAI Research Lab",
-  image = "https://chroniqai.com/og-image.png"
+  image = BRAND_ASSET_URLS.ogCover
 }: ArticleSchemaProps) {
   const schema = {
     "@context": "https://schema.org",
