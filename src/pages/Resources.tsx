@@ -23,7 +23,6 @@ import {
   WP_API_BASE,
 } from "@/services/wordpress";
 import { RESOURCE_POSTS, getAllCategories as getLocalCategories } from "@/data/resources/posts";
-import { BRAND_ASSETS } from "@/lib/brandAssets";
 
 export default function Resources() {
   const [isAuditModalOpen, setIsAuditModalOpen] = useState(false);
@@ -171,15 +170,7 @@ export default function Resources() {
 
           {/* Post Grid or Loading Skeleton or Empty State */}
           {isLoading ? (
-            <div className="space-y-8">
-              <div className="flex justify-center">
-                <img
-                  src={BRAND_ASSETS.brandLoader}
-                  alt="Loading ChroniqAI resources"
-                  className="h-12 w-auto object-contain"
-                />
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[1, 2, 3].map((n) => (
                 <div
                   key={n}
@@ -198,7 +189,6 @@ export default function Resources() {
                   </div>
                 </div>
               ))}
-              </div>
             </div>
           ) : filteredPosts.length === 0 ? (
             <div className="p-12 text-center rounded-2xl border border-glass-border bg-card/40 my-8 space-y-4">

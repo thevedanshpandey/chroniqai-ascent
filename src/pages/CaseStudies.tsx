@@ -5,7 +5,6 @@ import { PageLayout } from "@/components/layout/PageLayout";
 import { SEOHead } from "@/components/seo/SEOHead";
 import { LuxuryButton } from "@/components/ui/luxury-button";
 import { AuditModal } from "@/components/modals/AuditModal";
-import { BRAND_ASSETS } from "@/lib/brandAssets";
 import { ArrowRight, CheckCircle2, TrendingUp, Quote, Sparkles } from "lucide-react";
 
 const caseStudies = [
@@ -87,7 +86,7 @@ export default function CaseStudies() {
             className="text-center space-y-6 mb-20"
           >
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary/80 border border-primary/20 text-xs font-medium text-platinum">
-              <img src={BRAND_ASSETS.standaloneSymbolSvg} alt="" aria-hidden="true" className="w-3.5 h-3.5 object-contain shrink-0" />
+              <Sparkles size={14} className="text-platinum-glow" />
               Verified Performance & Hard Metrics
             </div>
 

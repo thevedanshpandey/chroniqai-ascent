@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Activity, ArrowUpRight, Calendar, CheckCircle2, Eye, EyeOff, MessageSquare, RefreshCw, TrendingUp } from "lucide-react";
-import { BRAND_ASSETS } from "@/lib/brandAssets";
 
 interface InteractiveGravityDashboardProps {
   compact?: boolean;
@@ -40,12 +39,6 @@ export function InteractiveGravityDashboard({ compact = false }: InteractiveGrav
       {/* Dashboard Top Header Bar */}
       <div className="p-4 md:p-5 border-b border-border/60 bg-secondary/40 flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-3">
-          <img
-            src={BRAND_ASSETS.dashboardAppLogo}
-            alt="ChroniqAI Gravity Dashboard"
-            className="h-6 w-auto object-contain shrink-0"
-          />
-          <span className="hidden sm:inline-block text-border">|</span>
           <div className="flex items-center gap-1.5">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
             <span className="font-mono text-xs font-semibold text-emerald-400 uppercase tracking-wider">

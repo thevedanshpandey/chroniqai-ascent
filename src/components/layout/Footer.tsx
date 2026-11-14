@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { BRAND_ASSETS } from "@/lib/brandAssets";
 
 const footerLinks = {
   platform: [
@@ -24,13 +23,11 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="md:col-span-2 space-y-4">
-            <Link to="/" className="inline-flex items-center gap-2.5">
-              <img
-                src={BRAND_ASSETS.footerLogo}
-                alt="ChroniqAI"
-                className="h-8 sm:h-9 w-auto object-contain shrink-0"
-              />
-              <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-secondary border border-primary/20 text-platinum shrink-0">
+            <Link to="/" className="inline-flex items-center gap-2">
+              <span className="font-luxury text-2xl font-semibold text-white">
+                Chroniq<span className="text-platinum-gradient">AI</span>
+              </span>
+              <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-secondary border border-primary/20 text-platinum">
                 Gravity
               </span>
             </Link>

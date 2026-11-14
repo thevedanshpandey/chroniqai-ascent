@@ -7,7 +7,6 @@ import { LuxuryButton } from "@/components/ui/luxury-button";
 import { AuditModal, FORM_LINK } from "@/components/modals/AuditModal";
 import { InteractiveGravityDashboard } from "@/components/revenue/InteractiveGravityDashboard";
 import { BlackHoleCanvas } from "@/components/visuals/BlackHoleCanvas";
-import { BRAND_ASSETS } from "@/lib/brandAssets";
 import {
   ArrowRight,
   CheckCircle2,
@@ -30,13 +29,7 @@ function GravityHeroSection({ onOpenApply }: { onOpenApply: () => void }) {
 
   return (
     <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden text-left">
-      {/* Background radial gradient & subtle pattern */}
-      <img
-        src={BRAND_ASSETS.triangularPattern}
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 w-full h-full object-cover opacity-[0.05] pointer-events-none -z-20"
-      />
+      {/* Background radial gradient */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[650px] hero-gradient pointer-events-none -z-10" />
 
       {/* Hero Black Hole Animation Canvas (Right Side Subtle Cosmic Backdrop) */}
@@ -53,16 +46,9 @@ function GravityHeroSection({ onOpenApply }: { onOpenApply: () => void }) {
             transition={{ duration: 0.6 }}
             className="lg:col-span-6 space-y-6"
           >
-            {/* Official Hero Logo */}
-            <img
-              src={BRAND_ASSETS.heroLogo}
-              alt="ChroniqAI"
-              className="h-9 sm:h-11 w-auto object-contain"
-            />
-
             {/* Eyebrow Badge */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary/90 border border-primary/25 text-xs font-medium text-platinum backdrop-blur-md">
-              <img src={BRAND_ASSETS.standaloneSymbolSvg} alt="" aria-hidden="true" className="w-4 h-4 object-contain shrink-0" />
+              <Sparkles size={14} className="text-platinum-glow" />
               <span>Gravity by Chroniq • AI Client Acquisition for High-Ticket B2B</span>
             </div>
 
@@ -619,14 +605,8 @@ function GravityFinalCTASection({ onOpenApply }: { onOpenApply: () => void }) {
     <section className="py-24 text-left relative overflow-hidden bg-secondary/10 border-t border-border/50">
       <div className="container mx-auto px-6 lg:px-8 max-w-4xl">
         <div className="p-10 md:p-16 rounded-3xl border border-glass-border bg-gradient-card text-center space-y-6 relative overflow-hidden shadow-2xl">
-          <img
-            src={BRAND_ASSETS.darkWatermark}
-            alt=""
-            aria-hidden="true"
-            className="absolute right-0 bottom-0 h-48 sm:h-64 w-auto object-contain opacity-[0.07] pointer-events-none select-none"
-          />
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary border border-primary/25 text-xs font-medium text-platinum relative z-10">
-            <img src={BRAND_ASSETS.standaloneSymbolSvg} alt="" aria-hidden="true" className="w-3.5 h-3.5 object-contain shrink-0" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary border border-primary/25 text-xs font-medium text-platinum">
+            <Sparkles size={14} className="text-platinum-glow" />
             Limited Monthly Capacity
           </div>
 

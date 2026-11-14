@@ -33,13 +33,6 @@ jobs:
       - name: Build production app
         run: bun run build
 
-      - name: Include root assets folder in dist/assets if present
-        run: |
-          if [ -d "assets" ]; then
-            mkdir -p dist/assets
-            cp -r assets/* dist/assets/ 2>/dev/null || true
-          fi
-
       - name: Deploy build output to SiteCountry hosting
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:

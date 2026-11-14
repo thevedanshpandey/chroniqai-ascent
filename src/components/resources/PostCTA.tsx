@@ -20,7 +20,6 @@ import {
   isValidEmail,
   isValidWebsite,
 } from "@/services/leadCapture";
-import { BRAND_ASSETS } from "@/lib/brandAssets";
 
 interface PostCTAProps {
   variant?: "mid-article" | "end-of-article" | "top-gate";
@@ -177,12 +176,6 @@ export function PostCTA({
           unlockedLink ? "bg-emerald-500/10" : "bg-primary/10"
         }`}
       />
-      <img
-        src={BRAND_ASSETS.darkWatermark}
-        alt=""
-        aria-hidden="true"
-        className="absolute right-0 bottom-0 h-40 w-auto object-contain opacity-[0.05] pointer-events-none select-none -z-10"
-      />
 
       <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-8">
         {/* Left Column: Context & Copy */}
@@ -195,7 +188,7 @@ export function PostCTA({
               </>
             ) : (
               <>
-                <img src={BRAND_ASSETS.standaloneSymbolSvg} alt="" aria-hidden="true" className="w-3.5 h-3.5 object-contain shrink-0" />
+                <Sparkles size={12} className="text-platinum-glow" />
                 <span>
                   {isTopGate
                     ? "Free resource"

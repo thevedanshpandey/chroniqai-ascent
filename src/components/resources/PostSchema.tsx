@@ -1,6 +1,5 @@
 import { Helmet } from "react-helmet-async";
 import { ResourcePost } from "@/data/resources/types";
-import { BRAND_ASSET_URLS } from "@/lib/brandAssets";
 
 interface PostSchemaProps {
   post: ResourcePost;
@@ -44,7 +43,7 @@ export function PostSchema({ post }: PostSchemaProps) {
       "url": "https://chroniqai.com",
       "logo": {
         "@type": "ImageObject",
-        "url": BRAND_ASSET_URLS.publisherLogo,
+        "url": "https://chroniqai.com/favicon.ico",
       },
     },
   };
@@ -92,8 +91,7 @@ export function PostSchema({ post }: PostSchemaProps) {
     "@type": "Organization",
     "name": "ChroniqAI",
     "url": "https://chroniqai.com",
-    "logo": BRAND_ASSET_URLS.organizationLogo,
-    "image": BRAND_ASSET_URLS.logoOnBlack,
+    "logo": "https://chroniqai.com/favicon.ico",
     "description": "ChroniqAI Gravity — AI-Powered LinkedIn Client Acquisition for High-Ticket B2B Founders.",
     "founders": [
       {

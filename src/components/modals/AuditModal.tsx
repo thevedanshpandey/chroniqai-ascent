@@ -2,7 +2,6 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, CheckCircle2, ArrowRight, Shield, Sparkles, Building2, Mail, User, Target } from "lucide-react";
 import { LuxuryButton } from "@/components/ui/luxury-button";
-import { BRAND_ASSETS } from "@/lib/brandAssets";
 
 // [FORM_LINK] Placeholder for Google Form URL
 export const FORM_LINK = "https://docs.google.com/forms/d/e/1FAIpQLSc-placeholder/viewform"; // [FORM_LINK]
@@ -63,13 +62,8 @@ export function AuditModal({ isOpen, onClose, initialScore }: AuditModalProps) {
             <div>
               {/* Header */}
               <div className="mb-6">
-                <img
-                  src={BRAND_ASSETS.whitePhotoOverlayLogo}
-                  alt="ChroniqAI"
-                  className="h-7 w-auto object-contain mb-3"
-                />
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/90 border border-primary/20 mb-3 text-xs font-medium text-platinum">
-                  <img src={BRAND_ASSETS.standaloneSymbolSvg} alt="" aria-hidden="true" className="w-3.5 h-3.5 object-contain shrink-0" />
+                  <Sparkles size={13} className="text-platinum-glow" />
                   ChroniqAI Gravity • Free Strategy Session & Pipeline Audit
                 </div>
                 <h3 className="text-2xl md:text-3xl font-luxury text-white mb-2">

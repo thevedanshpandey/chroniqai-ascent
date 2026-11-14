@@ -5,7 +5,6 @@ import { Menu, X, ArrowRight, Sparkles } from "lucide-react";
 import { LuxuryButton } from "@/components/ui/luxury-button";
 import { AuditModal } from "@/components/modals/AuditModal";
 import { cn } from "@/lib/utils";
-import { BRAND_ASSETS } from "@/lib/brandAssets";
 
 const navLinks = [
   { name: "Gravity by Chroniq", href: "/gravity" },
@@ -46,13 +45,11 @@ export function Navbar() {
         <nav className="container mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Brand Logo */}
-            <Link to="/" className="flex items-center gap-2.5 group shrink-0">
-              <img
-                src={BRAND_ASSETS.navbarLogo}
-                alt="ChroniqAI"
-                className="h-8 sm:h-9 w-auto object-contain shrink-0 transition-opacity duration-300 group-hover:opacity-90"
-              />
-              <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-secondary/90 border border-primary/20 text-platinum shrink-0">
+            <Link to="/" className="flex items-center gap-2 group">
+              <span className="font-luxury text-2xl font-semibold text-white tracking-wide group-hover:text-platinum-gradient transition-colors duration-300">
+                Chroniq<span className="text-platinum-gradient">AI</span>
+              </span>
+              <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-secondary/90 border border-primary/20 text-platinum">
                 Gravity
               </span>
             </Link>
